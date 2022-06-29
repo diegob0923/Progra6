@@ -285,10 +285,13 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Adicciones\AdiccionesLista.cshtml" />
+    <Content Include="Views\CoberturasPoliza\CoberturasPolizaLista.cshtml" />
+    <Content Include="Views\CoberturasPoliza\CoberturasPolizaInserta.cshtml" />
+    <Content Include="Views\CoberturasPoliza\CoberturasPolizaModifica.cshtml" />
+    <Content Include="Views\CoberturasPoliza\CoberturasPolizaElimina.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\CoberturasPoliza\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

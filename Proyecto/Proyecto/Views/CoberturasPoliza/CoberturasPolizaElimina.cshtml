@@ -1,0 +1,28 @@
+﻿@model Proyecto.Models.sp_Retorna_Cobertura_De_PolizaID_Result
+@{
+    ViewBag.Title = "CoberturasPolizaElimina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CoberturasPolizaElimina</h2>
+
+<form id="frmCoberturaSpolizaElimina" method="post">
+    <input type="hidden" name="Id_Cobertura" id="Id_Cobertura" value="@Model.Id_Cobertura" />
+    <div class="form-group">
+        <label>Nombre :</label>
+        <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" />
+    </div>
+    <div class="form-group">
+        <label>Descripción</label>
+        <input type="text" name="Descripcion" id="Descripcion" class="form-control" value="@Model.Descripcion" />
+    </div>
+    <div class="form-group">
+        <label>Porcentaje :</label>
+        <input type="text" name="Porcentaje" id="Porcentaje" class="form-control" value="@Model.Porcentaje" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Eliminar" id="btnEliminar" />
+    </div>
+    <a href="~/CoberturasPoliza/CoberturasPolizaLista">Regresar a la lista</a>
+
+</form>
