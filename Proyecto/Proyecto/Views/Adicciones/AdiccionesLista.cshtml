@@ -1,7 +1,22 @@
-﻿
+﻿@model List<Proyecto.Models.sp_Retorna_Adicciones_Result>
 @{
     ViewBag.Title = "AdiccionesLista";
 }
 
 <h2>AdiccionesLista</h2>
 
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Código</th>
+    </tr>
+    @{
+        foreach (Proyecto.Models.sp_Retorna_Adicciones_Result posicionModelo in Model)
+        {
+            <tr>
+                <td>@posicionModelo.Nombre </td>
+                <td>@posicionModelo.Codigo</td>
+            </tr>
+        }
+    }
+</table>
