@@ -126,19 +126,106 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdiccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Adicciones.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Adiccion_Cliente.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Canton.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cobertura_de_poliza.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Distrito.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Provincia.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Registro_Polizas.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RetornaCantonesID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RetornaCantones_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RetornaProvincias_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Retorna_Registro_Polizas_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SegurosEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SegurosEntities.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SegurosEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SegurosEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SegurosEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_AdiccionesID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Adicciones_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Adiccion_ClienteID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Adiccion_Cliente_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_ClienteID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Clientes_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Cobertura_De_PolizaID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Cobertura_De_Poliza_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Datos_Correo_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Poliza_Cliente_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Registro_PolizasID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuarios_Sistema.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,6 +241,12 @@
     <Content Include="Models\SegurosEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SegurosEntities.Context.cs</LastGenOutput>
+      <DependentUpon>SegurosEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\SegurosEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SegurosEntities.edmx</DependentUpon>
+      <LastGenOutput>SegurosEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -161,9 +254,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SegurosEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\SegurosEntities.edmx.diagram">
+    <Content Include="Models\SegurosEntities.edmx.diagram">
       <DependentUpon>SegurosEntities.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -189,6 +282,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Adicciones\AdiccionesLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
