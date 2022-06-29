@@ -1,0 +1,27 @@
+﻿@model Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result
+@{
+    ViewBag.Title = "CoberturasPolizaInserta";
+}
+
+<h2>Insertar coberturas poliza</h2>
+
+<form id="frmCoberturasPolizaInserta" method="post">
+
+    <div class="form-group">
+        <label>Nombre :</label>
+        <input type="text" name="Nombre" id="Nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Descripción</label>
+        <input type="text" name="Descripcion" id="Descripcion" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Porcentaje :</label>
+        <input type="text" name="Porcentaje" id="Porcentaje" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Registrar" id="btnRegistrar" />
+    </div>
+    <a href="~/CoberturasPoliza/CoberturasPolizaLista">Regresar a la lista</a>
+
+</form>
