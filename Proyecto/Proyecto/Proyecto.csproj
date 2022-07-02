@@ -290,6 +290,7 @@
     <Content Include="Views\CoberturasPoliza\CoberturasPolizaModifica.cshtml" />
     <Content Include="Views\CoberturasPoliza\CoberturasPolizaElimina.cshtml" />
     <Content Include="Views\Adicciones\AdiccionesInsertar.cshtml" />
+    <Content Include="Views\Adicciones\AdiccionesModificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
