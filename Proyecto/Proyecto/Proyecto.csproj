@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdiccionesClienteController.cs" />
     <Compile Include="Controllers\AdiccionesController.cs" />
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -292,6 +293,8 @@
     <Content Include="Views\Adicciones\AdiccionesInsertar.cshtml" />
     <Content Include="Views\Adicciones\AdiccionesModificar.cshtml" />
     <Content Include="Views\Adicciones\AdiccionesEliminar.cshtml" />
+    <Content Include="Views\AdiccionesCliente\AdiccionesClienteLista.cshtml" />
+    <Content Include="Views\AdiccionesCliente\AdiccionesClienteInsertar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

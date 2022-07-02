@@ -1,0 +1,31 @@
+﻿@model List<Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result>
+@{
+    ViewBag.Title = "Adicciones Clientes";
+}
+
+<h2>Lista de adicciones por cliente</h2>
+
+@*<a href="~/Adicciones/">Nueva adicción por cliente</a>*@
+<br />
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Código</th>
+        <th>Acciones</th>
+    </tr>
+    @{
+        foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
+        {
+            <tr>
+                <td>@posicionModelo.Nombre </td> @*nombre de la adicción*@
+                <td>@posicionModelo.NombreCompleto</td>
+                @*nombre completo cliente*@
+                <td>
+                    @*<a href="~/Adicciones/AdiccionesModificar?id_Adiccion=@posicionModelo.Id_Adiccion">Modificar</a>*@
+                    <br />
+                    @*<a href="~/Adicciones/AdiccionesEliminar?id_Adiccion=@posicionModelo.Id_Adiccion">Eliminar</a>*@
+                </td>
+            </tr>
+        }
+    }
+</table>
