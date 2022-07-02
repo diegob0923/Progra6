@@ -103,6 +103,45 @@ namespace Proyecto.Controllers
             AgregarClientesViewBag();
             return View(modeloVista);
         }
+        public ActionResult AdiccionesClienteEliminar(int id)
+        {
+            sp_Retorna_Adiccion_ClienteID_Result modeloVista = new sp_Retorna_Adiccion_ClienteID_Result();
+            modeloVista = modeloBD.sp_Retorna_Adiccion_ClienteID(id).FirstOrDefault();
+            AgregarAdiccionesViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
 
+        [HttpPost]
+        public ActionResult AdiccionesClienteEliminar(sp_Retorna_Adiccion_ClienteID_Result modeloVista)
+        {
+            int cantRegistrosAfectados = 0;
+            string resultado = "";
+
+            try
+            {
+                cantRegistrosAfectados = modeloBD.sp_Eliminar_Adicciones_Cliente(modeloVista.Id);
+            }
+            catch (Exception error)
+            {
+                resultado = "Ocurrió un error: " + error.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    resultado = "Registro eliminado";
+                }
+                else
+                {
+                    resultado += ". No se pudo eliminar ";
+                }
+            }
+
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            AgregarAdiccionesViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
     }
 }

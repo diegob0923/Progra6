@@ -1,15 +1,15 @@
 ﻿@model Proyecto.Models.sp_Retorna_Adiccion_ClienteID_Result
 @{
-    ViewBag.Title = "AdiccionesClienteModificar";
+    ViewBag.Title = "AdiccionesClienteEliminar";
 }
 
-<h2>Modificar adicciones por cliente</h2>
+<h2>Eliminar adicciones por cliente</h2>
 
-<form id="frmAdiccionesClienteModificar" method="post">
+<form id="frmAdiccionesClienteEliminar" method="post">
 
     <div class="form-group">
         <label>Adicción:</label>
-        <select name="Id_Adiccion" id="Id_Adiccion" class="form-control">
+        <select name="Id_Adiccion" id="Id_Adiccion" class="form-control" readonly>
             <option value="">Seleccione una adicción</option>
 
             @{
@@ -35,7 +35,7 @@
 
     <div class="form-group">
         <label>Cliente:</label>
-        <select name="Id_Cliente" id="Id_Cliente" class="form-control">
+        <select name="Id_Cliente" id="Id_Cliente" class="form-control" readonly>
             <option value="">Seleccione un cliente</option>
 
             @{
@@ -45,7 +45,7 @@
 
                     if (estaIdClienteEnModelo)
                     {
-                        <option value="@cliente.Id_Cliente" selected>@cliente.Nombre @cliente.Primer_Apellido @cliente.Segundo_Apellido</option>
+                        <option value="@cliente.Id_Cliente" selected >@cliente.Nombre @cliente.Primer_Apellido @cliente.Segundo_Apellido</option>
                     }
                     else
                     {
@@ -53,14 +53,14 @@
                     }
 
 
-                    @*Nombre hace referencia al nombre de adiccion*@
+                    
                 }
             }
         </select>
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Modificar" id="btnModificar" />
+        <input type="submit" value="Eliminar" id="btnEliminar" />
     </div>
     <a href="~/AdiccionesCliente/AdiccionesClienteLista">Regresar a la lista</a>
 </form>

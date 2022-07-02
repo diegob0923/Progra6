@@ -4,9 +4,9 @@
 }
 
 <h2>Lista de adicciones por cliente</h2>
-
-@*<a href="~/Adicciones/">Nueva adicción por cliente</a>*@
+<a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
 <br />
+
 <table class="table">
     <tr>
         <th>Nombre</th>
@@ -23,7 +23,7 @@
                 <td>
                     <a href="~/AdiccionesCliente/AdiccionesClienteModificar?id=@posicionModelo.Id">Modificar</a>
                     <br />
-                    @*<a href="~/Adicciones/AdiccionesEliminar?id_Adiccion=@posicionModelo.Id_Adiccion">Eliminar</a>*@
+                    <a href="~/AdiccionesCliente/AdiccionesClienteEliminar?id=@posicionModelo.Id">Eliminar</a>
                 </td>
             </tr>
         }
