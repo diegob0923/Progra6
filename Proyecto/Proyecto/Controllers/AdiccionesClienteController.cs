@@ -62,5 +62,47 @@ namespace Proyecto.Controllers
         {
             ViewBag.Clientes = modeloBD.sp_Retorna_Clientes(null,null,null,null).ToList(); ;
         }
+
+        public ActionResult AdiccionesClienteModificar(int id)
+        {
+            sp_Retorna_Adiccion_ClienteID_Result modeloVista = new sp_Retorna_Adiccion_ClienteID_Result();
+            modeloVista = modeloBD.sp_Retorna_Adiccion_ClienteID(id).FirstOrDefault();
+            AgregarAdiccionesViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult AdiccionesClienteModificar(sp_Retorna_Adiccion_ClienteID_Result modeloVista)
+        {
+            int cantRegistrosAfectados = 0;
+            string resultado = "";
+
+            try
+            {
+                cantRegistrosAfectados = modeloBD.sp_Modificar_Adicciones_Clientes(modeloVista.Id, modeloVista.Id_Adiccion, modeloVista.Id_Cliente);
+            }
+            catch (Exception error)
+            {
+                resultado = "Ocurrió un error: " + error.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    resultado = "Registro modificado";
+                }
+                else
+                {
+                    resultado += ".No se pudo modificar ";
+                }
+            }
+
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            AgregarAdiccionesViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+
     }
 }
