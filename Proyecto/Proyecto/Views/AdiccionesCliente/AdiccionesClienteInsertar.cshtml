@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "AdiccionesClienteInsertar";
+}
+
+<h2>Insertar adicciones por cliente</h2>
+
+
+<form id="frmAdiccionesClienteInsertar" method="post">
+
+    <div class="form-group">
+        <label>Adicción</label>
+        <select name="Id_Adiccion" id="Id_Adiccion" class="form-control">
+            <option value="">Seleccione una adicción</option>
+            @{
+                foreach (Proyecto.Models.sp_Retorna_Adicciones_Result adiccion in ViewBag.Adicciones)
+                {
+                    <option value="@adiccion.Id_Adiccion">@adiccion.Nombre</option>@*Nombre hace referencia al nombre de adiccion*@
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Cliente</label>
+        <select name="Id_Cliente" id="Id_Cliente" class="form-control">
+            <option value="">Seleccione una adicción</option>
+            @{
+                foreach (Proyecto.Models.sp_Retorna_Clientes_Result cliente in ViewBag.Clientes)
+                {
+                    <option value="@cliente.Id_Cliente">@cliente.Nombre @cliente.Primer_Apellido @cliente.Segundo_Apellido</option>
+                }
+            }
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <input type="submit" value="Guardar" id="btnAceptar" />
+    </div>
+    <a href="~/AdiccionesCliente/AdiccionesClienteLista">Regresar a la lista</a>
+</form>

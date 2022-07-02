@@ -1,0 +1,66 @@
+﻿@model Proyecto.Models.sp_Retorna_Adiccion_ClienteID_Result
+@{
+    ViewBag.Title = "AdiccionesClienteEliminar";
+}
+
+<h2>Eliminar adicciones por cliente</h2>
+
+<form id="frmAdiccionesClienteEliminar" method="post">
+
+    <div class="form-group">
+        <label>Adicción:</label>
+        <select name="Id_Adiccion" id="Id_Adiccion" class="form-control" readonly>
+            <option value="">Seleccione una adicción</option>
+
+            @{
+                foreach (Proyecto.Models.sp_Retorna_Adicciones_Result adiccion in ViewBag.Adicciones)
+                {
+                    bool esIdAdiccionModelo = adiccion.Id_Adiccion == Model.Id_Adiccion;
+
+                    if (esIdAdiccionModelo)
+                    {
+                        <option value="@adiccion.Id_Adiccion" selected>@adiccion.Nombre</option>
+                    }
+                    else
+                    {
+                        <option value="@adiccion.Id_Adiccion">@adiccion.Nombre</option>
+                    }
+
+
+                    @*Nombre hace referencia al nombre de adiccion*@
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Cliente:</label>
+        <select name="Id_Cliente" id="Id_Cliente" class="form-control" readonly>
+            <option value="">Seleccione un cliente</option>
+
+            @{
+                foreach (Proyecto.Models.sp_Retorna_Clientes_Result cliente in ViewBag.Clientes)
+                {
+                    bool estaIdClienteEnModelo = cliente.Id_Cliente == Model.Id_Cliente;
+
+                    if (estaIdClienteEnModelo)
+                    {
+                        <option value="@cliente.Id_Cliente" selected >@cliente.Nombre @cliente.Primer_Apellido @cliente.Segundo_Apellido</option>
+                    }
+                    else
+                    {
+                        <option value="@cliente.Id_Cliente">@cliente.Nombre @cliente.Primer_Apellido @cliente.Segundo_Apellido</option>
+                    }
+
+
+                    
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Eliminar" id="btnEliminar" />
+    </div>
+    <a href="~/AdiccionesCliente/AdiccionesClienteLista">Regresar a la lista</a>
+</form>
