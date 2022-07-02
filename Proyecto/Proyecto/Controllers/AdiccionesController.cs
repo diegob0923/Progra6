@@ -88,5 +88,43 @@ namespace Proyecto.Controllers
             Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
             return View(modeloVista);
         }
+
+        public ActionResult AdiccionesEliminar(int id_Adiccion)
+        {
+            sp_Retorna_AdiccionesID_Result modeloVista = new sp_Retorna_AdiccionesID_Result();
+            modeloVista = modeloBD.sp_Retorna_AdiccionesID(id_Adiccion).FirstOrDefault();
+            return View(modeloVista);
+
+        }
+
+        [HttpPost]
+        public ActionResult AdiccionesEliminar(sp_Retorna_AdiccionesID_Result modeloVista)
+        {
+            int cantRegistrosAfectados = 0;
+            string resultado = "";
+
+            try
+            {
+                cantRegistrosAfectados = modeloBD.sp_Eliminar_Adicciones(modeloVista.Id_Adiccion);
+            }
+            catch (Exception error)
+            {
+                resultado = "Ocurrió un error: " + error.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    resultado = "Registro eliminado";
+                }
+                else
+                {
+                    resultado += ".No se pudo eliminado ";
+                }
+            }
+
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            return View(modeloVista);
+        }
     }
 }
