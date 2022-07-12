@@ -1,6 +1,7 @@
 ﻿@model Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result
 @{
-    ViewBag.Title = "CoberturasPolizaInserta";
+    
+                ViewBag.Title = "CoberturasPolizaInserta";
 }
 
 <h2>Insertar coberturas poliza</h2>
@@ -10,6 +11,12 @@
     <div class="form-group">
         <label>Nombre :</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" />
+    </div>
+    <div class="row">
+        <label class="col-sm-2"></label>
+        <div class="col-sm-10">
+            <p id="Estatus" />
+        </div>
     </div>
     <div class="form-group">
         <label>Descripción</label>
@@ -25,3 +32,8 @@
     <a href="~/CoberturasPoliza/CoberturasPolizaLista">Regresar a la lista</a>
 
 </form>
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/ScriptsProyecto/CoberturasPolizaInserta.js");
+}

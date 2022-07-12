@@ -11,14 +11,17 @@ namespace Proyecto.Models
 {
     using System;
     
-    public partial class RetornaProvincias_Result
+    public partial class RetornaDistritos_Result
     {
-        public int id_Provincia { get; set; }
+        public int id_Distrito { get; set; }
+        public int id_Canton { get; set; }
         public string nombre { get; set; }
+        public string Canton { get; set; }
         public string usuarioCrea { get; set; }
         public Nullable<System.DateTime> fechaCrea { get; set; }
         public string usuarioModifica { get; set; }
         public Nullable<System.DateTime> fechaModifica { get; set; }
         public string vc_Estado { get; set; }
+        public Nullable<int> id_DistritoInec { get; set; }
     }
 }

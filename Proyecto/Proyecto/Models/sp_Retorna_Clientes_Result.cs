@@ -24,8 +24,11 @@ namespace Proyecto.Models
         public string Telefono1 { get; set; }
         public string Telefono2 { get; set; }
         public string Correo { get; set; }
-        public int Id_Provincia { get; set; }
-        public int Id_Canton { get; set; }
-        public int Id_Distrito { get; set; }
+        public string Provincia { get; set; }
+        public string Canton { get; set; }
+        public string Distrito { get; set; }
+        public int id_Provincia { get; set; }
+        public int id_Canton { get; set; }
+        public int id_Distrito { get; set; }
     }
 }

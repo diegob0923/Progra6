@@ -4,21 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CoberturasPolizaElimina</h2>
+<h2>Eliminar cobertura póliza</h2>
 
-<form id="frmCoberturaSpolizaElimina" method="post">
-    <input type="hidden" name="Id_Cobertura" id="Id_Cobertura" value="@Model.Id_Cobertura" />
+<form id="frmCoberturasPolizaElimina" method="post">
+    <input type="hidden" name="Id_Cobertura" id="Id_Cobertura" value="@Model.Id_Cobertura" readonly />
     <div class="form-group">
         <label>Nombre :</label>
-        <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" />
+        <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" readonly />
     </div>
     <div class="form-group">
         <label>Descripción</label>
-        <input type="text" name="Descripcion" id="Descripcion" class="form-control" value="@Model.Descripcion" />
+        <input type="text" name="Descripcion" id="Descripcion" class="form-control" value="@Model.Descripcion" readonly />
     </div>
     <div class="form-group">
         <label>Porcentaje :</label>
-        <input type="text" name="Porcentaje" id="Porcentaje" class="form-control" value="@Model.Porcentaje" />
+        <input type="text" name="Porcentaje" id="Porcentaje" class="form-control" value="@Model.Porcentaje" readonly />
     </div>
     <div class="form-group">
         <input type="submit" value="Eliminar" id="btnEliminar" />

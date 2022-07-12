@@ -3,10 +3,10 @@
     ViewBag.Title = "CoberturasPolizaModifica";
 }
 
-<h2>CoberturasPolizaModifica</h2>
+<h2>Modificar cobertura de polizá</h2>
 
-<form id="frmCoberturaSpolizaModifica" method="post">
-    
+<form id="frmCoberturasPolizaModifica" method="post">
+
     <div class="form-group">
         <label>Nombre :</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" />
@@ -25,3 +25,7 @@
     <a href="~/CoberturasPoliza/CoberturasPolizaLista">Regresar a la lista</a>
 
 </form>
+@section scripts{
+    @Scripts.Render("~/Scripts/ScriptsProyecto/CoberturasPolizaModifica.js");
+
+}

@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdiccionesClienteController.cs" />
     <Compile Include="Controllers\AdiccionesController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,6 +162,9 @@
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaCantones_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RetornaDistritos_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaProvincias_Result.cs">
@@ -270,6 +274,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ScriptsProyecto\ClientesInserta.js" />
+    <Content Include="Scripts\ScriptsProyecto\ClientesModifica.js" />
+    <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaInserta.js" />
+    <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaModifica.js" />
+    <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
+    <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
     <Content Include="Scripts\ValidacionesGenericas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -297,6 +307,10 @@
     <Content Include="Views\AdiccionesCliente\AdiccionesClienteInsertar.cshtml" />
     <Content Include="Views\AdiccionesCliente\AdiccionesClienteModificar.cshtml" />
     <Content Include="Views\AdiccionesCliente\AdiccionesClienteEliminar.cshtml" />
+    <Content Include="Views\Clientes\ClientesLista.cshtml" />
+    <Content Include="Views\Clientes\ClientesInserta.cshtml" />
+    <Content Include="Views\Clientes\ClientesElimina.cshtml" />
+    <Content Include="Views\Clientes\ClientesModifica.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
