@@ -30,6 +30,7 @@ namespace Proyecto
                 "~/Scripts/jquery-3.3.1.js",
                 "~/Scripts/jquery.validate.js",
                 "~/Scripts/ValidacionesGenericas.js"));
+
         }
     }
 }

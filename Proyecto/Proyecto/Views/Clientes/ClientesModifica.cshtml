@@ -1,0 +1,153 @@
+﻿@model Proyecto.Models.sp_Retorna_ClienteID_Result
+@{
+    ViewBag.Title = "ClientesModifica";
+}
+
+<h2>Modificar cliente</h2>
+
+<form id="frmClientesModifica" method="post">
+
+    <div class="form-group">
+        <label>Cedula :</label>
+        <input type="text" name="Cedula" id="Cedula" class="form-control" value="@Model.Cedula" />
+    </div>
+    <div class="form-group">
+        <label>Género</label>
+
+        <select name="Genero" id="Genero" class="form-control">
+            <option value="">SELECCIONE GENERO</option>
+
+            @{
+                if (Model.Genero == "Masculino")
+                {
+                    <option value="Masculino" selected>Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                }
+                else
+                {
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino" selected>Femenino</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Fecha de nacimiento :</label>
+        <input type="date" name="FechaNacimiento" id="FechaNacimiento" class="form-control" value="@Model.Fecha_Nacimiento.ToString("yyyy-MM-dd")"/>
+    </div>
+
+    <div class="form-group">
+        <label>Nombre :</label>
+        <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" />
+    </div>
+    <div class="form-group">
+        <label>Primer Apellido</label>
+        <input type="text" name="Primer_Apellido" id="Primer_Apellido" class="form-control" value="@Model.Primer_Apellido" />
+    </div>
+    <div class="form-group">
+        <label>Segundo Apellido :</label>
+        <input type="text" name="Segundo_Apellido" id="Segundo_Apellido" class="form-control" value="@Model.Segundo_Apellido" />
+    </div>
+    <div class="form-group">
+        <label>Dirección Física :</label>
+        <input type="text" name="Direccion" id="Direccion" class="form-control" value="@Model.Direccion" />
+    </div>
+    <div class="form-group">
+        <label>Teléfono Principal</label>
+        <input type="text" name="Telefono1" id="Telefono1" class="form-control" value="@Model.Telefono1" />
+    </div>
+    <div class="form-group">
+        <label>Teléfono Secundario :</label>
+        <input type="text" name="Telefono2" id="Telefono2" class="form-control" value="@Model.Telefono2" />
+    </div>
+    <div class="form-group">
+        <label>Correo Electrónico :</label>
+        <input type="text" name="Correo" id="Correo" class="form-control" value="@Model.Correo" />
+    </div>
+    <div class="form-group">
+        <label>Provincia :</label>
+        <select name="Id_Provincia" id="Id_Provincia" class="form-control">
+            <option value="">SELECCIONE UNA PROVINCIA</option>
+            @{
+                foreach (Proyecto.Models.RetornaProvincias_Result provincia in ViewBag.Provincias)
+                {
+                    bool estaProvinciaEnModelo = provincia.id_Provincia == Model.Id_Provincia;
+                    @*
+                        incluir propiedad selected si esIdProvinciaModelo es true
+                    *@
+
+                    if (estaProvinciaEnModelo)
+                    {
+                        <option value="@provincia.id_Provincia" selected>@provincia.nombre.ToUpper() </option>
+                    }
+                    else
+                    {
+                        <option value="@provincia.id_Provincia">@provincia.nombre.ToUpper() </option>
+                    }
+
+                }
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Cantón :</label>
+        <select name="Id_Canton" id="Id_Canton" class="form-control">
+            
+            @{
+                foreach (Proyecto.Models.RetornaCantones_Result canton in ViewBag.Cantones)
+                {
+                    bool estaCantonEnModelo = canton.id_Canton == Model.Id_Canton;
+                   
+                    if (estaCantonEnModelo)
+                    {
+                        <option value="@canton.id_Canton" selected>@canton.nombre.ToUpper() </option>
+                    }
+                    else
+                    {
+                        <option value="@canton.id_Canton">@canton.nombre.ToUpper() </option>
+                    }
+
+                }
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Distrito :</label>
+        <select name="Id_Distrito" id="Id_Distrito" class="form-control">
+            @{
+                foreach (Proyecto.Models.RetornaDistritos_Result distrito in ViewBag.Distritos)
+                {
+                    bool estaDistritoEnModelo = distrito.id_Distrito == Model.Id_Distrito;
+                    @*
+                        incluir propiedad selected si esIdProvinciaModelo es true
+                    *@
+
+                    if (estaDistritoEnModelo)
+                    {
+                        <option value="@distrito.id_Distrito" selected>@distrito.nombre.ToUpper() </option>
+                    }
+                    else
+                    {
+                        <option value="@distrito.id_Distrito">@distrito.nombre.ToUpper() </option>
+                    }
+
+                }
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Modificar" id="btnModificar" />
+    </div>
+    <a href="~/Clientes/ClientesLista">Regresar a la lista</a>
+
+</form>
+@section scripts{
+
+    @Scripts.Render("~/Scripts/ScriptsProyecto/ClientesModifica.js")
+    @Scripts.Render("~/Scripts/ScriptsProyecto/GeografiaModificar.js")
+
+}

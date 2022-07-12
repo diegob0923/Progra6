@@ -613,19 +613,6 @@ namespace Proyecto.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Adiccion_ClienteID_Result>("sp_Retorna_Adiccion_ClienteID", idParameter);
         }
     
-        public virtual ObjectResult<sp_Retorna_Adicciones_Result> sp_Retorna_Adicciones(string nombre, Nullable<int> codigo)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var codigoParameter = codigo.HasValue ?
-                new ObjectParameter("Codigo", codigo) :
-                new ObjectParameter("Codigo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Adicciones_Result>("sp_Retorna_Adicciones", nombreParameter, codigoParameter);
-        }
-    
         public virtual ObjectResult<sp_Retorna_AdiccionesID_Result> sp_Retorna_AdiccionesID(Nullable<int> id_Adiccion)
         {
             var id_AdiccionParameter = id_Adiccion.HasValue ?
@@ -642,36 +629,6 @@ namespace Proyecto.Models
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_ClienteID_Result>("sp_Retorna_ClienteID", idParameter);
-        }
-    
-        public virtual ObjectResult<sp_Retorna_Clientes_Result> sp_Retorna_Clientes(Nullable<int> cedula, string nombre, string primer_apellido, string segundo_apellido)
-        {
-            var cedulaParameter = cedula.HasValue ?
-                new ObjectParameter("cedula", cedula) :
-                new ObjectParameter("cedula", typeof(int));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
-            var primer_apellidoParameter = primer_apellido != null ?
-                new ObjectParameter("primer_apellido", primer_apellido) :
-                new ObjectParameter("primer_apellido", typeof(string));
-    
-            var segundo_apellidoParameter = segundo_apellido != null ?
-                new ObjectParameter("segundo_apellido", segundo_apellido) :
-                new ObjectParameter("segundo_apellido", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Clientes_Result>("sp_Retorna_Clientes", cedulaParameter, nombreParameter, primer_apellidoParameter, segundo_apellidoParameter);
-        }
-    
-        public virtual ObjectResult<sp_Retorna_Cobertura_De_Poliza_Result> sp_Retorna_Cobertura_De_Poliza(string nombre)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Cobertura_De_Poliza_Result>("sp_Retorna_Cobertura_De_Poliza", nombreParameter);
         }
     
         public virtual ObjectResult<sp_Retorna_Cobertura_De_PolizaID_Result> sp_Retorna_Cobertura_De_PolizaID(Nullable<int> id_Cobertura)
@@ -712,6 +669,67 @@ namespace Proyecto.Models
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Registro_PolizasID_Result>("sp_Retorna_Registro_PolizasID", idParameter);
+        }
+    
+        public virtual ObjectResult<RetornaDistritos_Result> RetornaDistritos(string nombre, Nullable<int> id_Canton)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var id_CantonParameter = id_Canton.HasValue ?
+                new ObjectParameter("id_Canton", id_Canton) :
+                new ObjectParameter("id_Canton", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornaDistritos_Result>("RetornaDistritos", nombreParameter, id_CantonParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<sp_Retorna_Adicciones_Result> sp_Retorna_Adicciones(string nombre, Nullable<int> codigo)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var codigoParameter = codigo.HasValue ?
+                new ObjectParameter("Codigo", codigo) :
+                new ObjectParameter("Codigo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Adicciones_Result>("sp_Retorna_Adicciones", nombreParameter, codigoParameter);
+        }
+    
+        public virtual ObjectResult<sp_Retorna_Cobertura_De_Poliza_Result> sp_Retorna_Cobertura_De_Poliza(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Cobertura_De_Poliza_Result>("sp_Retorna_Cobertura_De_Poliza", nombreParameter);
+        }
+    
+        public virtual ObjectResult<sp_Retorna_Clientes_Result> sp_Retorna_Clientes(Nullable<int> cedula, string nombre, string primer_apellido, string segundo_apellido)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var primer_apellidoParameter = primer_apellido != null ?
+                new ObjectParameter("primer_apellido", primer_apellido) :
+                new ObjectParameter("primer_apellido", typeof(string));
+    
+            var segundo_apellidoParameter = segundo_apellido != null ?
+                new ObjectParameter("segundo_apellido", segundo_apellido) :
+                new ObjectParameter("segundo_apellido", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Clientes_Result>("sp_Retorna_Clientes", cedulaParameter, nombreParameter, primer_apellidoParameter, segundo_apellidoParameter);
         }
     }
 }
