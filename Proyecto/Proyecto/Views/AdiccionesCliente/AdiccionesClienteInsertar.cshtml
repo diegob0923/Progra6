@@ -1,12 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AdiccionesClienteInsertar";
 }
 
 <h2>Insertar adicciones por cliente</h2>
 
 
-<form id="frmAdiccionesClienteInsertar" method="post">
+<form id="frmAdiccionesCliente" method="post">
 
     <div class="form-group">
         <label>Adicción</label>
@@ -15,7 +14,8 @@
             @{
                 foreach (Proyecto.Models.sp_Retorna_Adicciones_Result adiccion in ViewBag.Adicciones)
                 {
-                    <option value="@adiccion.Id_Adiccion">@adiccion.Nombre</option>@*Nombre hace referencia al nombre de adiccion*@
+                    <option value="@adiccion.Id_Adiccion">@adiccion.Nombre</option>
+                    @*Nombre hace referencia al nombre de adiccion*@
                 }
             }
         </select>
@@ -33,9 +33,12 @@
             }
         </select>
     </div>
-    
+
     <div class="form-group">
         <input type="submit" value="Guardar" id="btnAceptar" />
     </div>
     <a href="~/AdiccionesCliente/AdiccionesClienteLista">Regresar a la lista</a>
 </form>
+@section scripts{
+    <script src="~/Scripts/ScriptsProyecto/AdiccionesClienteValidacion.js"></script>
+}
