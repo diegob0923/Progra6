@@ -48,7 +48,7 @@ namespace Proyecto.Controllers
                 }
             }
             Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-            return View();
+            return RedirectToAction("AdiccionesLista", "Adicciones");
         }
 
         public ActionResult AdiccionesModificar(int id_Adiccion)
