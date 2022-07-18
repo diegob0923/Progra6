@@ -1,12 +1,11 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AdiccionesInsertar";
 }
 
 <h2>AdiccionesInsertar</h2>
 
-<form id="frmAdiccionesInsertar" method="post">
- 
+<form id="frmAdicciones" method="post">
+
     <div class="form-group">
         <label>Nombre</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" />
@@ -21,3 +20,6 @@
         <input type="submit" value="Registrar" id="btnRegistrar" />
     </div>
 </form>
+@section scripts{
+    <script src="~/Scripts/ScriptsProyecto/AdiccionesValidacion.js"></script>
+}
