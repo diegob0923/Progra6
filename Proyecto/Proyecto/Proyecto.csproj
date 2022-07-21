@@ -131,6 +131,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistroPolizasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +314,7 @@
     <Content Include="Views\Clientes\ClientesInserta.cshtml" />
     <Content Include="Views\Clientes\ClientesElimina.cshtml" />
     <Content Include="Views\Clientes\ClientesModifica.cshtml" />
+    <Content Include="Views\RegistroPolizas\RegistroPolizasLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
