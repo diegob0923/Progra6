@@ -170,6 +170,9 @@
     <Compile Include="Models\RetornaProvincias_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RetornarUsuarioContrasena_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Retorna_Registro_Polizas_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
@@ -218,6 +221,9 @@
     <Compile Include="Models\sp_Retorna_Cobertura_De_Poliza_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_Retorna_Contrasenas_Sistema_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Retorna_Datos_Correo_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
@@ -225,6 +231,9 @@
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_Retorna_Registro_PolizasID_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_Retorna_Usuarios_Sistema_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -246,8 +255,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\SegurosEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SegurosEntities.Context.cs</LastGenOutput>
       <DependentUpon>SegurosEntities.edmx</DependentUpon>
+      <LastGenOutput>SegurosEntities.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\SegurosEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -283,7 +292,9 @@
     <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
     <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
     <Content Include="Scripts\ValidacionesGenericas.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

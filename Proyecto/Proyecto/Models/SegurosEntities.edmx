@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ProyectoSegurosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ProyectoSegurosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adiccion_Cliente">
           <Key>
             <PropertyRef Name="Id" />
@@ -114,18 +114,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoSeguros.dbo.Usuarios_Sistema' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Usuarios_Sistema">
           <Key>
             <PropertyRef Name="Id_Usuario" />
-            <PropertyRef Name="Usuario" />
-            <PropertyRef Name="Contrasena" />
           </Key>
           <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Usuario" Type="int" Nullable="false" />
           <Property Name="Contrasena" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Tipo_Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="TipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="Canton_ref_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
@@ -220,6 +216,10 @@ warning 6002: The table/view 'ProyectoSeguros.dbo.Usuarios_Sistema' does not hav
         <Function Name="RetornaProvincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="RetornarUsuarioContrasena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -305,6 +305,11 @@ warning 6002: The table/view 'ProyectoSeguros.dbo.Usuarios_Sistema' does not hav
           <Parameter Name="Prima_Antes_Impuestos" Type="money" Mode="In" />
           <Parameter Name="Impuestos" Type="money" Mode="In" />
           <Parameter Name="Prima_Final" Type="money" Mode="In" />
+        </Function>
+        <Function Name="sp_Insertar_Usuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Usuario" Type="int" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="TipoUsuario" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_ModificaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Canton" Type="int" Mode="In" />
@@ -392,6 +397,9 @@ warning 6002: The table/view 'ProyectoSeguros.dbo.Usuarios_Sistema' does not hav
         <Function Name="sp_Retorna_Cobertura_De_PolizaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Cobertura" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_Retorna_Contrasenas_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_Retorna_Datos_Correo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cedula" Type="int" Mode="In" />
         </Function>
@@ -401,6 +409,9 @@ warning 6002: The table/view 'ProyectoSeguros.dbo.Usuarios_Sistema' does not hav
         </Function>
         <Function Name="sp_Retorna_Registro_PolizasID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Retorna_Usuarios_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Usuario" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ProyectoSegurosModelStoreContainer">
@@ -413,14 +424,7 @@ warning 6002: The table/view 'ProyectoSeguros.dbo.Usuarios_Sistema' does not hav
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registro_Polizas" EntityType="Self.Registro_Polizas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuarios_Sistema" EntityType="Self.Usuarios_Sistema" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Usuarios_Sistema].[Id_Usuario] AS [Id_Usuario], 
-[Usuarios_Sistema].[Usuario] AS [Usuario], 
-[Usuarios_Sistema].[Contrasena] AS [Contrasena], 
-[Usuarios_Sistema].[Tipo_Usuario] AS [Tipo_Usuario]
-FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Usuarios_Sistema" EntityType="Self.Usuarios_Sistema" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Canton_ref_Provincia" Association="Self.Canton_ref_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Canton" EntitySet="Canton" />
@@ -446,7 +450,8 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <End Role="Registro_Polizas" EntitySet="Registro_Polizas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProyectoSegurosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -484,7 +489,6 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Name="id_CantonInec" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Provincia" Relationship="Self.Canton_ref_Provincia" FromRole="Canton" ToRole="Provincia" />
           <NavigationProperty Name="Distrito" Relationship="Self.Distrito_ref_Canton" FromRole="Canton" ToRole="Distrito" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Canton" FromRole="Canton" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -505,9 +509,6 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Name="Id_Canton" Type="Int32" Nullable="false" />
           <Property Name="Id_Distrito" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Adiccion_Cliente" Relationship="Self.FK_Adiccion_Cliente_Cliente" FromRole="Cliente" ToRole="Adiccion_Cliente" />
-          <NavigationProperty Name="Canton" Relationship="Self.FK_Cliente_Canton" FromRole="Cliente" ToRole="Canton" />
-          <NavigationProperty Name="Distrito" Relationship="Self.FK_Cliente_Distrito" FromRole="Cliente" ToRole="Distrito" />
-          <NavigationProperty Name="Provincia" Relationship="Self.FK_Cliente_Provincia" FromRole="Cliente" ToRole="Provincia" />
           <NavigationProperty Name="Registro_Polizas" Relationship="Self.FK_Registro_Polizas_Cliente" FromRole="Cliente" ToRole="Registro_Polizas" />
         </EntityType>
         <EntityType Name="Cobertura_de_poliza">
@@ -534,7 +535,6 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="id_DistritoInec" Type="Int32" />
           <NavigationProperty Name="Canton" Relationship="Self.Distrito_ref_Canton" FromRole="Distrito" ToRole="Canton" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Distrito" FromRole="Distrito" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -548,7 +548,6 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Name="fechaModifica" Type="DateTime" Precision="3" />
           <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Canton" Relationship="Self.Canton_ref_Provincia" FromRole="Provincia" ToRole="Canton" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Provincia" FromRole="Provincia" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Registro_Polizas">
           <Key>
@@ -580,13 +579,11 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
         <EntityType Name="Usuarios_Sistema">
           <Key>
             <PropertyRef Name="Id_Usuario" />
-            <PropertyRef Name="Usuario" />
-            <PropertyRef Name="Contrasena" />
           </Key>
           <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="Int32" Nullable="false" />
           <Property Name="Contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Tipo_Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="FK_Adiccion_Cliente_Adicciones">
           <End Role="Adicciones" Type="Self.Adicciones" Multiplicity="1" />
@@ -633,42 +630,6 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             </Principal>
             <Dependent Role="Distrito">
               <PropertyRef Name="id_Canton" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Canton">
-          <End Role="Canton" Type="Self.Canton" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Canton">
-              <PropertyRef Name="id_Canton" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="Id_Canton" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Distrito">
-          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Distrito">
-              <PropertyRef Name="id_Distrito" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="Id_Distrito" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="id_Provincia" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="Id_Provincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -723,18 +684,6 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <End Role="Canton" EntitySet="Canton" />
             <End Role="Distrito" EntitySet="Distrito" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Canton" Association="Self.FK_Cliente_Canton">
-            <End Role="Canton" EntitySet="Canton" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Distrito" Association="Self.FK_Cliente_Distrito">
-            <End Role="Distrito" EntitySet="Distrito" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Provincia" Association="Self.FK_Cliente_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
           <AssociationSet Name="FK_Registro_Polizas_Cliente" Association="Self.FK_Registro_Polizas_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Registro_Polizas" EntitySet="Registro_Polizas" />
@@ -754,10 +703,18 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <Parameter Name="id_Provincia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetornaCantonesID" ReturnType="Collection(ProyectoSegurosModel.RetornaCantonesID_Result)">
-          <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RetornaDistritos" ReturnType="Collection(ProyectoSegurosModel.RetornaDistritos_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetornaProvincias" ReturnType="Collection(ProyectoSegurosModel.RetornaProvincias_Result)">
-          <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RetornarUsuarioContrasena" ReturnType="Collection(ProyectoSegurosModel.RetornarUsuarioContrasena_Result)">
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -776,22 +733,22 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_EliminaCanton">
-          <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Adicciones">
-          <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Adicciones_Cliente">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Clientes">
-          <Parameter Name="Id_Cliente" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Cliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Cobertura_De_Poliza">
-          <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Registro_Polizas">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ProyectoSegurosModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -844,6 +801,11 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <Parameter Name="Prima_Antes_Impuestos" Mode="In" Type="Decimal" />
             <Parameter Name="Impuestos" Mode="In" Type="Decimal" />
             <Parameter Name="Prima_Final" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Insertar_Usuarios">
+            <Parameter Name="Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="TipoUsuario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ModificaCanton">
             <Parameter Name="id_Canton" Mode="In" Type="Int32" />
@@ -907,38 +869,17 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <Parameter Name="nombreAdiccion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Adiccion_ClienteID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Adiccion_ClienteID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_Retorna_AdiccionesID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_AdiccionesID_Result)">
-          <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_Retorna_ClienteID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_ClienteID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_Retorna_Cobertura_De_PolizaID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Cobertura_De_PolizaID_Result)">
-          <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_Retorna_Datos_Correo" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Datos_Correo_Result)">
-          <Parameter Name="cedula" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_Retorna_Poliza_Cliente" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Poliza_Cliente_Result)">
-            <Parameter Name="Cedula_Cliente" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Poliza" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_Retorna_Registro_PolizasID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Registro_PolizasID_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="RetornaDistritos" ReturnType="Collection(ProyectoSegurosModel.RetornaDistritos_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
-            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="sp_Retorna_Adicciones" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Adicciones_Result)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Codigo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_Retorna_Cobertura_De_Poliza" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Cobertura_De_Poliza_Result)">
-          <Parameter Name="Nombre" Mode="In" Type="String" />
+          <FunctionImport Name="sp_Retorna_AdiccionesID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_AdiccionesID_Result)">
+            <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_ClienteID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_ClienteID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Clientes" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Clientes_Result)">
             <Parameter Name="cedula" Mode="In" Type="Int32" />
@@ -946,6 +887,29 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
             <Parameter Name="primer_apellido" Mode="In" Type="String" />
             <Parameter Name="segundo_apellido" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Cobertura_De_Poliza" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Cobertura_De_Poliza_Result)">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Cobertura_De_PolizaID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Cobertura_De_PolizaID_Result)">
+            <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Contrasenas_Sistema" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Contrasenas_Sistema_Result)">
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Datos_Correo" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Datos_Correo_Result)">
+            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Poliza_Cliente" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Poliza_Cliente_Result)">
+            <Parameter Name="Cedula_Cliente" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Poliza" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Registro_PolizasID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Registro_PolizasID_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Usuarios_Sistema" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Usuarios_Sistema_Result)">
+            <Parameter Name="Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <ComplexType Name="Retorna_Registro_Polizas_Result">
           <Property Type="Int32" Name="Id_Poliza" Nullable="false" />
@@ -985,6 +949,18 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
           <Property Type="Int32" Name="id_CantonInec" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="RetornaDistritos_Result">
+          <Property Type="Int32" Name="id_Distrito" Nullable="false" />
+          <Property Type="Int32" Name="id_Canton" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Canton" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="usuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
+          <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="id_DistritoInec" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="RetornaProvincias_Result">
           <Property Type="Int32" Name="id_Provincia" Nullable="false" />
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
@@ -993,6 +969,12 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Type="String" Name="usuarioModifica" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
           <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="RetornarUsuarioContrasena_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1017,6 +999,11 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Type="Int32" Name="Id_Adiccion" Nullable="false" />
           <Property Type="Int32" Name="Id_Cliente" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_Retorna_Adicciones_Result">
+          <Property Type="Int32" Name="Id_Adiccion" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Codigo" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sp_Retorna_AdiccionesID_Result">
           <Property Type="Int32" Name="Id_Adiccion" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
@@ -1038,17 +1025,48 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Type="Int32" Name="Id_Canton" Nullable="false" />
           <Property Type="Int32" Name="Id_Distrito" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_Retorna_Clientes_Result">
+          <Property Type="Int32" Name="Id_Cliente" Nullable="false" />
+          <Property Type="Int32" Name="Cedula" Nullable="false" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Provincia" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Canton" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Distrito" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="id_Provincia" Nullable="false" />
+          <Property Type="Int32" Name="id_Canton" Nullable="false" />
+          <Property Type="Int32" Name="id_Distrito" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_Retorna_Cobertura_De_Poliza_Result">
+          <Property Type="Int32" Name="Id_Cobertura" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="2000" />
+          <Property Type="Double" Name="Porcentaje" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sp_Retorna_Cobertura_De_PolizaID_Result">
           <Property Type="Int32" Name="Id_Cobertura" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="2000" />
           <Property Type="Double" Name="Porcentaje" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_Retorna_Contrasenas_Sistema_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="sp_Retorna_Datos_Correo_Result">
           <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
           <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_Retorna_Poliza_Cliente_Result">
@@ -1078,47 +1096,11 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <Property Type="Decimal" Name="Impuestos" Nullable="false" Precision="19" />
           <Property Type="Decimal" Name="Prima_Final" Nullable="false" Precision="19" />
         </ComplexType>
-        <ComplexType Name="RetornaDistritos_Result">
-          <Property Type="Int32" Name="id_Distrito" Nullable="false" />
-          <Property Type="Int32" Name="id_Canton" Nullable="false" />
-          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Canton" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="usuarioCrea" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="fechaCrea" Nullable="true" Precision="23" />
-          <Property Type="String" Name="usuarioModifica" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
-          <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
-          <Property Type="Int32" Name="id_DistritoInec" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_Retorna_Adicciones_Result">
-          <Property Type="Int32" Name="Id_Adiccion" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Codigo" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="sp_Retorna_Cobertura_De_Poliza_Result">
-          <Property Type="Int32" Name="Id_Cobertura" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="2000" />
-          <Property Type="Double" Name="Porcentaje" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="sp_Retorna_Clientes_Result">
-          <Property Type="Int32" Name="Id_Cliente" Nullable="false" />
-          <Property Type="Int32" Name="Cedula" Nullable="false" />
-          <Property Type="String" Name="Genero" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Telefono1" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Telefono2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Provincia" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Canton" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Distrito" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="id_Provincia" Nullable="false" />
-          <Property Type="Int32" Name="id_Canton" Nullable="false" />
-          <Property Type="Int32" Name="id_Distrito" Nullable="false" />
+        <ComplexType Name="sp_Retorna_Usuarios_Sistema_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1250,7 +1232,7 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="Tipo_Usuario" ColumnName="Tipo_Usuario" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1304,6 +1286,22 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RetornaDistritos" FunctionName="ProyectoSegurosModel.Store.RetornaDistritos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornaDistritos_Result">
+                <ScalarProperty Name="id_Distrito" ColumnName="id_Distrito" />
+                <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="Canton" ColumnName="Canton" />
+                <ScalarProperty Name="usuarioCrea" ColumnName="usuarioCrea" />
+                <ScalarProperty Name="fechaCrea" ColumnName="fechaCrea" />
+                <ScalarProperty Name="usuarioModifica" ColumnName="usuarioModifica" />
+                <ScalarProperty Name="fechaModifica" ColumnName="fechaModifica" />
+                <ScalarProperty Name="vc_Estado" ColumnName="vc_Estado" />
+                <ScalarProperty Name="id_DistritoInec" ColumnName="id_DistritoInec" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RetornaProvincias" FunctionName="ProyectoSegurosModel.Store.RetornaProvincias">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornaProvincias_Result">
@@ -1314,6 +1312,16 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
                 <ScalarProperty Name="usuarioModifica" ColumnName="usuarioModifica" />
                 <ScalarProperty Name="fechaModifica" ColumnName="fechaModifica" />
                 <ScalarProperty Name="vc_Estado" ColumnName="vc_Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RetornarUsuarioContrasena" FunctionName="ProyectoSegurosModel.Store.RetornarUsuarioContrasena">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornarUsuarioContrasena_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1351,6 +1359,7 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="sp_Insertar_Clientes" FunctionName="ProyectoSegurosModel.Store.sp_Insertar_Clientes" />
           <FunctionImportMapping FunctionImportName="sp_Insertar_Cobertura_De_Poliza" FunctionName="ProyectoSegurosModel.Store.sp_Insertar_Cobertura_De_Poliza" />
           <FunctionImportMapping FunctionImportName="sp_Insertar_Registro_Polizas" FunctionName="ProyectoSegurosModel.Store.sp_Insertar_Registro_Polizas" />
+          <FunctionImportMapping FunctionImportName="sp_Insertar_Usuarios" FunctionName="ProyectoSegurosModel.Store.sp_Insertar_Usuarios" />
           <FunctionImportMapping FunctionImportName="sp_ModificaCanton" FunctionName="ProyectoSegurosModel.Store.sp_ModificaCanton" />
           <FunctionImportMapping FunctionImportName="sp_Modificar_Adicciones" FunctionName="ProyectoSegurosModel.Store.sp_Modificar_Adicciones" />
           <FunctionImportMapping FunctionImportName="sp_Modificar_Adicciones_Clientes" FunctionName="ProyectoSegurosModel.Store.sp_Modificar_Adicciones_Clientes" />
@@ -1375,6 +1384,15 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_Adiccion" ColumnName="Id_Adiccion" />
                 <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Retorna_Adicciones" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Adicciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Adicciones_Result">
+                <ScalarProperty Name="Id_Adiccion" ColumnName="Id_Adiccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1407,6 +1425,39 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Retorna_Clientes" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Clientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Clientes_Result">
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Canton" ColumnName="Canton" />
+                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+                <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
+                <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
+                <ScalarProperty Name="id_Distrito" ColumnName="id_Distrito" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Retorna_Cobertura_De_Poliza" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Cobertura_De_Poliza">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Cobertura_De_Poliza_Result">
+                <ScalarProperty Name="Id_Cobertura" ColumnName="Id_Cobertura" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_Retorna_Cobertura_De_PolizaID" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Cobertura_De_PolizaID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Cobertura_De_PolizaID_Result">
@@ -1414,6 +1465,16 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Retorna_Contrasenas_Sistema" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Contrasenas_Sistema">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Contrasenas_Sistema_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1463,65 +1524,17 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetornaDistritos" FunctionName="ProyectoSegurosModel.Store.RetornaDistritos">
+          <FunctionImportMapping FunctionImportName="sp_Retorna_Usuarios_Sistema" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Usuarios_Sistema">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornaDistritos_Result">
-                <ScalarProperty Name="id_Distrito" ColumnName="id_Distrito" />
-                <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="Canton" ColumnName="Canton" />
-                <ScalarProperty Name="usuarioCrea" ColumnName="usuarioCrea" />
-                <ScalarProperty Name="fechaCrea" ColumnName="fechaCrea" />
-                <ScalarProperty Name="usuarioModifica" ColumnName="usuarioModifica" />
-                <ScalarProperty Name="fechaModifica" ColumnName="fechaModifica" />
-                <ScalarProperty Name="vc_Estado" ColumnName="vc_Estado" />
-                <ScalarProperty Name="id_DistritoInec" ColumnName="id_DistritoInec" />
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Usuarios_Sistema_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProyectoSegurosModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_Retorna_Adicciones" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Adicciones">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Adicciones_Result">
-                <ScalarProperty Name="Id_Adiccion" ColumnName="Id_Adiccion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_Retorna_Cobertura_De_Poliza" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Cobertura_De_Poliza">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Cobertura_De_Poliza_Result">
-                <ScalarProperty Name="Id_Cobertura" ColumnName="Id_Cobertura" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_Retorna_Clientes" FunctionName="ProyectoSegurosModel.Store.sp_Retorna_Clientes">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoSegurosModel.sp_Retorna_Clientes_Result">
-                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
-                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-                <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
-                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
-                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
-                <ScalarProperty Name="Canton" ColumnName="Canton" />
-                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
-                <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
-                <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
-                <ScalarProperty Name="id_Distrito" ColumnName="id_Distrito" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1539,7 +1552,7 @@ FROM [dbo].[Usuarios_Sistema] AS [Usuarios_Sistema]</DefiningQuery>
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
