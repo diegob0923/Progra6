@@ -13,15 +13,26 @@ namespace Proyecto.Models
 {
 
 using System;
+    using System.Collections.Generic;
     
-public partial class sp_Retorna_Adiccion_ClienteID_Result
+public partial class Rol
 {
+
+    public Rol()
+    {
+
+        this.Usuarios_Sistema = new HashSet<Usuarios_Sistema>();
+
+    }
+
 
     public int Id { get; set; }
 
-    public int Id_Adiccion { get; set; }
+    public string Nombre { get; set; }
 
-    public int Id_Cliente { get; set; }
+
+
+    public virtual ICollection<Usuarios_Sistema> Usuarios_Sistema { get; set; }
 
 }
 

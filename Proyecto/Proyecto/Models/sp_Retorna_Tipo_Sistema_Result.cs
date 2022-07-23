@@ -14,14 +14,16 @@ namespace Proyecto.Models
 
 using System;
     
-public partial class sp_Retorna_Adiccion_ClienteID_Result
+public partial class sp_Retorna_Tipo_Sistema_Result
 {
 
-    public int Id { get; set; }
+    public int Id_Usuario { get; set; }
 
-    public int Id_Adiccion { get; set; }
+    public int Usuario { get; set; }
 
-    public int Id_Cliente { get; set; }
+    public string Contrasena { get; set; }
+
+    public string Tipo_Usuario { get; set; }
 
 }
 

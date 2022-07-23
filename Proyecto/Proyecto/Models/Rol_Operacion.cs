@@ -13,15 +13,16 @@ namespace Proyecto.Models
 {
 
 using System;
+    using System.Collections.Generic;
     
-public partial class sp_Retorna_Adiccion_ClienteID_Result
+public partial class Rol_Operacion
 {
 
     public int Id { get; set; }
 
-    public int Id_Adiccion { get; set; }
+    public Nullable<int> IdRol { get; set; }
 
-    public int Id_Cliente { get; set; }
+    public int IdOperacion { get; set; }
 
 }
 

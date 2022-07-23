@@ -667,7 +667,6 @@
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Registro_Polizas" EntityType="Self.Registro_Polizas" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Usuarios_Sistema" EntityType="Self.Usuarios_Sistema" />
           <AssociationSet Name="FK_Adiccion_Cliente_Adicciones" Association="Self.FK_Adiccion_Cliente_Adicciones">
             <End Role="Adicciones" EntitySet="Adicciones" />
             <End Role="Adiccion_Cliente" EntitySet="Adiccion_Cliente" />

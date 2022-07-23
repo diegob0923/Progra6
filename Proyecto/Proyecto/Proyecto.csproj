@@ -131,6 +131,10 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InicioSesionController.cs" />
+    <Compile Include="Correo\EnvioCorreo.cs" />
+    <Compile Include="Filtros\AutorizarUsuarios.cs" />
+    <Compile Include="Filtros\VerificarSesion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,6 +154,12 @@
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Distrito.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Modulo.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Operaciones.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Provincia.cs">
@@ -174,6 +184,12 @@
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Retorna_Registro_Polizas_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rol.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rol_Operacion.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SegurosEntities.Context.cs">
@@ -291,6 +307,7 @@
     <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaModifica.js" />
     <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
     <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
+    <Content Include="Scripts\ScriptsProyecto\InicioSesion.js" />
     <Content Include="Scripts\ValidacionesGenericas.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -324,6 +341,7 @@
     <Content Include="Views\Clientes\ClientesInserta.cshtml" />
     <Content Include="Views\Clientes\ClientesElimina.cshtml" />
     <Content Include="Views\Clientes\ClientesModifica.cshtml" />
+    <Content Include="Views\InicioSesion\InicioSesion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

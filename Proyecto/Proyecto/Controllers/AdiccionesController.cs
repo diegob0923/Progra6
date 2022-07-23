@@ -1,4 +1,5 @@
-﻿using Proyecto.Models;
+﻿using Proyecto.Filtros;
+using Proyecto.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Proyecto.Controllers
     {
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
+        
         public ActionResult AdiccionesLista()
         {
             List<sp_Retorna_Adicciones_Result> modeloVista = new List<sp_Retorna_Adicciones_Result>();

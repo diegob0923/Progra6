@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Proyecto.Filtros;
 using Proyecto.Models;
 
 namespace Proyecto.Controllers
@@ -14,6 +15,7 @@ namespace Proyecto.Controllers
 
         // GET: CoberturasPoliza
         #region Coberturas Poliza Lista
+            [AutorizarUsuarios(IdOperacion:2)]
         public ActionResult CoberturasPolizaLista()
         {
             List<sp_Retorna_Cobertura_De_Poliza_Result> modeloVista = new List<sp_Retorna_Cobertura_De_Poliza_Result>();

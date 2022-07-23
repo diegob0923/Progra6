@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using Proyecto.Correo;
+using Proyecto.Filtros;
 
 namespace Proyecto.Controllers
 {
@@ -14,6 +16,7 @@ namespace Proyecto.Controllers
 
         // GET: Clientes
         #region Clientes Lista
+        
         public ActionResult ClientesLista()
         {
             ///int cedula, string nombre, string primer_apellido, string segundo_apellido
@@ -79,6 +82,24 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult ClientesInserta(sp_Retorna_Clientes_Result modeloVista)
         {
+            //Inicio Contraseña aleatoria
+            Random rdn = new Random();
+            string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890%$#@";
+            int longitud = caracteres.Length;
+            char letra;
+            int longitudContrasenia = 5;
+            string contraseniaAleatoria = string.Empty;
+            for (int i = 0; i < longitudContrasenia; i++)
+            {
+                letra = caracteres[rdn.Next(longitud)];
+                contraseniaAleatoria += letra.ToString();
+            }
+            //Final Contraseña aleatoria
+
+
+            string TipoUsuario = "Cliente";
+            
+
             int Cedula = modeloVista.Cedula;
             string Genero = modeloVista.Genero;
             DateTime Fecha_Nacimiento = modeloVista.Fecha_Nacimiento;
@@ -95,6 +116,7 @@ namespace Proyecto.Controllers
 
 
             int cantRegistrosAfectados = 0;
+            
             string resultado = "";
             try
             {
@@ -112,7 +134,12 @@ namespace Proyecto.Controllers
                        Id_Provincia,
                        Id_Canton,
                        Id_Distrito
-);
+                       );
+                this.modeloBD.sp_Insertar_Usuarios(
+                    Cedula,
+                    contraseniaAleatoria,
+                    TipoUsuario
+                        );
 
             }
             catch (Exception error)
@@ -126,7 +153,10 @@ namespace Proyecto.Controllers
                 {
                     resultado = "Registro insertado";
                     ///Para mostrar el mensaje de los exception errores mediante alert
+                   
+                    EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
                     Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                    RedirectToAction("ClientesLista", "Clientes");
 
                 }
                 else
@@ -138,9 +168,34 @@ namespace Proyecto.Controllers
 
             //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
             //seguido del nombre del controlador
-            return RedirectToAction("ClientesLista", "Clientes");
+            //return RedirectToAction("ClientesLista", "Clientes");
+            return View();
         }
         #endregion
+
+  
+        #region EnviarCorreos
+
+        void EnviarCorreos(string Correo, string Nombre, string Primer_Apellido, string Segundo_Apellido, int Cedula, string contrasenia)
+        {
+            
+
+            //Se llama a la clase que contiene los demás procedimientos para el envió del correo
+            EnvioCorreo envio = new EnvioCorreo();
+            string CorreoCliente = Correo;
+            int Usuario = Cedula;
+            string Contrasena = contrasenia;
+            string NombreCliente = Primer_Apellido + " " + Segundo_Apellido + " " + Nombre;
+
+            envio.EnviarCorreoClienteNuevo(CorreoCliente, NombreCliente, Usuario, Contrasena);
+
+
+
+        }
+
+        #endregion
+
+
 
         #region Clientes modificar y HttpPost
         public ActionResult ClientesModifica(int id_Cliente)

@@ -21,6 +21,12 @@
         <AssociationConnector Association="ProyectoSegurosModel.Distrito_ref_Canton" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoSegurosModel.FK_Registro_Polizas_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoSegurosModel.FK_Registro_Polizas_Cobertura_de_poliza" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProyectoSegurosModel.Modulo" Width="1.5" PointX="3.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ProyectoSegurosModel.Operaciones" Width="1.5" PointX="5.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ProyectoSegurosModel.Rol" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProyectoSegurosModel.Rol_Operacion" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ProyectoSegurosModel.Usuarios_Sistema" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="ProyectoSegurosModel.FK_Usuarios_Sistema_Rol" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
