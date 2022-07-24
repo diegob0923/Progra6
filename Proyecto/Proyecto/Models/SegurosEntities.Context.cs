@@ -796,5 +796,18 @@ namespace Proyecto.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Registro_PolizasID_Result>("sp_Retorna_Registro_PolizasID", idParameter);
         }
+    
+        public virtual ObjectResult<RetornarUsuarioContrasena_Result> RetornarUsuarioContrasena(Nullable<int> usuario, string contrasena)
+        {
+            var usuarioParameter = usuario.HasValue ?
+                new ObjectParameter("Usuario", usuario) :
+                new ObjectParameter("Usuario", typeof(int));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornarUsuarioContrasena_Result>("RetornarUsuarioContrasena", usuarioParameter, contrasenaParameter);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Proyecto.Models;
+﻿using Proyecto.Filtros;
+using Proyecto.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,11 @@ namespace Proyecto.Controllers
     {
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
+
         public ActionResult AdiccionesLista()
         {
             List<sp_Retorna_Adicciones_Result> modeloVista = new List<sp_Retorna_Adicciones_Result>();
-            modeloVista = modeloBD.sp_Retorna_Adicciones(null,null).ToList();
+            modeloVista = modeloBD.sp_Retorna_Adicciones(null, null).ToList();
             return View(modeloVista);
         }
 
@@ -30,7 +32,7 @@ namespace Proyecto.Controllers
             string resultado = "";
             try
             {
-                cantRegistrosAfectados = modeloBD.sp_Insertar_Adicciones(modeloVista.Nombre,modeloVista.Codigo);
+                cantRegistrosAfectados = modeloBD.sp_Insertar_Adicciones(modeloVista.Nombre, modeloVista.Codigo);
             }
             catch (Exception error)
             {

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "InicioSesion";
+
+}
+
+<h2>Iniciar sesíon</h2>
+
+<form id="frmInicioSesion" method="post">
+
+    <div class="form-group">
+        <label>Usuario :</label>
+        <input type="text" name="Usuario" id="Usuario" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Contraseña :</label>
+        <input type="text" name="Contrasena" id="Contrasena" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Ingresar" id="btnIngresar" />
+    </div>
+</form>
+@section scripts{
+
+    @Scripts.Render("~/Scripts/ScriptsProyecto/InicioSesion.js")
+
+}

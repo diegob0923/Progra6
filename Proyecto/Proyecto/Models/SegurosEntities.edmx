@@ -919,7 +919,15 @@
             <Parameter Name="nombreCobertura" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Registro_PolizasID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Registro_PolizasID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Retorna_Usuarios_Sistema" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Usuarios_Sistema_Result)">
+          <Parameter Name="Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="RetornarUsuarioContrasena" ReturnType="Collection(ProyectoSegurosModel.RetornarUsuarioContrasena_Result)">
+            <Parameter Name="Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="RetornaCantones_Result">
@@ -966,12 +974,6 @@
           <Property Type="String" Name="usuarioModifica" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
           <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
-        </ComplexType>
-        <ComplexType Name="RetornarUsuarioContrasena_Result">
-          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
-          <Property Type="Int32" Name="Usuario" Nullable="false" />
-          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1115,6 +1117,18 @@
           <Property Type="Decimal" Name="Impuestos" Nullable="false" Precision="19" />
           <Property Type="Decimal" Name="Prima_Final" Nullable="false" Precision="19" />
           <Property Type="DateTime" Name="Fecha_Vencimiento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_Retorna_Usuarios_Sistema_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RetornarUsuarioContrasena_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1309,16 +1323,6 @@
                 <ScalarProperty Name="usuarioModifica" ColumnName="usuarioModifica" />
                 <ScalarProperty Name="fechaModifica" ColumnName="fechaModifica" />
                 <ScalarProperty Name="vc_Estado" ColumnName="vc_Estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetornarUsuarioContrasena" FunctionName="ProyectoSegurosModel.Store.RetornarUsuarioContrasena">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornarUsuarioContrasena_Result">
-                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1551,6 +1555,17 @@
                 <ScalarProperty Name="Impuestos" ColumnName="Impuestos" />
                 <ScalarProperty Name="Prima_Final" ColumnName="Prima_Final" />
                 <ScalarProperty Name="Fecha_Vencimiento" ColumnName="Fecha_Vencimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProyectoSegurosModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="RetornarUsuarioContrasena" FunctionName="ProyectoSegurosModel.Store.RetornarUsuarioContrasena">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornarUsuarioContrasena_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
