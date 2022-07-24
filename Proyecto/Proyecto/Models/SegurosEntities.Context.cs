@@ -104,19 +104,6 @@ namespace Proyecto.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornaProvincias_Result>("RetornaProvincias", nombreParameter);
         }
     
-        public virtual ObjectResult<RetornarUsuarioContrasena_Result> RetornarUsuarioContrasena(string usuario, string contrasena)
-        {
-            var usuarioParameter = usuario != null ?
-                new ObjectParameter("Usuario", usuario) :
-                new ObjectParameter("Usuario", typeof(string));
-    
-            var contrasenaParameter = contrasena != null ?
-                new ObjectParameter("Contrasena", contrasena) :
-                new ObjectParameter("Contrasena", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornarUsuarioContrasena_Result>("RetornarUsuarioContrasena", usuarioParameter, contrasenaParameter);
-        }
-    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?
@@ -778,6 +765,19 @@ namespace Proyecto.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<RetornarUsuarioContrasena_Result> RetornarUsuarioContrasena(Nullable<int> usuario, string contrasena)
+        {
+            var usuarioParameter = usuario.HasValue ?
+                new ObjectParameter("Usuario", usuario) :
+                new ObjectParameter("Usuario", typeof(int));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornarUsuarioContrasena_Result>("RetornarUsuarioContrasena", usuarioParameter, contrasenaParameter);
         }
     }
 }

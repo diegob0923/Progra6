@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProyectoSegurosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProyectoSegurosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adiccion_Cliente">
           <Key>
             <PropertyRef Name="Id" />
@@ -217,7 +217,7 @@
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
         <Function Name="RetornarUsuarioContrasena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Usuario" Type="int" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -450,8 +450,7 @@
             <End Role="Registro_Polizas" EntitySet="Registro_Polizas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProyectoSegurosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -703,18 +702,14 @@
             <Parameter Name="id_Provincia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetornaCantonesID" ReturnType="Collection(ProyectoSegurosModel.RetornaCantonesID_Result)">
-            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+          <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetornaDistritos" ReturnType="Collection(ProyectoSegurosModel.RetornaDistritos_Result)">
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RetornaProvincias" ReturnType="Collection(ProyectoSegurosModel.RetornaProvincias_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="RetornarUsuarioContrasena" ReturnType="Collection(ProyectoSegurosModel.RetornarUsuarioContrasena_Result)">
-            <Parameter Name="Usuario" Mode="In" Type="String" />
-            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -733,22 +728,22 @@
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_EliminaCanton">
-            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+          <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Adicciones">
-            <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Adicciones_Cliente">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Clientes">
-            <Parameter Name="Id_Cliente" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Cliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Cobertura_De_Poliza">
-            <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Eliminar_Registro_Polizas">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ProyectoSegurosModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -869,17 +864,17 @@
             <Parameter Name="nombreAdiccion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Adiccion_ClienteID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Adiccion_ClienteID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Adicciones" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Adicciones_Result)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Codigo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_AdiccionesID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_AdiccionesID_Result)">
-            <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Adiccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_ClienteID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_ClienteID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Clientes" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Clientes_Result)">
             <Parameter Name="cedula" Mode="In" Type="Int32" />
@@ -888,28 +883,32 @@
             <Parameter Name="segundo_apellido" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Cobertura_De_Poliza" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Cobertura_De_Poliza_Result)">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
+          <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Cobertura_De_PolizaID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Cobertura_De_PolizaID_Result)">
-            <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Cobertura" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Contrasenas_Sistema" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Contrasenas_Sistema_Result)">
-            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          <Parameter Name="Contrasena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Datos_Correo" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Datos_Correo_Result)">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+          <Parameter Name="cedula" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Poliza_Cliente" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Poliza_Cliente_Result)">
             <Parameter Name="Cedula_Cliente" Mode="In" Type="Int32" />
             <Parameter Name="Id_Poliza" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Registro_PolizasID" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Registro_PolizasID_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Retorna_Usuarios_Sistema" ReturnType="Collection(ProyectoSegurosModel.sp_Retorna_Usuarios_Sistema_Result)">
-            <Parameter Name="Usuario" Mode="In" Type="Int32" />
+          <Parameter Name="Usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="RetornarUsuarioContrasena" ReturnType="Collection(ProyectoSegurosModel.RetornarUsuarioContrasena_Result)">
+            <Parameter Name="Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Retorna_Registro_Polizas_Result">
           <Property Type="Int32" Name="Id_Poliza" Nullable="false" />
@@ -969,12 +968,6 @@
           <Property Type="String" Name="usuarioModifica" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
           <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
-        </ComplexType>
-        <ComplexType Name="RetornarUsuarioContrasena_Result">
-          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
-          <Property Type="Int32" Name="Usuario" Nullable="false" />
-          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1097,6 +1090,12 @@
           <Property Type="Decimal" Name="Prima_Final" Nullable="false" Precision="19" />
         </ComplexType>
         <ComplexType Name="sp_Retorna_Usuarios_Sistema_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TipoUsuario" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RetornarUsuarioContrasena_Result">
           <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
           <Property Type="Int32" Name="Usuario" Nullable="false" />
           <Property Type="String" Name="Contrasena" Nullable="false" MaxLength="50" />
@@ -1315,16 +1314,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetornarUsuarioContrasena" FunctionName="ProyectoSegurosModel.Store.RetornarUsuarioContrasena">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornarUsuarioContrasena_Result">
-                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ProyectoSegurosModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ProyectoSegurosModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ProyectoSegurosModel.Store.sp_dropdiagram" />
@@ -1535,6 +1524,16 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProyectoSegurosModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="RetornarUsuarioContrasena" FunctionName="ProyectoSegurosModel.Store.RetornarUsuarioContrasena">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoSegurosModel.RetornarUsuarioContrasena_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
