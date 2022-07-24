@@ -131,6 +131,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistroPolizasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -143,6 +144,7 @@
     <Compile Include="Models\Canton.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Clases\RegistroPolizas.cs" />
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
@@ -291,6 +293,7 @@
     <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaModifica.js" />
     <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
     <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
+    <Content Include="Scripts\ScriptsProyecto\RegistroPolizasValidaciones.js" />
     <Content Include="Scripts\ValidacionesGenericas.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -324,6 +327,8 @@
     <Content Include="Views\Clientes\ClientesInserta.cshtml" />
     <Content Include="Views\Clientes\ClientesElimina.cshtml" />
     <Content Include="Views\Clientes\ClientesModifica.cshtml" />
+    <Content Include="Views\RegistroPolizas\RegistroPolizasLista.cshtml" />
+    <Content Include="Views\RegistroPolizas\RegistroPolizasInsertar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
