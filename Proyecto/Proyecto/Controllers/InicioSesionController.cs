@@ -20,80 +20,85 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        void RealizarAutenticacion()
-        {
-            RetornarUsuarioContrasena_Result
-                Resultado = this.modeloBD.RetornarUsuarioContrasena(int Usuario, string ).FirstOrDefault();
-
-
-            /// Verificar si el objeto es nulo, si lo es,
-            /// entonces el usuario y contraseña son incorrectos
-            if (Resultado == null)
-            {
-                lblMensaje.Text = "Correo eléctronico ó contraseña incorrectos";
-                this.txtCorreo.Text = "";
-                this.txtCorreo.Focus();
-                this.Session.Add("nombreUsuario", null);
-                this.Session.Add("ultimoIngreso", null);
-                this.Session.Add("idUsuario", null);
-                this.Session.Add("usuarioLogeado", false);
-                this.Session.Add("tipoUsuario", null);
-            }
-            else
-            {
-                // Se obtiene los datos del doctor que está ingresando al sistema, para conocer cuál fue su ultima
-                // vez que utilizo el sistema.
-                RetornaRegistroIngreso_Result DatosDoctor = this.ModeloBD.RetornaRegistroIngreso(txtCorreo.Text).FirstOrDefault();
-
-                // Si no se encontró registros del doctor, quiere decir que es la primera vez
-                // que utiliza el sistema.
-                // al contrario, si se encontraron registros, se obtiene la fecha y hora
-                // de la ultima vez que utilizo el sistema.
-                if (DatosDoctor == null)
-                {
-                    this.Session.Add("ultimoIngreso", "Esta es su primera vez en el sistema");
-                }
-                else
-                {
-                    this.Session.Add("ultimoIngreso", DatosDoctor.Fecha_Ultimo_Ingreso);
-                    this.ModeloBD.InsertarRegistroIngreso(Resultado.correoElectronico);
-                }
-                // Variables de sesión
-                this.ModeloBD.InsertarRegistroIngreso(Resultado.correoElectronico);
-                this.Session.Add("nombreUsuario", Resultado.nombreCompleto);
-                this.Session.Add("idUsuario", Resultado.id_Usuario);
-                this.Session.Add("usuarioLogeado", true);
-                this.Session.Add("tipoUsuario", Resultado.tipoUsuario);
-                this.Response.Redirect("~/Formularios/FrmPaginaPrincipal.aspx");
-            }
-        }
-
-
+        
         [HttpPost]
         public ActionResult InicioSesion(int Usuario, string Contrasena)
-        { 
+        {
+            //Arreglar 
 
+            //RetornarUsuarioContrasena_Result
+            //    Resultado = this.modeloBD.RetornarUsuarioContrasena(Usuario, Contrasena).FirstOrDefault();
+            //string Mensaje = "";
 
+            ///// Verificar si el objeto es nulo, si lo es,
+            ///// entonces el usuario y contraseña son incorrectos
+            //if (Resultado == null)
+            //{
+            //   Mensaje = "Usuario o contraseña incorrectos";
+            //    Response.Write("<script language=javascript>alert('" + Mensaje + "');</script>");
 
+            //}
+            //else
+            //{
 
+            //    if (DatosDoctor == null)
+            //    {
+            //        this.Session.Add("ultimoIngreso", "Esta es su primera vez en el sistema");
+            //    }
+            //    else
+            //    {
+            //        this.Session.Add("ultimoIngreso", DatosDoctor.Fecha_Ultimo_Ingreso);
+            //        this.ModeloBD.InsertarRegistroIngreso(Resultado.correoElectronico);
+            //    }
+            //    // Variables de sesión
+            //    this.ModeloBD.InsertarRegistroIngreso(Resultado.correoElectronico);
+            //    this.Session.Add("nombreUsuario", Resultado.nombreCompleto);
+            //    this.Session.Add("idUsuario", Resultado.id_Usuario);
+            //    this.Session.Add("usuarioLogeado", true);
+            //    this.Session.Add("tipoUsuario", Resultado.tipoUsuario);
+            //    this.Response.Redirect("~/Formularios/FrmPaginaPrincipal.aspx");
+            //}
+            
             try
             {
                 using (Models.ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities())
                 {
-                    var usuario = (from login in modeloBD.Usuarios_Sistema
-                                   where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim()
+                    //string tipo = "";
+                    string tipoCliente = "Cliente";
+                    string tipoColaborador = "Colaborador";
+                    var usuario1 = (from login in modeloBD.Usuarios_Sistema
+                                   where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim() && login.TipoUsuario == tipoCliente
                                    select login).FirstOrDefault();
+                    var usuario2 = (from login in modeloBD.Usuarios_Sistema
+                                    where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim() && login.TipoUsuario == tipoColaborador
+                                    select login).FirstOrDefault();
+                    var TipoCliente = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoCliente select T).FirstOrDefault();
+                    var TipoColaborador = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoColaborador select T).FirstOrDefault();
 
-                    if (usuario == null)
+                    if (usuario1 == null && usuario2 == null)
                     {
                         ViewBag.Error = "Usuario o contraseña incorrecta";
                         return View();
                     }
-                    Session["Usuario"] = usuario;
+                    else if(usuario1 == TipoCliente)
+                    {
+
+
+                        Session["Usuario"] = usuario1;
+                        return RedirectToAction("ClientesLista", "Clientes");
+                    }
+                    
+                    else if (usuario2 == TipoColaborador)
+                    {
+                        
+                        Session["Usuario"] = usuario2;
+                        return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
+                    }
+                    //Session["Usuario"] = usuario;
                 }
 
 
-                return View();
+                return RedirectToAction("","");
                 //RedirectToAction("ClientesLista","Clientes");
             }
             catch (Exception ex)
