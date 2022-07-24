@@ -127,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdiccionesClienteController.cs" />
+    <Compile Include="Controllers\AdiccionesClienteReporteController.cs" />
     <Compile Include="Controllers\AdiccionesController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
@@ -295,6 +296,8 @@
     <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
     <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
     <Content Include="Scripts\ScriptsProyecto\InicioSesion.js" />
+    <Content Include="Scripts\ScriptsProyecto\ReporteAdiccionesClienteKendoUI.js" />
+    <Content Include="Scripts\ScriptsProyecto\UtilidadesReporteAdiccionesCliente.js" />
     <Content Include="Scripts\ValidacionesGenericas.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -329,6 +332,7 @@
     <Content Include="Views\Clientes\ClientesElimina.cshtml" />
     <Content Include="Views\Clientes\ClientesModifica.cshtml" />
     <Content Include="Views\InicioSesion\InicioSesion.cshtml" />
+    <Content Include="Views\AdiccionesClienteReporte\AdiccionesClienteReporte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
