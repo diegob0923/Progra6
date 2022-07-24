@@ -92,7 +92,7 @@ namespace Proyecto.Controllers
                     {
                         
                         Session["Usuario"] = usuario2;
-                        return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
+                        return RedirectToAction("AdiccionesClienteReporte", "AdiccionesClienteReporte");
                     }
                     //Session["Usuario"] = usuario;
                 }

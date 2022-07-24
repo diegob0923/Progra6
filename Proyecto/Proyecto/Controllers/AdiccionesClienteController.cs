@@ -143,5 +143,19 @@ namespace Proyecto.Controllers
             AgregarClientesViewBag();
             return View(modeloVista);
         }
+
+        //Retornar la lista de adicciones cliente para el reporte
+        [HttpPost]
+        public ActionResult RetornaAdiccionesClienteLista()
+        {
+            
+            List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
+            this.modeloBD.sp_Retorna_Adiccion_Cliente(null, null, null, null).ToList();
+
+            return Json(new
+            {
+                resultado = listaAdiccionesCliente
+            });
+        }
     }
 }
