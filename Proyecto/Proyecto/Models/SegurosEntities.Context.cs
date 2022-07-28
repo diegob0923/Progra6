@@ -787,5 +787,14 @@ namespace Proyecto.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Poliza_Cliente_Result>("sp_Retorna_Poliza_Cliente", cedula_ClienteParameter, id_PolizaParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> Retornar_Cantidad_Adicciones_Por_Cliente(Nullable<int> id_Cliente)
+        {
+            var id_ClienteParameter = id_Cliente.HasValue ?
+                new ObjectParameter("id_Cliente", id_Cliente) :
+                new ObjectParameter("id_Cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Retornar_Cantidad_Adicciones_Por_Cliente", id_ClienteParameter);
+        }
     }
 }

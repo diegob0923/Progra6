@@ -217,6 +217,9 @@
         <Function Name="RetornaProvincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Retornar_Cantidad_Adicciones_Por_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Cliente" Type="int" Mode="In" />
+        </Function>
         <Function Name="RetornarUsuarioContrasena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Usuario" Type="int" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
@@ -915,6 +918,9 @@
             <Parameter Name="Cedula_Cliente" Mode="In" Type="Int32" />
             <Parameter Name="Id_Poliza" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Retornar_Cantidad_Adicciones_Por_Cliente" ReturnType="Collection(Int32)">
+            <Parameter Name="id_Cliente" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Retorna_Registro_Polizas_Result">
           <Property Type="Int32" Name="Id_Poliza" Nullable="false" />
@@ -1543,6 +1549,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Retornar_Cantidad_Adicciones_Por_Cliente" FunctionName="ProyectoSegurosModel.Store.Retornar_Cantidad_Adicciones_Por_Cliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
