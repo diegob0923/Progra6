@@ -34,5 +34,20 @@ namespace Proyecto.Controllers
             ViewBag.Clientes = modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
         }
 
+        public ActionResult RetornarCoberturaPorID(int id_Cobertura)
+        {
+            sp_Retorna_Cobertura_De_PolizaID_Result cobertura = modeloBD.sp_Retorna_Cobertura_De_PolizaID(id_Cobertura).FirstOrDefault();
+            return Json(cobertura);
+        }
+        public ActionResult RetornarNumeroAdicciones(int pId_Cliente)
+        {
+            List<sp_Retorna_Adiccion_Cliente_Result> adiccionesClientes = modeloBD.sp_Retorna_Adiccion_Cliente(null,null,null,null).ToList();
+            var cantidadAdiccionesPorCliente = (from adiccion in modeloBD.Adiccion_Cliente
+                                                where adiccion.Id_Cliente == pId_Cliente
+                                                select adiccion).Count();
+            return Json(cantidadAdiccionesPorCliente);
+        }
+
+
     }
 }
