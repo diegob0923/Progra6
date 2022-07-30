@@ -23,6 +23,7 @@ namespace Proyecto.Models
         public decimal Prima_Antes_Impuestos { get; set; }
         public decimal Impuestos { get; set; }
         public decimal Prima_Final { get; set; }
+        public System.DateTime Fecha_Vencimiento { get; set; }
         public string NombreCompleto { get; set; }
         public string Nombre { get; set; }
     }

@@ -2,6 +2,7 @@
     
     estableceEventoChangeParaCobertura();
     estableceEventoChangeParaCliente();
+    estableceEventoChangeParaMontoAsegurado();
 });
 
 function estableceEventoChangeParaCobertura() {
@@ -23,11 +24,19 @@ function estableceEventoChangeParaCliente() {
         //obtener valores inputs
 
         var cliente = $('#Id_Cliente').val()//obtiene el valor del parametro value de la etiqueta <select> de coberturas
-        //llamar a la funcion que carga el porcentajeCobertura
+        //llamar a la funcion que carga el Cliente
         asignarValorNumeroAdicciones(cliente);
     });
 }
 
+function estableceEventoChangeParaMontoAsegurado() {
+    //evento change para el dropdownlist de coberturas
+    $('#Monto_Asegurado').change(function () {
+        //llamar a la funcion que realiza calculos
+        RealizarCalculos();
+    });
+
+}
 
 function asignarValorPorcentajeCobertura(idCobertura) {
     ///dirección a donde se enviarán los datos
@@ -92,11 +101,52 @@ function asignarValorNumeroAdicciones(pIdCliente) {
 }
 
 function RealizarCalculos() {
-
-    if ($('#Porcentaje_Cobertura').val() != "" && $('#Numero_Adicciones').val() != "") {
-        console.log('ambos tienen valor')
+    var porcentajeCobertura = $('#Porcentaje_Cobertura').val();
+    var numAdicciones = $('#Numero_Adicciones').val();
+    var monto = $('#Monto_Asegurado').val();
+    //revisar si los campos de Porcentaje_Cobertura y Numero_Adicciones tienen valores para proceder con los calculos
+    if (porcentajeCobertura != "" && numAdicciones != "" && monto != "") {
+      
+        MontoAdicciones(numAdicciones, monto);
+        PrimaAntesImpuestos(porcentajeCobertura, $('#Monto_Adicciones').val());
+        Impuestos($('#Prima_Antes_Impuestos').val());
+        PrimaFinal($('#Prima_Antes_Impuestos').val(), $('#Impuestos').val());
     } else {
         console.log('falta valor')
     }
     
+}
+
+
+
+
+function MontoAdicciones(cantidadAdicciones, montoAsegurado)
+{
+    if (cantidadAdicciones == 1) {
+        var montoAdicciones = montoAsegurado * 0.05;
+    }
+    else if (cantidadAdicciones == 2 || cantidadAdicciones == 3) {
+        var montoAdicciones = montoAsegurado * 0.10;
+    }
+    else {// adicciones >3
+        var montoAdicciones = montoAsegurado * 0.15;
+    }
+
+    $('#Monto_Adicciones').val(montoAdicciones);
+}
+
+function PrimaAntesImpuestos(porcentajeCobertura, montoAdicciones) {
+    var primaAntesImpuestos = montoAdicciones * porcentajeCobertura;
+    $('#Prima_Antes_Impuestos').val(primaAntesImpuestos);
+}
+
+function Impuestos(primaAntesImpuestos) {
+    var impuestos = primaAntesImpuestos * 0.13; //13% de impuestos
+    $('#Impuestos').val(impuestos);
+}
+
+ function PrimaFinal(primaAntesImpuestos, impuestos)
+ {
+     var primarFinal = parseFloat(primaAntesImpuestos) + parseFloat(impuestos);
+     $('#Prima_Final').val(primarFinal);
 }

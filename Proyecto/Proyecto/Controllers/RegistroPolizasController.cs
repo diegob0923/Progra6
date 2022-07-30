@@ -23,7 +23,50 @@ namespace Proyecto.Controllers
             AgregarClientesViewBag();
             return View();
         }
+        [HttpPost]
+        public ActionResult RegistroPolizasInsertar(Retorna_Registro_Polizas_Result modeloVista)
+        {
+            int cantRegistrosAfectados = 0;
+            string resultado = "";
 
+            try
+            {
+
+                cantRegistrosAfectados = modeloBD.sp_Insertar_Registro_Polizas(
+                   modeloVista.Id_Cobertura,
+                   modeloVista.Id_Cliente,
+                   modeloVista.Monto_Asegurado,
+                   modeloVista.Porcentaje_Cobertura,
+                   modeloVista.Numero_Adicciones,
+                   modeloVista.Monto_Adicciones,
+                   modeloVista.Prima_Antes_Impuestos,
+                   modeloVista.Impuestos,
+                   modeloVista.Prima_Final,
+                   modeloVista.Fecha_Vencimiento
+                    );
+            }
+            catch (Exception error)
+            {
+                resultado = "Ocurrió un error: " + error.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    resultado = "Registro insertado";
+                }
+                else
+                {
+                    resultado += ".No se pudo insertar ";
+                }
+            }
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            
+            AgregarCoberturaViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+        
         void AgregarCoberturaViewBag()
         {
             ViewBag.Cobertura = modeloBD.sp_Retorna_Cobertura_De_Poliza(null).ToList();

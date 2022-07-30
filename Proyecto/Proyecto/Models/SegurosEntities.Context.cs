@@ -39,27 +39,6 @@ namespace Proyecto.Models
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Usuarios_Sistema> Usuarios_Sistema { get; set; }
     
-        public virtual ObjectResult<Retorna_Registro_Polizas_Result> Retorna_Registro_Polizas(string nombre, string primerApellido, string segundoApellido, string nombreCobertura)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("primerApellido", primerApellido) :
-                new ObjectParameter("primerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("segundoApellido", segundoApellido) :
-                new ObjectParameter("segundoApellido", typeof(string));
-    
-            var nombreCoberturaParameter = nombreCobertura != null ?
-                new ObjectParameter("nombreCobertura", nombreCobertura) :
-                new ObjectParameter("nombreCobertura", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Retorna_Registro_Polizas_Result>("Retorna_Registro_Polizas", nombreParameter, primerApellidoParameter, segundoApellidoParameter, nombreCoberturaParameter);
-        }
-    
         public virtual ObjectResult<RetornaCantones_Result> RetornaCantones(string nombre, Nullable<int> id_Provincia)
         {
             var nombreParameter = nombre != null ?
@@ -795,6 +774,27 @@ namespace Proyecto.Models
                 new ObjectParameter("id_Cliente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Retornar_Cantidad_Adicciones_Por_Cliente", id_ClienteParameter);
+        }
+    
+        public virtual ObjectResult<Retorna_Registro_Polizas_Result> Retorna_Registro_Polizas(string nombre, string primerApellido, string segundoApellido, string nombreCobertura)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("primerApellido", primerApellido) :
+                new ObjectParameter("primerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("segundoApellido", segundoApellido) :
+                new ObjectParameter("segundoApellido", typeof(string));
+    
+            var nombreCoberturaParameter = nombreCobertura != null ?
+                new ObjectParameter("nombreCobertura", nombreCobertura) :
+                new ObjectParameter("nombreCobertura", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Retorna_Registro_Polizas_Result>("Retorna_Registro_Polizas", nombreParameter, primerApellidoParameter, segundoApellidoParameter, nombreCoberturaParameter);
         }
     }
 }
