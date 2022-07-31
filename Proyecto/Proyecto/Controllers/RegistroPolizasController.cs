@@ -31,8 +31,9 @@ namespace Proyecto.Controllers
 
             try
             {
-
-                cantRegistrosAfectados = modeloBD.sp_Insertar_Registro_Polizas(
+                if (modeloVista.Fecha_Vencimiento>DateTime.Now)
+                {
+                    cantRegistrosAfectados = modeloBD.sp_Insertar_Registro_Polizas(
                    modeloVista.Id_Cobertura,
                    modeloVista.Id_Cliente,
                    modeloVista.Monto_Asegurado,
@@ -44,6 +45,12 @@ namespace Proyecto.Controllers
                    modeloVista.Prima_Final,
                    modeloVista.Fecha_Vencimiento
                     );
+                }
+                else
+                {
+                    resultado = "No se puede seleccionar una fecha menor a la actual, por favor intente de nuevo";
+                }
+                
             }
             catch (Exception error)
             {
