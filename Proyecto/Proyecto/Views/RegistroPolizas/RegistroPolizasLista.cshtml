@@ -1,0 +1,47 @@
+﻿@model List<Proyecto.Models.sp_Retorna_Poliza_Cliente_Result>
+@{
+    ViewBag.Title = "RegistroPolizas";
+}
+
+<h2>Registros de pólizas</h2>
+<br />
+<table class="table">
+    <tr>
+        <th>Id póliza</th>
+        <th>Cobertura</th>
+        <th>Cliente</th>
+        <th>Fecha Vencimiento</th>
+        <th>Monto asegurado</th>
+        <th>Porcentaje de cobertura</th>
+        <th>Numero adicciones</th>
+        <th>Monto adicciones</th>
+        <th>Prima antes de impuestos</th>
+        <th>Impuestos</th>
+        <th>Prima final</th>
+        <th>Acciones</th>
+    </tr>
+    @{
+        foreach (Proyecto.Models.sp_Retorna_Poliza_Cliente_Result posicionModelo in Model)
+        {
+            <tr>
+                <td>@posicionModelo.Id_Poliza </td>
+                <td>@posicionModelo.Cobertura</td>
+                <td>@posicionModelo.Nombre @posicionModelo.Primer_Apellido @posicionModelo.Segundo_Apellido</td>
+                <td>@posicionModelo.Fecha_Vencimiento.ToString("yyyy-MM-dd")</td>
+                <td>@posicionModelo.Monto_Asegurado</td>
+                <td>@posicionModelo.Porcentaje_Cobertura</td>
+                <td>@posicionModelo.Numero_Adicciones</td>
+                <td>@posicionModelo.Monto_Adicciones</td>
+                <td>@posicionModelo.Prima_Antes_Impuestos</td>
+                <td>@posicionModelo.Impuestos</td>
+                <td>@posicionModelo.Prima_Final</td>
+                <td>
+                    <a href="~/RegistroPolizas/RegistroPolizasModificar?id_Poliza=@posicionModelo.Id_Poliza">Modificar</a>
+                        <br />
+                        <a href="~/RegistroPolizas/RegistroPolizasEliminar?id_Poliza=@posicionModelo.Id_Poliza">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
