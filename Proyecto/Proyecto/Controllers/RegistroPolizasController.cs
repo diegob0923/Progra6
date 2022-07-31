@@ -107,7 +107,7 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado = "No se puede seleccionar una fecha menor a la actual, por favor intente de nuevo";
+                    resultado = "No se puede eliminar una poliza con fecha menor a la actual";
                 }
 
             }
@@ -123,7 +123,7 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ".No se pudo insertar ";
+                    resultado += ".No se pudo modificar ";
                 }
             }
             Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
@@ -132,6 +132,56 @@ namespace Proyecto.Controllers
             AgregarClientesViewBag();
             return View(modeloVista);
         }
+
+        public ActionResult RegistroPolizasEliminar(int id_Poliza)
+        {
+            sp_Retorna_Registro_PolizasID_Result modeloVista = modeloBD.sp_Retorna_Registro_PolizasID(id_Poliza).FirstOrDefault();
+            AgregarCoberturaViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult RegistroPolizasEliminar(sp_Retorna_Registro_PolizasID_Result modeloVista)
+        {
+            int cantRegistrosAfectados = 0;
+            string resultado = "";
+
+            try
+            {
+                if (modeloVista.Fecha_Vencimiento > DateTime.Now)
+                {
+                    cantRegistrosAfectados = modeloBD.sp_Eliminar_Registro_Polizas(modeloVista.Id_Poliza);
+                }
+                else
+                {
+                    resultado = "No se puede seleccionar una fecha menor a la actual, por favor intente de nuevo";
+                }
+
+            }
+            catch (Exception error)
+            {
+                resultado = "Ocurrió un error: " + error.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    resultado = "Registro eliminado";
+                }
+                else
+                {
+                    resultado += ".No se pudo eliminar ";
+                }
+            }
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+
+            AgregarCoberturaViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+
+        #region Agregar datos al ViewBag
 
         void AgregarCoberturaViewBag()
         {
@@ -142,6 +192,8 @@ namespace Proyecto.Controllers
         {
             ViewBag.Clientes = modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
         }
+
+        #endregion
 
         public ActionResult RetornarCoberturaPorID(int id_Cobertura)
         {

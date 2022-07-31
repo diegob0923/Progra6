@@ -331,6 +331,7 @@
     <Content Include="Views\RegistroPolizas\RegistroPolizasLista.cshtml" />
     <Content Include="Views\RegistroPolizas\RegistroPolizasInsertar.cshtml" />
     <Content Include="Views\RegistroPolizas\RegistroPolizasModificar.cshtml" />
+    <Content Include="Views\RegistroPolizas\RegistroPolizasEliminar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
