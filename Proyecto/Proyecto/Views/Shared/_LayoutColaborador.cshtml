@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Menu colaborador", "MenuColaborador", "MenuColaborador")</li>
+                    <li>@Html.ActionLink("Cobertura de póliza", "CoberturasPolizaLista", "CoberturasPoliza")</li>
+                    <li>@Html.ActionLink("Adicciones", "AdiccionesLista", "Adicciones")</li>
+                    <li>@Html.ActionLink("Clientes", "ClientesLista", "Clientes")</li>
+                    <li>@Html.ActionLink("Adicciones por cliente", "AdiccionesClienteLista", "AdiccionesCliente")</li>
+                    <li>@Html.ActionLink("Registro Pólizas", "", "")</li>
+                    <li>@Html.ActionLink("Reporte pólizas", "", "")</li>
+                    <li>@Html.ActionLink("Reporte adicciones", "AdiccionesClienteReporte", "AdiccionesClienteReporte")</li>
+                    <li>@Html.ActionLink("Salir", "InicioSesion", "InicioSesion")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/bundleJquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("css", required: false)
+</body>
+</html>

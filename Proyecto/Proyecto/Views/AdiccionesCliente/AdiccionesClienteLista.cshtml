@@ -1,6 +1,11 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result>
+    
 @{
     ViewBag.Title = "Adicciones Clientes";
+    //Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
+    
+
 }
 
 <h2>Lista de adicciones por cliente</h2>
@@ -29,3 +34,5 @@
         }
     }
 </table>
+
+@*<a href="~/InicioSesion/InicioSesion">Salir</a>*@
