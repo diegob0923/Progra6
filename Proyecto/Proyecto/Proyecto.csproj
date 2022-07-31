@@ -133,6 +133,8 @@
     <Compile Include="Controllers\CoberturasPolizaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioSesionController.cs" />
+    <Compile Include="Controllers\MenuClienteController.cs" />
+    <Compile Include="Controllers\MenuColaboradorController.cs" />
     <Compile Include="Correo\EnvioCorreo.cs" />
     <Compile Include="Filtros\VerificarSesion.cs" />
     <Compile Include="Controllers\RegistroPolizasController.cs" />
@@ -341,6 +343,11 @@
     <Content Include="Views\RegistroPolizas\RegistroPolizasEliminar.cshtml" />
     <Content Include="Views\InicioSesion\InicioSesion.cshtml" />
     <Content Include="Views\AdiccionesClienteReporte\AdiccionesClienteReporte.cshtml" />
+    <Content Include="Views\Shared\_LayoutColaborador.cshtml" />
+    <Content Include="Views\MenuColaborador\MenuColaborador.cshtml" />
+    <Content Include="Views\Shared\_LayoutCliente.cshtml" />
+    <Content Include="Views\MenuCliente\MenuCliente.cshtml" />
+    <Content Include="Views\Shared\_LayoutSolo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

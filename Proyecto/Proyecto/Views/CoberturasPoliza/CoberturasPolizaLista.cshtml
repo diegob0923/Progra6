@@ -1,6 +1,8 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result>
 @{
     ViewBag.Title = "CoberturasPolizaLista";
+    //Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
 <h2>Lista de coberturas Poliza</h2>
@@ -12,39 +14,39 @@
 </form>
 
 
-    <table class="table">
-        <tr>
+<table class="table">
+    <tr>
 
-            <th>Id Cobertura Póliza </th>
-            <th>Nombre </th>
-            <th>Descripción </th>
-            <th>Porcentaje </th>
-            <th>Acciones</th>
+        <th>Id Cobertura Póliza </th>
+        <th>Nombre </th>
+        <th>Descripción </th>
+        <th>Porcentaje </th>
+        <th>Acciones</th>
 
-        </tr>
-        @{
-            foreach (Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result posicionModelo
-                in this.Model)
-            {
+    </tr>
+    @{
+        foreach (Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result posicionModelo
+            in this.Model)
+        {
 
 
-                <tr>
-                    <td>@posicionModelo.Id_Cobertura</td>
-                    <td>@posicionModelo.Nombre</td>
-                    <td>@posicionModelo.Descripcion</td>
-                    <td>@posicionModelo.Porcentaje</td>
-                    <td>
-                        <a href="~/CoberturasPoliza/CoberturasPolizaModifica?Id_Cobertura=@posicionModelo.Id_Cobertura">Modificar</a>
-                        <br />
-                        <a href="~/CoberturasPoliza/CoberturasPolizaElimina?Id_Cobertura=@posicionModelo.Id_Cobertura">Eliminar</a>
-                    </td>
-                </tr>
-
-            }
+            <tr>
+                <td>@posicionModelo.Id_Cobertura</td>
+                <td>@posicionModelo.Nombre</td>
+                <td>@posicionModelo.Descripcion</td>
+                <td>@posicionModelo.Porcentaje</td>
+                <td>
+                    <a href="~/CoberturasPoliza/CoberturasPolizaModifica?Id_Cobertura=@posicionModelo.Id_Cobertura">Modificar</a>
+                    <br />
+                    <a href="~/CoberturasPoliza/CoberturasPolizaElimina?Id_Cobertura=@posicionModelo.Id_Cobertura">Eliminar</a>
+                </td>
+            </tr>
 
         }
 
-    </table>
-    <a href="~/InicioSesion/InicioSesion">Salir</a>
+    }
 
-    
+</table>
+@*<a href="~/MenuColaborador/MenuColaborador">Salir</a>*@
+
+

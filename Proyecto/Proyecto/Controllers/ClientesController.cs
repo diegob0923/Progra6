@@ -24,11 +24,15 @@ namespace Proyecto.Controllers
 
             modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
             ///cedula,nombre,primer_apellido,segundo_apellido
+            ///
+            
+
 
             return View(modeloVista);
         }
         #endregion
 
+        
         #region Clientes insertar, metodos retornar Json( provincia, canton, distrito) y HttpPost
         //Metodo de la vista de insertar clientes
         public ActionResult ClientesInserta()
