@@ -330,6 +330,7 @@
     <Content Include="Views\Clientes\ClientesModifica.cshtml" />
     <Content Include="Views\RegistroPolizas\RegistroPolizasLista.cshtml" />
     <Content Include="Views\RegistroPolizas\RegistroPolizasInsertar.cshtml" />
+    <Content Include="Views\RegistroPolizas\RegistroPolizasModificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

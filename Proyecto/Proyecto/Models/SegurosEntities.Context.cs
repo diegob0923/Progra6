@@ -637,15 +637,6 @@ namespace Proyecto.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Datos_Correo_Result>("sp_Retorna_Datos_Correo", cedulaParameter);
         }
     
-        public virtual ObjectResult<sp_Retorna_Registro_PolizasID_Result> sp_Retorna_Registro_PolizasID(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Registro_PolizasID_Result>("sp_Retorna_Registro_PolizasID", idParameter);
-        }
-    
         public virtual ObjectResult<sp_Retorna_Usuarios_Sistema_Result> sp_Retorna_Usuarios_Sistema(Nullable<int> usuario)
         {
             var usuarioParameter = usuario.HasValue ?
@@ -795,6 +786,15 @@ namespace Proyecto.Models
                 new ObjectParameter("nombreCobertura", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Retorna_Registro_Polizas_Result>("Retorna_Registro_Polizas", nombreParameter, primerApellidoParameter, segundoApellidoParameter, nombreCoberturaParameter);
+        }
+    
+        public virtual ObjectResult<sp_Retorna_Registro_PolizasID_Result> sp_Retorna_Registro_PolizasID(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Registro_PolizasID_Result>("sp_Retorna_Registro_PolizasID", idParameter);
         }
     }
 }

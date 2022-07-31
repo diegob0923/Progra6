@@ -18,6 +18,7 @@
         <th>Prima antes de impuestos</th>
         <th>Impuestos</th>
         <th>Prima final</th>
+        <th>Acciones</th>
     </tr>
     @{
         foreach (Proyecto.Models.sp_Retorna_Poliza_Cliente_Result posicionModelo in Model)
@@ -35,9 +36,9 @@
                 <td>@posicionModelo.Impuestos</td>
                 <td>@posicionModelo.Prima_Final</td>
                 <td>
-                    @*<a href="~/Adicciones/AdiccionesModificar?id_Adiccion=@posicionModelo.Id_Poliza">Modificar</a>
+                    <a href="~/RegistroPolizas/RegistroPolizasModificar?id_Poliza=@posicionModelo.Id_Poliza">Modificar</a>
                         <br />
-                        <a href="~/Adicciones/AdiccionesEliminar?id_Adiccion=@posicionModelo.Id_Poliza">Eliminar</a>*@
+                        <a href="~/RegistroPolizas/RegistroPolizasEliminar?id_Poliza=@posicionModelo.Id_Poliza">Eliminar</a>
                 </td>
             </tr>
         }

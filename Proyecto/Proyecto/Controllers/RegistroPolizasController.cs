@@ -73,7 +73,66 @@ namespace Proyecto.Controllers
             AgregarClientesViewBag();
             return View(modeloVista);
         }
-        
+        public ActionResult RegistroPolizasModificar(int id_Poliza)
+        {
+            sp_Retorna_Registro_PolizasID_Result modeloVista = modeloBD.sp_Retorna_Registro_PolizasID(id_Poliza).FirstOrDefault();
+            AgregarCoberturaViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult RegistroPolizasModificar(sp_Retorna_Registro_PolizasID_Result modeloVista)
+        {
+            int cantRegistrosAfectados = 0;
+            string resultado = "";
+
+            try
+            {
+                if (modeloVista.Fecha_Vencimiento > DateTime.Now)
+                {
+                    cantRegistrosAfectados = modeloBD.sp_Modificar_Registro_Polizas(
+                   modeloVista.Id_Poliza,
+                   modeloVista.Id_Cobertura,
+                   modeloVista.Id_Cliente,
+                   modeloVista.Monto_Asegurado,
+                   modeloVista.Porcentaje_Cobertura,
+                   modeloVista.Numero_Adicciones,
+                   modeloVista.Monto_Adicciones,
+                   modeloVista.Prima_Antes_Impuestos,
+                   modeloVista.Impuestos,
+                   modeloVista.Prima_Final,
+                   modeloVista.Fecha_Vencimiento
+                    );
+                }
+                else
+                {
+                    resultado = "No se puede seleccionar una fecha menor a la actual, por favor intente de nuevo";
+                }
+
+            }
+            catch (Exception error)
+            {
+                resultado = "Ocurrió un error: " + error.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    resultado = "Registro modificado";
+                }
+                else
+                {
+                    resultado += ".No se pudo insertar ";
+                }
+            }
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+
+            AgregarCoberturaViewBag();
+            AgregarClientesViewBag();
+            return View(modeloVista);
+        }
+
         void AgregarCoberturaViewBag()
         {
             ViewBag.Cobertura = modeloBD.sp_Retorna_Cobertura_De_Poliza(null).ToList();

@@ -103,7 +103,8 @@ function asignarValorNumeroAdicciones(pIdCliente) {
 function RealizarCalculos() {
     var porcentajeCobertura = $('#Porcentaje_Cobertura').val();
     var numAdicciones = $('#Numero_Adicciones').val();
-    var monto = $('#Monto_Asegurado').val();
+    var monto = Number($('#Monto_Asegurado').val().replace(/[,]+/g, "."));//el replace es por si se ingresa un numero con decimales, poner el decimal con , causa error por eso se trasforma a . 
+   
     //revisar si los campos de Porcentaje_Cobertura y Numero_Adicciones tienen valores para proceder con los calculos
     if (porcentajeCobertura != "" && numAdicciones != "" && monto != "") {
       
