@@ -20,6 +20,10 @@ namespace Proyecto.Controllers
             return View();
         }
 
+
+
+
+
         #region diferenciar usuarios 
         [HttpPost]
         public ActionResult InicioSesion(int Usuario, string Contrasena)
@@ -44,6 +48,9 @@ namespace Proyecto.Controllers
                     var TipoCliente = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoCliente select T).FirstOrDefault();
                     var TipoColaborador = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoColaborador select T).FirstOrDefault();
 
+
+                    
+
                     if (usuario1 == null && usuario2 == null)
                     {
                         ViewBag.Error = "Usuario o contraseña incorrecta";
@@ -52,16 +59,21 @@ namespace Proyecto.Controllers
                     else if(usuario1 == TipoCliente)
                     {
 
-
+                        Session["TipoUsuario"] = tipoCliente;
                         Session["Usuario"] = usuario1;
+                        //ViewBag.TipoUsuario = tipoCliente;
                         return RedirectToAction("MenuCliente", "MenuCliente");
+                        
                     }
                     
                     else if (usuario2 == TipoColaborador)
                     {
-                        
+
+                        Session["TipoUsuario"] = tipoColaborador;
                         Session["Usuario"] = usuario2;
+                        //ViewBag.TipoUsuario = tipoColaborador;
                         return RedirectToAction("MenuColaborador", "MenuColaborador");
+                        
                     }
                     //Session["Usuario"] = usuario;
                 }

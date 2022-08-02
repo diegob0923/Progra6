@@ -1,8 +1,19 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Clientes_Result>
 @{
     ViewBag.Title = "ClientesLista";
-    //Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
+
+    if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+    {
+        Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
+    }
+    else
+
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+
 }
 
 <h2>Lista de clientes</h2>
@@ -36,7 +47,7 @@
     </tr>
     @{
         foreach (Proyecto.Models.sp_Retorna_Clientes_Result posicionModelo
-    in this.Model)
+in this.Model)
         {
 
 
@@ -68,5 +79,7 @@
 
 </table>
 
-@*<a href="~/InicioSesion/InicioSesion">Salir</a>*@
+
+
+
 

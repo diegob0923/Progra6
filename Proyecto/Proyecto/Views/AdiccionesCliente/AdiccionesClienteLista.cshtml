@@ -1,10 +1,20 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result>
-    
+
 @{
     ViewBag.Title = "Adicciones Clientes";
-    //Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
-    
+
+    if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+    {
+        Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
+    }
+    else
+
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+
 
 }
 
@@ -35,4 +45,3 @@
     }
 </table>
 
-@*<a href="~/InicioSesion/InicioSesion">Salir</a>*@
