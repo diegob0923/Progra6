@@ -11,11 +11,12 @@ namespace Proyecto.Models
 {
     using System;
     
-    public partial class sp_Retorna_Contrasenas_Sistema_Result
+    public partial class sp_Retorna_Adiccion_Cliente_ID_Cliente_Result
     {
-        public int Id_Usuario { get; set; }
-        public int Usuario { get; set; }
-        public string Contrasena { get; set; }
-        public string TipoUsuario { get; set; }
+        public int Id { get; set; }
+        public int Id_Adiccion { get; set; }
+        public string Nombre { get; set; }
+        public int Id_Cliente { get; set; }
+        public string NombreCompleto { get; set; }
     }
 }

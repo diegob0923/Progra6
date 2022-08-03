@@ -9,14 +9,14 @@ namespace Proyecto.Filtros
 {
     public class VerificarSesion : ActionFilterAttribute
     {
-        private Models.Usuarios_Sistema usuario;
+        //private Models.Usuarios_Sistema usuario;
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             try
             {
                 base.OnActionExecuting(filterContext);
-
-                usuario = (Models.Usuarios_Sistema)HttpContext.Current.Session["Usuario"];
+                //(Models.Usuarios_Sistema)HttpContext.Current.Session["Usuario"];
+                var usuario = HttpContext.Current.Session["Usuario"];
                 if (usuario == null)
                 {
                     if (filterContext.Controller is InicioSesionController == false)

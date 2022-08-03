@@ -11,7 +11,7 @@ namespace Proyecto.Controllers
 {
     public class ClientesController : Controller
     {
-
+        
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
         // GET: Clientes
@@ -20,15 +20,31 @@ namespace Proyecto.Controllers
         public ActionResult ClientesLista()
         {
             ///int cedula, string nombre, string primer_apellido, string segundo_apellido
-            List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
+            //List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
 
-            modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
-            ///cedula,nombre,primer_apellido,segundo_apellido
-            ///
+            //modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
             
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+            {
+                ///int cedula, string nombre, string primer_apellido, string segundo_apellido
+                List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
+
+                modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
+                return View(modeloVista);
+            }
+            else
+
+            {
+                ///int cedula, string nombre, string primer_apellido, string segundo_apellido
+                List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
+
+                modeloVista = this.modeloBD.sp_Retorna_Clientes(Convert.ToInt32(Session["Cedula"]), null, null, null).ToList();
+                return View(modeloVista);
+            }
 
 
-            return View(modeloVista);
+            //return View(modeloVista);
         }
         #endregion
 

@@ -214,6 +214,9 @@
     <Compile Include="Models\sp_Retorna_Adiccion_ClienteID_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_Retorna_Adiccion_Cliente_ID_Cliente_Result.cs">
+      <DependentUpon>SegurosEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_Retorna_Adiccion_Cliente_Result.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>

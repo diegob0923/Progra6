@@ -37,50 +37,52 @@ namespace Proyecto.Controllers
                     string tipoCliente = "Cliente";
                     string tipoColaborador = "Colaborador";
 
-                    var usuario1 = (from login in modeloBD.Usuarios_Sistema
-                                   where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim() && login.TipoUsuario == tipoCliente
-                                   select login).FirstOrDefault();
+                    var usuario = modeloBD.RetornarUsuarioContrasena(Usuario, Contrasena).FirstOrDefault();
 
-                    var usuario2 = (from login in modeloBD.Usuarios_Sistema
-                                    where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim() && login.TipoUsuario == tipoColaborador
-                                    select login).FirstOrDefault();
+                    //var usuario1 = (from login in modeloBD.Usuarios_Sistema
+                    //               where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim() && login.TipoUsuario == tipoCliente
+                    //               select login).FirstOrDefault();
 
-                    var TipoCliente = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoCliente select T).FirstOrDefault();
-                    var TipoColaborador = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoColaborador select T).FirstOrDefault();
+                    //var usuario2 = (from login in modeloBD.Usuarios_Sistema
+                    //                where login.Usuario == Usuario && login.Contrasena == Contrasena.Trim() && login.TipoUsuario == tipoColaborador
+                    //                select login).FirstOrDefault();
+
+                    //var TipoCliente = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoCliente && T.Usuario == Usuario select T).FirstOrDefault();
+                    //var TipoColaborador = (from T in modeloBD.Usuarios_Sistema where T.TipoUsuario == tipoColaborador && T.Usuario == Usuario select T).FirstOrDefault();
 
 
-                    
 
-                    if (usuario1 == null && usuario2 == null)
+
+                    if (usuario == null )
                     {
                         ViewBag.Error = "Usuario o contraseña incorrecta";
                         return View();
                     }
-                    else if(usuario1 == TipoCliente)
+                    else if(usuario.TipoUsuario == tipoCliente)
                     {
-
+                        Session["Cedula"] = Usuario;
                         Session["TipoUsuario"] = tipoCliente;
-                        Session["Usuario"] = usuario1;
-                        //ViewBag.TipoUsuario = tipoCliente;
+                        Session["Usuario"] = usuario;
+                        
                         return RedirectToAction("MenuCliente", "MenuCliente");
                         
                     }
                     
-                    else if (usuario2 == TipoColaborador)
+                    else if (usuario.TipoUsuario == tipoColaborador)
                     {
-
+                        Session["Cedula"] = Usuario;
                         Session["TipoUsuario"] = tipoColaborador;
-                        Session["Usuario"] = usuario2;
-                        //ViewBag.TipoUsuario = tipoColaborador;
+                        Session["Usuario"] = usuario;
+                        
                         return RedirectToAction("MenuColaborador", "MenuColaborador");
                         
                     }
-                    //Session["Usuario"] = usuario;
+                    
                 }
 
 
                 return RedirectToAction("","");
-                //RedirectToAction("ClientesLista","Clientes");
+                
             }
             catch (Exception ex)
             {

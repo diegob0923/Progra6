@@ -12,9 +12,30 @@ namespace Proyecto.Controllers
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
         public ActionResult AdiccionesClienteLista()
         {
-            List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
-            modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(null, null, null, null).ToList();
-            return View(modeloVista);
+            
+
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+            {
+               
+                List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
+                modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(null, null, null, null).ToList();
+                return View(modeloVista);
+                
+            }
+            else
+
+            {
+                
+                List<sp_Retorna_Adiccion_Cliente_ID_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_ID_Cliente_Result>();
+                modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente_ID_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
+               
+                return View(modeloVista);
+                
+            }
+
+
+
         }
 
         public ActionResult AdiccionesClienteInsertar()
