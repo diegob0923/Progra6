@@ -19,17 +19,17 @@ namespace Proyecto.Controllers
             {
                
                 List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
-                modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(null, null, null, null).ToList();
+                modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(null).ToList();
                 return View(modeloVista);
                 
             }
             else
 
             {
-                
-                List<sp_Retorna_Adiccion_Cliente_ID_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_ID_Cliente_Result>();
-                modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente_ID_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
-               
+
+
+                List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
+                modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
                 return View(modeloVista);
                 
             }
@@ -170,13 +170,44 @@ namespace Proyecto.Controllers
         public ActionResult RetornaAdiccionesClienteLista()
         {
             
-            List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
-            this.modeloBD.sp_Retorna_Adiccion_Cliente(null, null, null, null).ToList();
+            //List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
+            //this.modeloBD.sp_Retorna_Adiccion_Cliente(null).ToList();
 
-            return Json(new
+            //return Json(new
+            //{
+            //    resultado = listaAdiccionesCliente
+            //});
+
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
+
             {
-                resultado = listaAdiccionesCliente
-            });
+
+                List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
+            this.modeloBD.sp_Retorna_Adiccion_Cliente(null).ToList();
+
+                return Json(new
+                {
+                    resultado = listaAdiccionesCliente
+                });
+
+            }
+            else
+
+            {
+
+
+                List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
+            this.modeloBD.sp_Retorna_Adiccion_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
+
+                return Json(new
+                {
+                    resultado = listaAdiccionesCliente
+                });
+
+            }
+
+
+
         }
     }
 }

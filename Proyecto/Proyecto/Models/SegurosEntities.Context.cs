@@ -630,27 +630,6 @@ namespace Proyecto.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
         }
     
-        public virtual ObjectResult<sp_Retorna_Adiccion_Cliente_Result> sp_Retorna_Adiccion_Cliente(string nombre, string primerApellido, string segundoApellido, string nombreAdiccion)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("primerApellido", primerApellido) :
-                new ObjectParameter("primerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("segundoApellido", segundoApellido) :
-                new ObjectParameter("segundoApellido", typeof(string));
-    
-            var nombreAdiccionParameter = nombreAdiccion != null ?
-                new ObjectParameter("nombreAdiccion", nombreAdiccion) :
-                new ObjectParameter("nombreAdiccion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Adiccion_Cliente_Result>("sp_Retorna_Adiccion_Cliente", nombreParameter, primerApellidoParameter, segundoApellidoParameter, nombreAdiccionParameter);
-        }
-    
         public virtual ObjectResult<sp_Retorna_Adiccion_ClienteID_Result> sp_Retorna_Adiccion_ClienteID(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -804,6 +783,15 @@ namespace Proyecto.Models
                 new ObjectParameter("Contrasena", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornarUsuarioContrasena_Result>("RetornarUsuarioContrasena", usuarioParameter, contrasenaParameter);
+        }
+    
+        public virtual ObjectResult<sp_Retorna_Adiccion_Cliente_Result> sp_Retorna_Adiccion_Cliente(Nullable<int> cedula)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Retorna_Adiccion_Cliente_Result>("sp_Retorna_Adiccion_Cliente", cedulaParameter);
         }
     }
 }
