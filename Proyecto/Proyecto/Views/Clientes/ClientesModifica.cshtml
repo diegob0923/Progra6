@@ -34,7 +34,7 @@
 
     <div class="form-group">
         <label>Fecha de nacimiento :</label>
-        <input type="date" name="FechaNacimiento" id="FechaNacimiento" class="form-control" value="@Model.Fecha_Nacimiento.ToString("yyyy-MM-dd")"/>
+        <input type="date" name="FechaNacimiento" id="FechaNacimiento" class="form-control" value="@Model.Fecha_Nacimiento.ToString("yyyy-MM-dd")" />
     </div>
 
     <div class="form-group">
@@ -67,8 +67,8 @@
     </div>
     <div class="form-group">
         <label>Provincia :</label>
-        <select name="Id_Provincia" id="Id_Provincia" class="form-control">
-            <option value="">SELECCIONE UNA PROVINCIA</option>
+        <select name="Id_Provincia" id="Id_Provincia" class="form-control" value="@Model.Id_Provincia">
+
             @{
                 foreach (Proyecto.Models.RetornaProvincias_Result provincia in ViewBag.Provincias)
                 {
@@ -76,17 +76,20 @@
                     @*
                         incluir propiedad selected si esIdProvinciaModelo es true
                     *@
-
-                    if (estaProvinciaEnModelo)
+                    if (provincia.id_Provincia == Model.Id_Provincia)
                     {
-                        <option value="@provincia.id_Provincia" selected>@provincia.nombre.ToUpper() </option>
-                    }
-                    else
-                    {
-                        <option value="@provincia.id_Provincia">@provincia.nombre.ToUpper() </option>
-                    }
+                        if (estaProvinciaEnModelo)
+                        {
+                            <option value="@provincia.id_Provincia" selected>@provincia.nombre.ToUpper() </option>
+                        }
+                        else
+                        {
+                            <option value="@provincia.id_Provincia">@provincia.nombre.ToUpper() </option>
+                        }
 
+                    }
                 }
+
 
             }
         </select>
@@ -94,20 +97,29 @@
     <div class="form-group">
         <label>Cantón :</label>
         <select name="Id_Canton" id="Id_Canton" class="form-control">
-            
+
             @{
                 foreach (Proyecto.Models.RetornaCantones_Result canton in ViewBag.Cantones)
                 {
                     bool estaCantonEnModelo = canton.id_Canton == Model.Id_Canton;
-                   
-                    if (estaCantonEnModelo)
+
+
+                    //revisar esto solucion del profe
+                    if (canton.id_Provincia == Model.Id_Provincia)
                     {
-                        <option value="@canton.id_Canton" selected>@canton.nombre.ToUpper() </option>
+
+                        if (estaCantonEnModelo)
+                        {
+                            <option value="@canton.id_Canton" selected>@canton.nombre.ToUpper() </option>
+                        }
+                        else
+                        {
+                            <option value="@canton.id_Canton">@canton.nombre.ToUpper() </option>
+                        }
+
                     }
-                    else
-                    {
-                        <option value="@canton.id_Canton">@canton.nombre.ToUpper() </option>
-                    }
+
+
 
                 }
 
@@ -125,16 +137,20 @@
                         incluir propiedad selected si esIdProvinciaModelo es true
                     *@
 
-                    if (estaDistritoEnModelo)
+                    if (distrito.id_Canton == Model.Id_Canton)
                     {
-                        <option value="@distrito.id_Distrito" selected>@distrito.nombre.ToUpper() </option>
-                    }
-                    else
-                    {
-                        <option value="@distrito.id_Distrito">@distrito.nombre.ToUpper() </option>
-                    }
+                        if (estaDistritoEnModelo)
+                        {
+                            <option value="@distrito.id_Distrito" selected>@distrito.nombre.ToUpper() </option>
+                        }
+                        else
+                        {
+                            <option value="@distrito.id_Distrito">@distrito.nombre.ToUpper() </option>
+                        }
 
+                    }
                 }
+
 
             }
         </select>

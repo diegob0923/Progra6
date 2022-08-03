@@ -1,12 +1,35 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Clientes_Result>
 @{
     ViewBag.Title = "ClientesLista";
+
+    if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+    {
+        Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
+    }
+    else
+
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+
 }
 
 <h2>Lista de clientes</h2>
 
 <form id="frmClientes" method="post">
-    <a href="~/Clientes/ClientesInserta">Agregar nuevo cliente</a>
+    @{
+        if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+        {
+
+             <a href="~/Clientes/ClientesInserta">Agregar nuevo cliente</a>
+
+        }
+
+    }
+    
 
 
 </form>
@@ -29,39 +52,87 @@
         <th>Provincia</th>
         <th>Cantón</th>
         <th>Distrito</th>
-        <th>Acciones</th>
+        @{
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
 
-    </tr>
-    @{
-        foreach (Proyecto.Models.sp_Retorna_Clientes_Result posicionModelo
-            in this.Model)
-        {
+            {
 
+                <th>Acciones</th>
 
+            }
+
+        }
     <tr>
-        <td>@posicionModelo.Id_Cliente</td>
-        <td>@posicionModelo.Cedula</td>
-        <td>@posicionModelo.Genero</td>
-        <td>@posicionModelo.Fecha_Nacimiento</td>
-        <td>@posicionModelo.Nombre</td>
-        <td>@posicionModelo.Primer_Apellido</td>
-        <td>@posicionModelo.Segundo_Apellido</td>
-        <td>@posicionModelo.Direccion</td>
-        <td>@posicionModelo.Telefono1</td>
-        <td>@posicionModelo.Telefono2</td>
-        <td>@posicionModelo.Correo</td>
-        <td>@posicionModelo.Provincia</td>
-        <td>@posicionModelo.Canton</td>
-        <td>@posicionModelo.Distrito</td>
-        <td>
-            <a href="~/Clientes/ClientesModifica?Id_Cliente=@posicionModelo.Id_Cliente">Modificar</a>
-            <br />
-            <a href="~/Clientes/ClientesElimina?Id_Cliente=@posicionModelo.Id_Cliente">Eliminar</a>
-        </td>
-    </tr>
+
+        @{
+
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+            {
+                foreach (Proyecto.Models.sp_Retorna_Clientes_Result posicionModelo
+                    in this.Model)
+                {
+
+
+                <tr>
+                    <td>@posicionModelo.Id_Cliente</td>
+                    <td>@posicionModelo.Cedula</td>
+                    <td>@posicionModelo.Genero</td>
+                    <td>@posicionModelo.Fecha_Nacimiento</td>
+                    <td>@posicionModelo.Nombre</td>
+                    <td>@posicionModelo.Primer_Apellido</td>
+                    <td>@posicionModelo.Segundo_Apellido</td>
+                    <td>@posicionModelo.Direccion</td>
+                    <td>@posicionModelo.Telefono1</td>
+                    <td>@posicionModelo.Telefono2</td>
+                    <td>@posicionModelo.Correo</td>
+                    <td>@posicionModelo.Provincia</td>
+                    <td>@posicionModelo.Canton</td>
+                    <td>@posicionModelo.Distrito</td>
+                    <td>
+                        <a href="~/Clientes/ClientesModifica?Id_Cliente=@posicionModelo.Id_Cliente">Modificar</a>
+                        <br />
+                        <a href="~/Clientes/ClientesElimina?Id_Cliente=@posicionModelo.Id_Cliente">Eliminar</a>
+                    </td>
+                </tr>
+
+            }
+
+        }
+        else
+
+        {
+            foreach (Proyecto.Models.sp_Retorna_Clientes_Result posicionModelo
+                in this.Model)
+            {
+
+                <tr>
+                    <td>@posicionModelo.Id_Cliente</td>
+                    <td>@posicionModelo.Cedula</td>
+                    <td>@posicionModelo.Genero</td>
+                    <td>@posicionModelo.Fecha_Nacimiento</td>
+                    <td>@posicionModelo.Nombre</td>
+                    <td>@posicionModelo.Primer_Apellido</td>
+                    <td>@posicionModelo.Segundo_Apellido</td>
+                    <td>@posicionModelo.Direccion</td>
+                    <td>@posicionModelo.Telefono1</td>
+                    <td>@posicionModelo.Telefono2</td>
+                    <td>@posicionModelo.Correo</td>
+                    <td>@posicionModelo.Provincia</td>
+                    <td>@posicionModelo.Canton</td>
+                    <td>@posicionModelo.Distrito</td>
+
+                </tr>
+
+            }
+        }
+
 
         }
 
-    }
+    </table>
 
-</table>
+
+
+
+

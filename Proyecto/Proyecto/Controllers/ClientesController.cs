@@ -4,28 +4,51 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using Proyecto.Correo;
+using Proyecto.Filtros;
 
 namespace Proyecto.Controllers
 {
     public class ClientesController : Controller
     {
-
+        
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
         // GET: Clientes
         #region Clientes Lista
+
         public ActionResult ClientesLista()
         {
             ///int cedula, string nombre, string primer_apellido, string segundo_apellido
-            List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
+            //List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
 
-            modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
-            ///cedula,nombre,primer_apellido,segundo_apellido
+            //modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
+            
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
 
-            return View(modeloVista);
+            {
+                ///int cedula, string nombre, string primer_apellido, string segundo_apellido
+                List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
+
+                modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
+                return View(modeloVista);
+            }
+            else
+
+            {
+                ///int cedula, string nombre, string primer_apellido, string segundo_apellido
+                List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
+
+                modeloVista = this.modeloBD.sp_Retorna_Clientes(Convert.ToInt32(Session["Cedula"]), null, null, null).ToList();
+                return View(modeloVista);
+            }
+
+
+            //return View(modeloVista);
         }
         #endregion
 
+        
         #region Clientes insertar, metodos retornar Json( provincia, canton, distrito) y HttpPost
         //Metodo de la vista de insertar clientes
         public ActionResult ClientesInserta()
@@ -79,6 +102,24 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult ClientesInserta(sp_Retorna_Clientes_Result modeloVista)
         {
+            //Inicio Contraseña aleatoria
+            Random rdn = new Random();
+            string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890%$#@";
+            int longitud = caracteres.Length;
+            char letra;
+            int longitudContrasenia = 5;
+            string contraseniaAleatoria = string.Empty;
+            for (int i = 0; i < longitudContrasenia; i++)
+            {
+                letra = caracteres[rdn.Next(longitud)];
+                contraseniaAleatoria += letra.ToString();
+            }
+            //Final Contraseña aleatoria
+
+
+            string TipoUsuario = "Cliente";
+
+
             int Cedula = modeloVista.Cedula;
             string Genero = modeloVista.Genero;
             DateTime Fecha_Nacimiento = modeloVista.Fecha_Nacimiento;
@@ -89,12 +130,13 @@ namespace Proyecto.Controllers
             string Telefono1 = modeloVista.Telefono1;
             string Telefono2 = modeloVista.Telefono2;
             string Correo = modeloVista.Correo;
-            int Id_Provincia = modeloVista.id_Provincia;   
+            int Id_Provincia = modeloVista.id_Provincia;
             int Id_Canton = modeloVista.id_Canton;
             int Id_Distrito = modeloVista.id_Distrito;
 
 
             int cantRegistrosAfectados = 0;
+
             string resultado = "";
             try
             {
@@ -112,7 +154,12 @@ namespace Proyecto.Controllers
                        Id_Provincia,
                        Id_Canton,
                        Id_Distrito
-);
+                       );
+                this.modeloBD.sp_Insertar_Usuarios(
+                    Cedula,
+                    contraseniaAleatoria,
+                    TipoUsuario
+                        );
 
             }
             catch (Exception error)
@@ -126,7 +173,10 @@ namespace Proyecto.Controllers
                 {
                     resultado = "Registro insertado";
                     ///Para mostrar el mensaje de los exception errores mediante alert
+
+                    EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
                     Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                    RedirectToAction("ClientesLista", "Clientes");
 
                 }
                 else
@@ -138,9 +188,34 @@ namespace Proyecto.Controllers
 
             //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
             //seguido del nombre del controlador
-            return RedirectToAction("ClientesLista", "Clientes");
+            //return RedirectToAction("ClientesLista", "Clientes");
+            return View();
         }
         #endregion
+
+
+        #region EnviarCorreos
+
+        void EnviarCorreos(string Correo, string Nombre, string Primer_Apellido, string Segundo_Apellido, int Cedula, string contrasenia)
+        {
+
+
+            //Se llama a la clase que contiene los demás procedimientos para el envió del correo
+            EnvioCorreo envio = new EnvioCorreo();
+            string CorreoCliente = Correo;
+            int Usuario = Cedula;
+            string Contrasena = contrasenia;
+            string NombreCliente = Primer_Apellido + " " + Segundo_Apellido + " " + Nombre;
+
+            envio.EnviarCorreoClienteNuevo(CorreoCliente, NombreCliente, Usuario, Contrasena);
+
+
+
+        }
+
+        #endregion
+
+
 
         #region Clientes modificar y HttpPost
         public ActionResult ClientesModifica(int id_Cliente)

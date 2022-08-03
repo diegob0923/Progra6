@@ -1,15 +1,17 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Adicciones_Result>
 @{
     ViewBag.Title = "AdiccionesLista";
+    Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+    
 }
 
-<h2>AdiccionesLista</h2>
+<h2>Lista de adicciones</h2>
 
 <a href="~/Adicciones/AdiccionesInsertar">Nueva adicción</a>
 <br />
 <table class="table">
     <tr>
-        <th>Nombre</th>
+        <th>Nombre adicción</th>
         <th>Código</th>
         <th>Acciones</th>
     </tr>
@@ -28,3 +30,4 @@
         }
     }
 </table>
+

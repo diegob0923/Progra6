@@ -1,31 +1,103 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result>
+
 @{
     ViewBag.Title = "Adicciones Clientes";
+
+    if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+    {
+        Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
+    }
+    else
+
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+
+
 }
 
 <h2>Lista de adicciones por cliente</h2>
-<a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
+@{
+    if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+    {
+
+    <a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
+
+    }
+
+}
+
 <br />
 
 <table class="table">
     <tr>
-        <th>Nombre</th>
-        <th>Código</th>
-        <th>Acciones</th>
+        <th>Nombre adicción</th>
+        <th>Nombre cliente</th>
+        @{
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+            {
+
+                <th> Acciones </th>
+
+            }
+
+        }
+
     </tr>
     @{
-        foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
+
+        if (Session["TipoUsuario"].ToString() == "Colaborador")
+
         {
-            <tr>
-                <td>@posicionModelo.Nombre </td> @*nombre de la adicción*@
-                <td>@posicionModelo.NombreCompleto</td>
-                @*nombre completo cliente*@
-                <td>
-                    <a href="~/AdiccionesCliente/AdiccionesClienteModificar?id=@posicionModelo.Id">Modificar</a>
-                    <br />
-                    <a href="~/AdiccionesCliente/AdiccionesClienteEliminar?id=@posicionModelo.Id">Eliminar</a>
-                </td>
-            </tr>
+            foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
+            {
+                <tr>
+                    <td>@posicionModelo.Nombre </td>
+                    <td>@posicionModelo.NombreCompleto</td>
+
+                    <td>
+                        <a href="~/AdiccionesCliente/AdiccionesClienteModificar?id=@posicionModelo.Id">Modificar</a>
+                        <br />
+                        <a href="~/AdiccionesCliente/AdiccionesClienteEliminar?id=@posicionModelo.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+
         }
+        else
+
+        {
+
+            foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
+            {
+                <tr>
+                    <td>@posicionModelo.Nombre </td> @*nombre de la adicción*@
+                    <td>@posicionModelo.NombreCompleto</td>
+                    @*nombre completo cliente*@
+
+                </tr>
+            }
+        }
+
+
+
+        @*foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
+            {
+                <tr>
+                    <td>@posicionModelo.Nombre </td>
+                    <td>@posicionModelo.NombreCompleto</td>
+
+                    <td>
+                        <a href="~/AdiccionesCliente/AdiccionesClienteModificar?id=@posicionModelo.Id">Modificar</a>
+                        <br />
+                        <a href="~/AdiccionesCliente/AdiccionesClienteEliminar?id=@posicionModelo.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }*@
     }
 </table>
+

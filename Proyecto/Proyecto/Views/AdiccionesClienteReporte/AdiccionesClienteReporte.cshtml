@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "AdiccionesClienteReporte";
+    
+
+    if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+    {
+        Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
+    }
+    else
+
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+
+
+}
+@section css{
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.blueopal.min.css" rel="stylesheet" />
+}
+
+<h2>Reporte Adicciones por cliente</h2>
+
+<div id="divKendoGrid">
+
+</div>
+
+
+
+@section scripts{
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jszip.min.js"></script>
+    <script src="~/Scripts/ScriptsProyecto/UtilidadesReporteAdiccionesCliente.js"></script>
+    <script src="~/Scripts/ScriptsProyecto/ReporteAdiccionesClienteKendoUI.js"></script>
+
+}
+
+
