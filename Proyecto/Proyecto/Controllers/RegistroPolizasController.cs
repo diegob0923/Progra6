@@ -207,6 +207,45 @@ namespace Proyecto.Controllers
             return Json(cantidadClientes);
         }
 
+        #region retornar polizás para reporte
+        //Retornar la lista de polizás cliente para el reporte
+        [HttpPost]
+        public ActionResult RetornaPolizasClienteLista()
+        {
+
+            if (Session["TipoUsuario"].ToString() == "Colaborador")
+
+            {
+
+                List<sp_Retorna_Poliza_Cliente_Result> listaPolizasCliente =
+            this.modeloBD.sp_Retorna_Poliza_Cliente(null,null).ToList();
+
+                return Json(new
+                {
+                    resultado = listaPolizasCliente
+                });
+
+            }
+            else
+
+            {
+
+
+                List<sp_Retorna_Poliza_Cliente_Result> listaPolizasCliente =
+            this.modeloBD.sp_Retorna_Poliza_Cliente(Convert.ToInt32(Session["Cedula"]),null).ToList();
+
+                return Json(new
+                {
+                    resultado = listaPolizasCliente
+                });
+
+            }
+
+
+
+        }
+        #endregion
+
 
     }
 }

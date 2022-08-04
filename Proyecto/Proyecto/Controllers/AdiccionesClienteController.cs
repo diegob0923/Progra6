@@ -170,14 +170,6 @@ namespace Proyecto.Controllers
         public ActionResult RetornaAdiccionesClienteLista()
         {
             
-            //List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
-            //this.modeloBD.sp_Retorna_Adiccion_Cliente(null).ToList();
-
-            //return Json(new
-            //{
-            //    resultado = listaAdiccionesCliente
-            //});
-
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
