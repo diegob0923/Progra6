@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "AdiccionesClienteReporte";
-    
+
 
     if (Session["TipoUsuario"].ToString() == "Colaborador")
 
@@ -21,7 +21,7 @@
     <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.blueopal.min.css" rel="stylesheet" />
 }
 
-<h2>Reporte Adicciones por cliente</h2>
+<h2>Reporte polizás por cliente</h2>
 
 <div id="divKendoGrid">
 
@@ -33,8 +33,6 @@
     <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jszip.min.js"></script>
     <script src="~/Scripts/ScriptsProyecto/UtilidadesReportes.js"></script>
-    <script src="~/Scripts/ScriptsProyecto/ReporteAdiccionesClienteKendoUI.js"></script>
+    <script src="~/Scripts/ScriptsProyecto/ReportePolizasKendoUI.js"></script>
 
 }
-
-
