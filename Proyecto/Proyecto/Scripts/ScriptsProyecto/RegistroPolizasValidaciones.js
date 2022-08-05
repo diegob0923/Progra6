@@ -21,29 +21,29 @@ function validarRegistroPolizas() {
                 date: true
             },
             Monto_Asegurado: {
-                requiered: true,
+                required: true,
                 number: true
             },
             Porcentaje_Cobertura: {
-                requiered: true
+                required: true
             },
             Numero_Adicciones: {
-                requiered: true,
+                required: true,
                 number: true
             },
             Monto_Adicciones: {
-                requiered: true,
+                required: true,
                 number: true
             },
             Prima_Antes_Impuestos: {
-                requiered: true,
+                required: true,
                 number: true
             },
             Impuestos: {
-                requiered: true
+                required: true
             } ,
             Prima_Final: {
-                requiered: true,
+                required: true,
                 number: true},
         }
     });
