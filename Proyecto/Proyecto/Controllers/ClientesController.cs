@@ -167,16 +167,15 @@ namespace Proyecto.Controllers
                 resultado = "Ocurrió un error: " + error.Message;
             }
 
-            finally
-            {
+            
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro insertado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-
-                    EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                    RedirectToAction("ClientesLista", "Clientes");
+                ///Para mostrar el mensaje de los exception errores mediante alert
+                Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
+                    
+                    return RedirectToAction("ClientesLista", "Clientes");
 
                 }
                 else
@@ -184,7 +183,7 @@ namespace Proyecto.Controllers
                     resultado += "No se pudo insertar";
                     Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
-            }
+            
 
             //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
             //seguido del nombre del controlador
@@ -192,8 +191,7 @@ namespace Proyecto.Controllers
             return View();
         }
         #endregion
-
-
+        
         #region EnviarCorreos
 
         void EnviarCorreos(string Correo, string Nombre, string Primer_Apellido, string Segundo_Apellido, int Cedula, string contrasenia)
@@ -330,24 +328,24 @@ namespace Proyecto.Controllers
             {
                 resultado = "Ocurrió un error: " + error.Message;
             }
-            finally
+
+            if (cantRegistrosAfectados > 0)
             {
-                if (cantRegistrosAfectados > 0)
-                {
-                    resultado = "Registro eliminado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                }
+                resultado = "Registro eliminado";
+                ///Para mostrar el mensaje de los exception errores mediante alert
+                Response.Write("<script language=javascript>alert('" + resultado + "');</script>"); 
+               
+             }
                 else
                 {
                     resultado += "No se pudo eliminar";
                     Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
-            }
+            
 
             //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
             //seguido del nombre del controlador
-            return RedirectToAction("ClientesLista", "Clientes");
+            return View();
 
         }
         #endregion

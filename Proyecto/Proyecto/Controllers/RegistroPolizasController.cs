@@ -163,17 +163,19 @@ namespace Proyecto.Controllers
             {
                 resultado = "Ocurrió un error: " + error.Message;
             }
-            finally
+            
+            if (cantRegistrosAfectados > 0)
+                {
+
+                //resultado = "Registro eliminado";
+                Response.Write("<script language=javascript>alert('Registro eliminado');</script>");
+                return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
+
+            }else
             {
-                if (cantRegistrosAfectados > 0)
-                {
-                    resultado = "Registro eliminado";
-                }
-                else
-                {
                     resultado += ".No se pudo eliminar ";
                 }
-            }
+            
             Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
 
             AgregarCoberturaViewBag();
