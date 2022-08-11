@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,8 +22,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    
+                        <li><span class="sprite seguros0"></span></li>
+                    
+                    
                     <li>@Html.ActionLink("Menu colaborador", "MenuColaborador", "MenuColaborador")</li>
-                    <li>@Html.ActionLink("Cobertura de póliza", "CoberturasPolizaLista", "CoberturasPoliza")</li>
+                    <li>@Html.ActionLink("Cobertura póliza", "CoberturasPolizaLista", "CoberturasPoliza")</li>
                     <li>@Html.ActionLink("Adicciones", "AdiccionesLista", "Adicciones")</li>
                     <li>@Html.ActionLink("Clientes", "ClientesLista", "Clientes")</li>
                     <li>@Html.ActionLink("Adicciones por cliente", "AdiccionesClienteLista", "AdiccionesCliente")</li>
@@ -38,7 +43,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Seguros el equipo del siglo XXI</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/bundleJquery")

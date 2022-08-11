@@ -1,0 +1,39 @@
+﻿.carousel-inner {
+    width: 100%;
+    
+}
+.item{
+    text-align:center;
+    
+}
+
+.sprite {
+    display: inline-block;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-image: url(../Media/imagenSeguros.png);
+}
+
+.seguros0 {
+    width: 60px;
+    height: 51px;
+    background-position: -703px -703px
+}
+
+.seguros1 {
+    width: 700px;
+    height: 700px;
+    background-position: -1px -1px
+}
+
+.seguros2 {
+    width: 700px;
+    height: 700px;
+    background-position: -1px -703px
+}
+
+.seguros3 {
+    width: 700px;
+    height: 700px;
+    background-position: -703px -1px
+}

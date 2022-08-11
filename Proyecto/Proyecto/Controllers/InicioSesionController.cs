@@ -20,6 +20,7 @@ namespace Proyecto.Controllers
             return View();
         }
 
+
         
         #region diferenciar usuarios 
         [HttpPost]

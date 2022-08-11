@@ -1,11 +1,52 @@
-﻿
-@{
-    
-    ViewBag.Title = "MenuColaborador";
-    Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-    
+﻿@section css{
+
+    <link href="~/Content/Carousel.css" rel="stylesheet" />
 }
 
-<h2>Menu Colaborador</h2>
+@{
 
+    ViewBag.Title = "MenuColaborador";
+    Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
+}
+    <br />
+    <br />
+<h2>Menu Colaborador</h2>
+<br />
+
+<form id="frmAppBootstrap" runat="server">
+    
+    <div class="container" id="divContenendorContenido">
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol id="olCarousel" class="carousel-indicators">
+                <li data-target="myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="myCarousel" data-slide-to="1"></li>
+                <li data-target="myCarousel" data-slide-to="2"></li>
+                <li data-target="myCarousel" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <span class="sprite seguros1"> </span>
+                </div>
+                <div class="item">
+                    <span class="sprite seguros2"></span>
+                </div>
+                <div class="item">
+                    <span class="sprite seguros3"></span>
+                </div>
+
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </div>
+        </div>
+        <br />
+    </div>
+</form>
 
