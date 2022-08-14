@@ -6,9 +6,15 @@
 
 }
 
-<h2>Registros de pólizas</h2>
-<a href="~/RegistroPolizas/RegistroPolizasInsertar">Nueva adicción</a>
+@if (TempData["Mensaje"] != null)
+{
+
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
+}
 <br />
+<br />
+<h2>Registros de pólizas</h2>
+<a href="~/RegistroPolizas/RegistroPolizasInsertar">Nuevo registro poliza</a>
 <table class="table">
     <tr>
         <th>Id póliza</th>
@@ -41,8 +47,8 @@
                 <td>@posicionModelo.Prima_Final</td>
                 <td>
                     <a href="~/RegistroPolizas/RegistroPolizasModificar?id_Poliza=@posicionModelo.Id_Poliza">Modificar</a>
-                        <br />
-                        <a href="~/RegistroPolizas/RegistroPolizasEliminar?id_Poliza=@posicionModelo.Id_Poliza">Eliminar</a>
+                    <br />
+                    <a href="~/RegistroPolizas/RegistroPolizasEliminar?id_Poliza=@posicionModelo.Id_Poliza">Eliminar</a>
                 </td>
             </tr>
         }

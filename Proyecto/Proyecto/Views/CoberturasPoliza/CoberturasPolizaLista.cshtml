@@ -2,7 +2,13 @@
 @{
     ViewBag.Title = "CoberturasPolizaLista";
     Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-    
+
+}
+
+@if (TempData["Mensaje"] != null)
+{
+
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
 }
 
 <h2>Lista de coberturas póliza</h2>

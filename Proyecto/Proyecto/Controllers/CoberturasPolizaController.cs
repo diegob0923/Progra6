@@ -65,17 +65,16 @@ namespace Proyecto.Controllers
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro insertado";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                    
                 }
                 else
                 {
                     resultado += "No se pudo insertar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                   
                 }
             }
 
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
         }
         #endregion
@@ -122,17 +121,16 @@ namespace Proyecto.Controllers
                 {
                     resultado = "Registro modificado";
                     ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                    
                 }
                 else
                 {
                     resultado += "No se pudo modificar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                    
                 }
             }
 
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
         }
 
@@ -173,18 +171,17 @@ namespace Proyecto.Controllers
                 {
                     resultado = "Registro eliminado";
                     ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                    
                 }
 
                 else
                 {
                     resultado += "No se pudo eliminar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+                   
                 }
 
             }
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
 
         }

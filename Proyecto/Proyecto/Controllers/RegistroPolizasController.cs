@@ -31,7 +31,7 @@ namespace Proyecto.Controllers
 
             try
             {
-                if (modeloVista.Fecha_Vencimiento>DateTime.Now)
+                if (modeloVista.Fecha_Vencimiento > DateTime.Now)
                 {
                     cantRegistrosAfectados = modeloBD.sp_Insertar_Registro_Polizas(
                    modeloVista.Id_Cobertura,
@@ -50,7 +50,7 @@ namespace Proyecto.Controllers
                 {
                     resultado = "No se puede seleccionar una fecha menor a la actual, por favor intente de nuevo";
                 }
-                
+
             }
             catch (Exception error)
             {
@@ -67,11 +67,12 @@ namespace Proyecto.Controllers
                     resultado += ".No se pudo insertar ";
                 }
             }
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-            
+
+
             AgregarCoberturaViewBag();
             AgregarClientesViewBag();
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
         }
         public ActionResult RegistroPolizasModificar(int id_Poliza)
         {
@@ -126,11 +127,11 @@ namespace Proyecto.Controllers
                     resultado += ".No se pudo modificar ";
                 }
             }
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
 
             AgregarCoberturaViewBag();
             AgregarClientesViewBag();
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
         }
 
         public ActionResult RegistroPolizasEliminar(int id_Poliza)
@@ -163,24 +164,23 @@ namespace Proyecto.Controllers
             {
                 resultado = "Ocurrió un error: " + error.Message;
             }
-            
+
             if (cantRegistrosAfectados > 0)
-                {
-
-                //resultado = "Registro eliminado";
-                Response.Write("<script language=javascript>alert('Registro eliminado');</script>");
-                return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
-
-            }else
             {
-                    resultado += ".No se pudo eliminar ";
-                }
-            
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+
+                resultado = "Registro eliminado";
+
+            }
+            else
+            {
+                resultado += ".No se pudo eliminar ";
+            }
 
             AgregarCoberturaViewBag();
             AgregarClientesViewBag();
-            return View(modeloVista);
+
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
         }
 
         #region Agregar datos al ViewBag
@@ -202,7 +202,7 @@ namespace Proyecto.Controllers
             sp_Retorna_Cobertura_De_PolizaID_Result cobertura = modeloBD.sp_Retorna_Cobertura_De_PolizaID(id_Cobertura).FirstOrDefault();
             return Json(cobertura);
         }
-        
+
         public ActionResult RetornarNumeroAdicciones(int id_Cliente)
         {
             int cantidadClientes = (int)modeloBD.Retornar_Cantidad_Adicciones_Por_Cliente(id_Cliente).FirstOrDefault();
@@ -220,7 +220,7 @@ namespace Proyecto.Controllers
             {
 
                 List<sp_Retorna_Poliza_Cliente_Result> listaPolizasCliente =
-            this.modeloBD.sp_Retorna_Poliza_Cliente(null,null).ToList();
+            this.modeloBD.sp_Retorna_Poliza_Cliente(null, null).ToList();
 
                 return Json(new
                 {
@@ -234,7 +234,7 @@ namespace Proyecto.Controllers
 
 
                 List<sp_Retorna_Poliza_Cliente_Result> listaPolizasCliente =
-            this.modeloBD.sp_Retorna_Poliza_Cliente(Convert.ToInt32(Session["Cedula"]),null).ToList();
+            this.modeloBD.sp_Retorna_Poliza_Cliente(Convert.ToInt32(Session["Cedula"]), null).ToList();
 
                 return Json(new
                 {

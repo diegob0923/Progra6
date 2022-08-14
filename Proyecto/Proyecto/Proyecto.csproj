@@ -151,7 +151,6 @@
     <Compile Include="Models\Canton.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Clases\RegistroPolizas.cs" />
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>SegurosEntities.tt</DependentUpon>
     </Compile>
@@ -305,6 +304,7 @@
     <Content Include="Scripts\ScriptsProyecto\ClientesModifica.js" />
     <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaInserta.js" />
     <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaModifica.js" />
+    <Content Include="Scripts\ScriptsProyecto\elementosJqueryUI.js" />
     <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
     <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
     <Content Include="Scripts\ScriptsProyecto\RegistroPolizas.js" />
@@ -361,6 +361,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Clases\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
