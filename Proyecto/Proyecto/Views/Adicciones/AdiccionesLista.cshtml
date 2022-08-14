@@ -1,9 +1,19 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Adicciones_Result>
+
 @{
     ViewBag.Title = "AdiccionesLista";
     Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-    
+
 }
+
+@*@TempData["Mensaje"]*@
+
+@if (TempData["Mensaje"] != null)
+{
+   
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
+}
+
 
 <h2>Lista de adicciones</h2>
 

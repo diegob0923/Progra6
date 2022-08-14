@@ -1,22 +1,26 @@
 ﻿@model Proyecto.Models.sp_Retorna_AdiccionesID_Result
 @{
     ViewBag.Title = "AdiccionesModificar";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
 }
 
 <h2>Modificar adicción</h2>
-
 
 <form id="frmAdicciones" method="post">
     <div class="form-group">
         <label>Nombre</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" />
     </div>
-
     <div class="form-group">
         <label>Codigo</label>
         <input type="text" name="Codigo" id="Codigo" class="form-control" value="@Model.Codigo" />
     </div>
-
     <div class="form-group">
         <input type="submit" value="Guardar" id="btnAceptar" />
     </div>

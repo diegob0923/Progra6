@@ -1,21 +1,25 @@
 ﻿@{
     ViewBag.Title = "AdiccionesInsertar";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
+@if (TempData["Mensaje"] != null)
+{
+
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
+}
+
+
 <h2>AdiccionesInsertar</h2>
-
 <form id="frmAdicciones" method="post">
-
     <div class="form-group">
         <label>Nombre</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" />
     </div>
-
     <div class="form-group">
         <label>Código</label>
         <input type="text" name="Codigo" id="Codigo" class="form-control" />
     </div>
-
     <div class="form-group">
         <input type="submit" value="Registrar" id="btnRegistrar" />
     </div>

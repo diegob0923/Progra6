@@ -42,14 +42,17 @@ namespace Proyecto.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
+
                     resultado = "Registro insertado";
+                    
                 }
                 else
                 {
                     resultado += ".No se pudo insertar ";
+                    
                 }
             }
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("AdiccionesLista", "Adicciones");
         }
 
@@ -86,9 +89,9 @@ namespace Proyecto.Controllers
                     resultado += ".No se pudo modificar ";
                 }
             }
+            TempData["Mensaje"] = resultado;
 
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-            return View(modeloVista);
+            return RedirectToAction("AdiccionesLista", "Adicciones");
         }
 
         public ActionResult AdiccionesEliminar(int id_Adiccion)
@@ -125,8 +128,9 @@ namespace Proyecto.Controllers
                 }
             }
 
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+
+            return RedirectToAction("AdiccionesLista", "Adicciones");
         }
     }
 }
