@@ -11,7 +11,7 @@ namespace Proyecto.Controllers
 {
     public class ClientesController : Controller
     {
-        
+
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
         // GET: Clientes
@@ -23,7 +23,7 @@ namespace Proyecto.Controllers
             //List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
 
             //modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
-            
+
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
@@ -48,7 +48,7 @@ namespace Proyecto.Controllers
         }
         #endregion
 
-        
+
         #region Clientes insertar, metodos retornar Json( provincia, canton, distrito) y HttpPost
         //Metodo de la vista de insertar clientes
         public ActionResult ClientesInserta()
@@ -167,31 +167,24 @@ namespace Proyecto.Controllers
                 resultado = "Ocurrió un error: " + error.Message;
             }
 
-            
-                if (cantRegistrosAfectados > 0)
-                {
-                    resultado = "Registro insertado";
-                ///Para mostrar el mensaje de los exception errores mediante alert
-                Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+
+            if (cantRegistrosAfectados > 0)
+            {
+                resultado = "Registro insertado";
+
                 EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
-                    
-                    return RedirectToAction("ClientesLista", "Clientes");
 
-                }
-                else
-                {
-                    resultado += "No se pudo insertar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                }
+            }
+            else
+            {
+                resultado += "No se pudo insertar";
+            }
             
-
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
-            //return RedirectToAction("ClientesLista", "Clientes");
-            return View();
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("ClientesLista", "Clientes");
         }
         #endregion
-        
+
         #region EnviarCorreos
 
         void EnviarCorreos(string Correo, string Nombre, string Primer_Apellido, string Segundo_Apellido, int Cedula, string contrasenia)
@@ -278,23 +271,17 @@ namespace Proyecto.Controllers
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro modificado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
 
                 }
                 else
                 {
                     resultado += "No se pudo modificar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
             }
 
-            ///Para mostrar el mensaje de los exception errores mediante alert
-
             AgregarProvinciaCantonDistritoViewBag();
-
-            //return RedirectToAction("ClientesLista", "Clientes");
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("ClientesLista", "Clientes");
         }
 
         #endregion
@@ -332,21 +319,15 @@ namespace Proyecto.Controllers
             if (cantRegistrosAfectados > 0)
             {
                 resultado = "Registro eliminado";
-                ///Para mostrar el mensaje de los exception errores mediante alert
-                Response.Write("<script language=javascript>alert('" + resultado + "');</script>"); 
-               
-             }
-                else
-                {
-                    resultado += "No se pudo eliminar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                }
-            
 
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
-            return View();
+            }
+            else
+            {
+                resultado += "No se pudo eliminar";
+            }
 
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("ClientesLista", "Clientes");
         }
         #endregion
     }
