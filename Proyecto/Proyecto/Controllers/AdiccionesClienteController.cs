@@ -26,15 +26,12 @@ namespace Proyecto.Controllers
             else
 
             {
-
-
+                
                 List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
                 modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
                 return View(modeloVista);
                 
             }
-
-
 
         }
 
@@ -66,13 +63,14 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ". No se pudo insertar. Puede que el registro ya exista";
+                    resultado += "No se pudo insertar";
                 }
             }
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            
             AgregarAdiccionesViewBag();
             AgregarClientesViewBag();
-            return View();
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("AdiccionesClienteLista", "AdiccionesCliente");
         }
 
         void AgregarAdiccionesViewBag()
@@ -115,14 +113,15 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ".No se pudo modificar ";
+                    resultado += "No se pudo modificar ";
                 }
             }
 
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            
             AgregarAdiccionesViewBag();
             AgregarClientesViewBag();
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("AdiccionesClienteLista", "AdiccionesCliente");
         }
         public ActionResult AdiccionesClienteEliminar(int id)
         {
@@ -155,14 +154,15 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ". No se pudo eliminar ";
+                    resultado += "No se pudo eliminar ";
                 }
             }
 
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            
             AgregarAdiccionesViewBag();
             AgregarClientesViewBag();
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("AdiccionesClienteLista", "AdiccionesCliente");
         }
 
         //Retornar la lista de adicciones cliente para el reporte

@@ -15,7 +15,12 @@
         Layout = "~/Views/Shared/_LayoutCliente.cshtml";
     }
 
+}
 
+@if (TempData["Mensaje"] != null)
+{
+
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
 }
 
 <h2>Lista de adicciones por cliente</h2>
@@ -24,7 +29,7 @@
 
     {
 
-    <a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
+        <a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
 
     }
 
