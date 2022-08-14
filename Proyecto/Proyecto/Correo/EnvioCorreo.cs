@@ -10,7 +10,7 @@ namespace Proyecto.Correo
     public class EnvioCorreo
     {
 
-        #region ENVIO DE CORREO DE BIENVENIDA A LOS CLIENTES
+        #region Envio de correo al cliente
 
         // Método utilizado cuando se registra un nuevo cliente al sistema,
         // donde se le enviara un correo electrónico de bienvenida.
@@ -25,8 +25,6 @@ namespace Proyecto.Correo
                 $"<span>Sitio web: http://localhost:61050/InicioSesion/InicioSesion </span><br/>" +
                 $"<span>Usuario:{Usuario} Contraseña:{Contrasena}.</span><br/>" +
                  "<br/><br/><br/><br/><span><b>Mensaje autogenerado, por favor no responder.</b></span>" +
-
-
             "</body>";
 
             // Servidor del correo electrónico que se utiliza para enviar el correo.
@@ -47,12 +45,8 @@ namespace Proyecto.Correo
             mail.Body = body;
             // Envía el correo electrónico
             smtp.Send(mail);
-
         }
 
-        #endregion ENVIO DE CORREO DE BIENVENIDA A LOS CLIENTES
-
-
-
+        #endregion
     }
 }

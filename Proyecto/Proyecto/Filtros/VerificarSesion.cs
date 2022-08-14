@@ -9,13 +9,16 @@ namespace Proyecto.Filtros
 {
     public class VerificarSesion : ActionFilterAttribute
     {
-        //private Models.Usuarios_Sistema usuario;
+        #region Verificar el inicio de sesión 
+        //Verifica la sesión del usuario para permitir ingresar
+        //Proporciona el contexto para el método ActionExecuting de la clase ActionFilterAttribute.
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             try
             {
+                //se ejecuta toda la lógica de autorización 
                 base.OnActionExecuting(filterContext);
-                //(Models.Usuarios_Sistema)HttpContext.Current.Session["Usuario"];
+                
                 var usuario = HttpContext.Current.Session["Usuario"];
                 if (usuario == null)
                 {
@@ -29,8 +32,7 @@ namespace Proyecto.Filtros
             {
                 filterContext.Result = new RedirectResult("/InicioSesion/InicioSesion");
             }
-
         }
-
+        #endregion
     }
 }

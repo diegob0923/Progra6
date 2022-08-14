@@ -2,75 +2,75 @@
 
 @{
     ViewBag.Title = "ClientesInserta";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
-<h2>Insertar Clientes</h2>
+<h2 align="center">Insertar Clientes</h2>
 
 
-<form id="frmClientesInserta" method="post">
+<form align="center" id="frmClientesInserta" method="post">
 
-    <div class="form-group">
-        <label>Cedula :</label>
+    <div align="center" class="form-group">
+        <label>Cédula :</label>
         <input type="text" name="Cedula" id="Cedula" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Genero</label>
-        
+
         <select name="Genero" id="Genero" class="form-control">
             <option value="">SELECCIONE GENERO</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
         </select>
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Fecha de nacimiento :</label>
         <input type="date" name="Fecha_Nacimiento" id="Fecha_Nacimiento" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Nombre :</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Primer Apellido</label>
         <input type="text" name="Primer_Apellido" id="Primer_Apellido" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Segundo Apellido :</label>
         <input type="text" name="Segundo_Apellido" id="Segundo_Apellido" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Dirección Física :</label>
         <input type="text" name="Direccion" id="Direccion" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Teléfono Principal</label>
         <input type="text" name="Telefono1" id="Telefono1" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Teléfono Secundario :</label>
         <input type="text" name="Telefono2" id="Telefono2" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Correo Electrónico :</label>
         <input type="text" name="Correo" id="Correo" class="form-control" />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Provincia :</label>
         <select name="Id_Provincia" id="Id_Provincia" class="form-control"></select>
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Cantón :</label>
         <select name="Id_Canton" id="Id_Canton" class="form-control"></select>
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Distrito :</label>
         <select name="Id_Distrito" id="Id_Distrito" class="form-control"></select>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Registrar" id="btnRegistrar" />
+    <div align="center" class="form-group">
+        <input class="btn btn-primary btn-block mb-4" type="submit" value="Registrar" id="btnRegistrar" />
     </div>
     <a href="~/Clientes/ClientesLista">Regresar a la lista</a>
-
 </form>
 @section scripts{
     @Scripts.Render("~/Scripts/ScriptsProyecto/Geografia.js")

@@ -1,12 +1,10 @@
 ﻿@{
     ViewBag.Title = "AdiccionesClienteReporte";
 
-
     if (Session["TipoUsuario"].ToString() == "Colaborador")
 
     {
         Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-
     }
     else
 
@@ -14,25 +12,26 @@
         Layout = "~/Views/Shared/_LayoutCliente.cshtml";
     }
 
-
 }
+
 @section css{
     <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.common.min.css" rel="stylesheet" />
     <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.blueopal.min.css" rel="stylesheet" />
 }
+<br />
+<br />
+<h2 align="center">Reporte pólizas por cliente</h2>
 
-<h2>Reporte polizás por cliente</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-15" id="divKendoGrid">
 
-<div id="divKendoGrid">
-
+        </div>
+    </div>
 </div>
-
-
-
 @section scripts{
     <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jszip.min.js"></script>
     <script src="~/Scripts/ScriptsProyecto/UtilidadesReportes.js"></script>
     <script src="~/Scripts/ScriptsProyecto/ReportePolizasKendoUI.js"></script>
-
 }

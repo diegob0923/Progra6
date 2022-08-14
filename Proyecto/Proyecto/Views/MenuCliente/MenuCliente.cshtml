@@ -1,8 +1,19 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "MenuCliente";
     Layout = "~/Views/Shared/_LayoutCliente.cshtml";
 }
 
-<h2>Menu Cliente</h2>
+<h2 align="center">Menu Cliente</h2>
 
+<div>
+    <h3>Video informativo</h3>
+    <video width="320" height="240" controls="controls">
+        <source src="~/Media/seguros.mp4" type="video/mp4" />
+    </video>
+    <div >
+        <h3>Audio informativo</h3>
+        <audio controls="controls">
+            <source src="~/Media/audio.mp3" type="audio/mpeg" />
+        </audio>
+    </div>
+</div>

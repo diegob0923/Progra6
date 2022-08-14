@@ -15,27 +15,23 @@ namespace Proyecto.Controllers
 
         // GET: CoberturasPoliza
         #region Coberturas Poliza Lista
-        
+
         public ActionResult CoberturasPolizaLista()
         {
             List<sp_Retorna_Cobertura_De_Poliza_Result> modeloVista = new List<sp_Retorna_Cobertura_De_Poliza_Result>();
-
             modeloVista = this.modeloBD.sp_Retorna_Cobertura_De_Poliza(null).ToList();
-
-
             return View(modeloVista);
         }
         #endregion
 
-        #region Coberturas de poliza insertar y HttpPost
-        //Metodo de la vista de insertar Coberturas Poliza
+        #region Coberturas de póliza insertar
+        //Método de la vista de insertar Coberturas Póliza
         public ActionResult CoberturasPolizaInserta()
         {
-
             return View();
         }
 
-        //Metodo httpPost para insertar los datos de coberturas poliza a la 
+        //Método httpPost para insertar los datos de coberturas póliza a la 
         //base de datos
         [HttpPost]
         public ActionResult CoberturasPolizaInserta(sp_Retorna_Cobertura_De_Poliza_Result modeloVista)
@@ -53,7 +49,6 @@ namespace Proyecto.Controllers
                         Descripcion,
                         Convert.ToInt32(Porcentaje)
                         );
-
             }
             catch (Exception error)
             {
@@ -65,22 +60,19 @@ namespace Proyecto.Controllers
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro insertado";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
                 else
                 {
                     resultado += "No se pudo insertar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
             }
 
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
         }
         #endregion
 
-        #region Coberturas de poliza modificar y HttpPost
+        #region Coberturas de póliza modificar
         public ActionResult CoberturasPolizaModifica(int id_Cobertura)
         {
             ///obtener el registro que se desea modificar
@@ -121,31 +113,26 @@ namespace Proyecto.Controllers
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro modificado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
                 else
                 {
                     resultado += "No se pudo modificar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
             }
 
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
         }
 
         #endregion
 
-        #region Coberturas Poliza Eliminar y HttpPost
+        #region Coberturas Poliza Eliminar
         public ActionResult CoberturasPolizaElimina(int Id_Cobertura)
         {
             ///obtener el registro que se desea modificar
             ///utilizando el parámetro del método id_Cobertura
             sp_Retorna_Cobertura_De_PolizaID_Result modeloVista = new sp_Retorna_Cobertura_De_PolizaID_Result();
             modeloVista = this.modeloBD.sp_Retorna_Cobertura_De_PolizaID(Id_Cobertura).FirstOrDefault();
-
             return View(modeloVista);
         }
 
@@ -172,21 +159,16 @@ namespace Proyecto.Controllers
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro eliminado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
 
                 else
                 {
                     resultado += "No se pudo eliminar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
-
             }
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
-            return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
 
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("CoberturasPolizaLista", "CoberturasPoliza");
         }
         #endregion
     }

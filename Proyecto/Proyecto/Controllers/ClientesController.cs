@@ -11,25 +11,19 @@ namespace Proyecto.Controllers
 {
     public class ClientesController : Controller
     {
-        
+
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
         // GET: Clientes
         #region Clientes Lista
 
         public ActionResult ClientesLista()
-        {
-            ///int cedula, string nombre, string primer_apellido, string segundo_apellido
-            //List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
-
-            //modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
-            
+        {          
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
                 ///int cedula, string nombre, string primer_apellido, string segundo_apellido
                 List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
-
                 modeloVista = this.modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList();
                 return View(modeloVista);
             }
@@ -38,22 +32,16 @@ namespace Proyecto.Controllers
             {
                 ///int cedula, string nombre, string primer_apellido, string segundo_apellido
                 List<sp_Retorna_Clientes_Result> modeloVista = new List<sp_Retorna_Clientes_Result>();
-
                 modeloVista = this.modeloBD.sp_Retorna_Clientes(Convert.ToInt32(Session["Cedula"]), null, null, null).ToList();
                 return View(modeloVista);
-            }
-
-
-            //return View(modeloVista);
+            }       
         }
         #endregion
 
-        
         #region Clientes insertar, metodos retornar Json( provincia, canton, distrito) y HttpPost
-        //Metodo de la vista de insertar clientes
+        //Método de la vista de insertar clientes
         public ActionResult ClientesInserta()
         {
-
             return View();
         }
 
@@ -66,7 +54,7 @@ namespace Proyecto.Controllers
             return Json(provincias);
         }
 
-        //Metodo para retornar las cantones tomando en cuenta el id de provincia
+        //Método para retornar los cantones tomando en cuenta el id de provincia
         public ActionResult RetornarCantones(int Id_Provincia)
         {
             List<RetornaCantones_Result> cantones = new List<RetornaCantones_Result>();
@@ -74,7 +62,7 @@ namespace Proyecto.Controllers
             ViewBag.Cantones = cantones;
             return Json(cantones);
         }
-        //Metodo para retornar los distritos tomando en cuenta el id de canton
+        //Método para retornar los distritos tomando en cuenta el id de cantón
         public ActionResult RetornarDistritos(int Id_Canton)
         {
             List<RetornaDistritos_Result> distritos = new List<RetornaDistritos_Result>();
@@ -96,8 +84,7 @@ namespace Proyecto.Controllers
             ViewBag.Distritos = distritos;
         }
 
-
-        //Metodo httpPost para insertar los datos de Clientes a la 
+        //Método httpPost para insertar los datos de Clientes a la 
         //base de datos
         [HttpPost]
         public ActionResult ClientesInserta(sp_Retorna_Clientes_Result modeloVista)
@@ -116,9 +103,7 @@ namespace Proyecto.Controllers
             }
             //Final Contraseña aleatoria
 
-
             string TipoUsuario = "Cliente";
-
 
             int Cedula = modeloVista.Cedula;
             string Genero = modeloVista.Genero;
@@ -133,7 +118,6 @@ namespace Proyecto.Controllers
             int Id_Provincia = modeloVista.id_Provincia;
             int Id_Canton = modeloVista.id_Canton;
             int Id_Distrito = modeloVista.id_Distrito;
-
 
             int cantRegistrosAfectados = 0;
 
@@ -167,38 +151,26 @@ namespace Proyecto.Controllers
                 resultado = "Ocurrió un error: " + error.Message;
             }
 
-            finally
+            if (cantRegistrosAfectados > 0)
             {
-                if (cantRegistrosAfectados > 0)
-                {
-                    resultado = "Registro insertado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
+                resultado = "Registro insertado";
 
-                    EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                    RedirectToAction("ClientesLista", "Clientes");
-
-                }
-                else
-                {
-                    resultado += "No se pudo insertar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                }
+                EnviarCorreos(Correo, Nombre, Primer_Apellido, Segundo_Apellido, Cedula, contraseniaAleatoria);
             }
-
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
-            //return RedirectToAction("ClientesLista", "Clientes");
-            return View();
+            else
+            {
+                resultado += "No se pudo insertar";
+            }
+            
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("ClientesLista", "Clientes");
         }
         #endregion
-
 
         #region EnviarCorreos
 
         void EnviarCorreos(string Correo, string Nombre, string Primer_Apellido, string Segundo_Apellido, int Cedula, string contrasenia)
         {
-
 
             //Se llama a la clase que contiene los demás procedimientos para el envió del correo
             EnvioCorreo envio = new EnvioCorreo();
@@ -208,23 +180,18 @@ namespace Proyecto.Controllers
             string NombreCliente = Primer_Apellido + " " + Segundo_Apellido + " " + Nombre;
 
             envio.EnviarCorreoClienteNuevo(CorreoCliente, NombreCliente, Usuario, Contrasena);
-
-
-
         }
 
         #endregion
 
-
-
-        #region Clientes modificar y HttpPost
+        #region Clientes modificar
         public ActionResult ClientesModifica(int id_Cliente)
         {
             ///obtener el registro que se desea modificar
-            ///utilizando el parámetro del método id_Persona
+            ///utilizando el parámetro del método id_Cliente
             sp_Retorna_ClienteID_Result modeloVista = new sp_Retorna_ClienteID_Result();
             modeloVista = this.modeloBD.sp_Retorna_ClienteID(id_Cliente).FirstOrDefault();
-            //agregar datos al provincia, canton, distrito ViewBag, despues se usarán para cargar los dropdown de la vista
+            //agregar datos al provincia, canton, distrito ViewBag, después se usarán para cargar los dropdown de la vista
             AgregarProvinciaCantonDistritoViewBag();
             ///enviar el modelo a la vista
             return View(modeloVista);
@@ -268,7 +235,6 @@ namespace Proyecto.Controllers
                         Id_Canton,
                         Id_Distrito
                         );
-
             }
             catch (Exception error)
             {
@@ -280,28 +246,22 @@ namespace Proyecto.Controllers
                 if (cantRegistrosAfectados > 0)
                 {
                     resultado = "Registro modificado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
 
                 }
                 else
                 {
                     resultado += "No se pudo modificar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
                 }
             }
 
-            ///Para mostrar el mensaje de los exception errores mediante alert
-
             AgregarProvinciaCantonDistritoViewBag();
-
-            //return RedirectToAction("ClientesLista", "Clientes");
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("ClientesLista", "Clientes");
         }
 
         #endregion
 
-        #region Clientes Eliminar y HttpPost
+        #region Clientes Eliminar
         public ActionResult ClientesElimina(int Id_Cliente)
         {
             ///obtener el registro que se desea modificar
@@ -330,25 +290,19 @@ namespace Proyecto.Controllers
             {
                 resultado = "Ocurrió un error: " + error.Message;
             }
-            finally
+
+            if (cantRegistrosAfectados > 0)
             {
-                if (cantRegistrosAfectados > 0)
-                {
-                    resultado = "Registro eliminado";
-                    ///Para mostrar el mensaje de los exception errores mediante alert
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                }
-                else
-                {
-                    resultado += "No se pudo eliminar";
-                    Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-                }
+                resultado = "Registro eliminado";
+
+            }
+            else
+            {
+                resultado += "No se pudo eliminar";
             }
 
-            //El RedirectToAction sirve para redirigir mediante el return la ruta usando primero el nombre del metodo 
-            //seguido del nombre del controlador
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("ClientesLista", "Clientes");
-
         }
         #endregion
     }

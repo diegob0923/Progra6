@@ -1,83 +1,57 @@
 ﻿@model Proyecto.Models.sp_Retorna_ClienteID_Result
 
-
-
 @{
     ViewBag.Title = "ClientesElimina";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
-<h2>Eliminar clientes</h2>
+<h2 align="center">Eliminar clientes</h2>
 
-<form id="frmClientesElimina" method="post">
+<form align="center" id="frmClientesElimina" method="post">
     <input type="hidden" name="Id_Cliente" id="Id_Cliente" value="@Model.Id_Cliente" readonly />
-    <div class="form-group">
-        <label>Cedula :</label>
+    <div align="center" class="form-group">
+        <label>Cédula :</label>
         <input type="text" name="Cedula" id="Cedula" class="form-control" value="@Model.Cedula" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Genero</label>
         <input type="text" name="Genero" id="Genero" class="form-control" value="@Model.Genero" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Fecha de nacimiento :</label>
-        <input type="text" name="Fecha_Nacimiento" id="Fecha_Nacimiento" class="form-control" value="@Model.Fecha_Nacimiento" readonly />
+        <input type="text" name="Fecha_Nacimiento" id="Fecha_Nacimiento" class="form-control" value="@Model.Fecha_Nacimiento.ToString("yyyy-MM-dd")" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Nombre :</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Primer Apellido</label>
         <input type="text" name="Primer_Apellido" id="Primer_Apellido" class="form-control" value="@Model.Primer_Apellido" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Segundo Apellido :</label>
         <input type="text" name="Segundo_Apellido" id="Segundo_Apellido" class="form-control" value="@Model.Segundo_Apellido" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Dirección Física :</label>
         <input type="text" name="Direccion" id="Direccion" class="form-control" value="@Model.Direccion" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Teléfono Principal</label>
         <input type="text" name="Telefono1" id="Telefono1" class="form-control" value="@Model.Telefono1" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Teléfono Secundario :</label>
         <input type="text" name="Telefono2" id="Telefono2" class="form-control" value="@Model.Telefono2" readonly />
     </div>
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Correo Electrónico :</label>
         <input type="text" name="Correo" id="Correo" class="form-control" value="@Model.Correo" readonly />
     </div>
-
-    @*El profe me digo que no hacia falta mostrar los datos de las listas a la hora de eliminar o cambiar lo selected por
-        textbox para traer los datos directos
-    *@
-    @*<div class="form-group">
-            <label>Provincia :</label>
-
-            <input type="text" name="Id_Provincia" id="Id_Provincia" class="form-control" value="@Model.Id_Provincia" readonly />
-        </div>
-        <div class="form-group">
-            <label>Cantón :</label>
-
-            <input type="text" name="Id_Canton" id="Id_Canton" class="form-control" value="@Model.Id_Canton" readonly />
-        </div>
-        <div class="form-group">
-            <label>Distrito :</label>
-
-            <input type="text" name="Id_Distrito" id="Id_Distrito" class="form-control" value="@Model.Id_Distrito" readonly />
-
-        </div>*@
-    <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnEliminar" />
+    <div align="center" class="form-group">
+        <input class="btn btn-primary btn-block mb-4" type="submit" value="Eliminar" id="btnEliminar" />
     </div>
     <a href="~/Clientes/ClientesLista">Regresar a la lista</a>
 
 </form>
-@*@section scripts{
-    @Scripts.Render("~/Scripts/ScriptsProyecto/Geografia.js")
-
-}*@

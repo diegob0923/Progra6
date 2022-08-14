@@ -1,13 +1,15 @@
 ﻿@model Proyecto.Models.sp_Retorna_Adiccion_ClienteID_Result
 @{
     ViewBag.Title = "AdiccionesClienteEliminar";
+    Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
+
 }
 
-<h2>Eliminar adicciones por cliente</h2>
+<h2 align="center">Eliminar adicciones por cliente</h2>
 
-<form id="frmAdiccionesClienteEliminar" method="post">
+<form align="center" id="frmAdiccionesClienteEliminar" method="post">
 
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Adicción:</label>
         <select name="Id_Adiccion" id="Id_Adiccion" class="form-control" disabled>
             <option value="">Seleccione una adicción</option>
@@ -26,14 +28,13 @@
                         <option value="@adiccion.Id_Adiccion">@adiccion.Nombre</option>
                     }
 
-
-                    @*Nombre hace referencia al nombre de adiccion*@
+                    @*Nombre hace referencia al nombre de adicción*@
                 }
             }
         </select>
     </div>
 
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Cliente:</label>
         <select name="Id_Cliente" id="Id_Cliente" class="form-control" disabled>
             <option value="">Seleccione un cliente</option>
@@ -59,8 +60,8 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnEliminar" />
+    <div align="center" class="form-group">
+        <input class="btn btn-primary btn-block mb-4" type="submit" value="Eliminar" id="btnEliminar" />
     </div>
     <a href="~/AdiccionesCliente/AdiccionesClienteLista">Regresar a la lista</a>
 </form>

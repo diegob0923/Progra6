@@ -2,17 +2,21 @@
 @{
     ViewBag.Title = "CoberturasPolizaLista";
     Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-    
+
 }
 
-<h2>Lista de coberturas Poliza</h2>
+@if (TempData["Mensaje"] != null)
+{
+
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
+}
+<br />
+<br />
+<h2 align="center">Lista de coberturas póliza</h2>
 
 <form id="frmCoberturasPoliza" method="post">
     <a href="~/CoberturasPoliza/CoberturasPolizaInserta">Agregar nueva cobertura</a>
-
-
 </form>
-
 
 <table class="table">
     <tr>
@@ -22,14 +26,11 @@
         <th>Descripción </th>
         <th>Porcentaje </th>
         <th>Acciones</th>
-
     </tr>
     @{
         foreach (Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result posicionModelo
             in this.Model)
         {
-
-
             <tr>
                 <td>@posicionModelo.Id_Cobertura</td>
                 <td>@posicionModelo.Nombre</td>
@@ -41,11 +42,8 @@
                     <a href="~/CoberturasPoliza/CoberturasPolizaElimina?Id_Cobertura=@posicionModelo.Id_Cobertura">Eliminar</a>
                 </td>
             </tr>
-
         }
-
     }
-
 </table>
 
 

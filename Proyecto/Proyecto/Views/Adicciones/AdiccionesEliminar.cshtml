@@ -1,24 +1,23 @@
 ﻿@model Proyecto.Models.sp_Retorna_AdiccionesID_Result
 @{
     ViewBag.Title = "AdiccionesEliminar";
+    Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
-<h2>Eliminar adicción</h2>
 
+<h2 align="center">Eliminar adicción</h2>
 
-<form id="frmAdiccionesEliminar" method="post">
-    <div class="form-group">
+<form align="center" id="frmAdiccionesEliminar" method="post">
+    <div align="center" class="form-group">
         <label>Nombre</label>
         <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre" readonly />
     </div>
-
-    <div class="form-group">
-        <label>Codigo</label>
-        <input type="text" name="Codigo" id="Codigo" class="form-control" value="@Model.Codigo" readonly/>
+    <div align="center" class="form-group">
+        <label>código</label>
+        <input type="text" name="Codigo" id="Codigo" class="form-control" value="@Model.Codigo" readonly />
     </div>
-
-    <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnEliminar" />
+    <div align="center" class="form-group">
+        <input class="btn btn-primary btn-block mb-4" type="submit" value="Eliminar" id="btnEliminar" />
     </div>
     <a href="~/Adicciones/AdiccionesLista">Regresar a la lista</a>
 </form>

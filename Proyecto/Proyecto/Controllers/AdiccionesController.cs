@@ -12,14 +12,16 @@ namespace Proyecto.Controllers
     {
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
 
-
+        #region Adicciones lista
         public ActionResult AdiccionesLista()
         {
             List<sp_Retorna_Adicciones_Result> modeloVista = new List<sp_Retorna_Adicciones_Result>();
             modeloVista = modeloBD.sp_Retorna_Adicciones(null, null).ToList();
             return View(modeloVista);
         }
+        #endregion
 
+        #region Adicciones insertar
         public ActionResult AdiccionesInsertar()
         {
             return View();
@@ -42,23 +44,25 @@ namespace Proyecto.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    resultado = "Registro insertado";
+
+                    resultado = "Registro insertado";                    
                 }
                 else
                 {
-                    resultado += ".No se pudo insertar ";
+                    resultado += "No se pudo insertar ";                   
                 }
             }
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+            TempData["Mensaje"] = resultado;
             return RedirectToAction("AdiccionesLista", "Adicciones");
         }
+        #endregion
 
+        #region Adicciones modificar
         public ActionResult AdiccionesModificar(int id_Adiccion)
         {
             sp_Retorna_AdiccionesID_Result modeloVista = new sp_Retorna_AdiccionesID_Result();
             modeloVista = modeloBD.sp_Retorna_AdiccionesID(id_Adiccion).FirstOrDefault();
             return View(modeloVista);
-
         }
 
         [HttpPost]
@@ -83,20 +87,20 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ".No se pudo modificar ";
+                    resultado += "No se pudo modificar ";
                 }
             }
-
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("AdiccionesLista", "Adicciones");
         }
+        #endregion
 
+        #region Adiccioneseliminar
         public ActionResult AdiccionesEliminar(int id_Adiccion)
         {
             sp_Retorna_AdiccionesID_Result modeloVista = new sp_Retorna_AdiccionesID_Result();
             modeloVista = modeloBD.sp_Retorna_AdiccionesID(id_Adiccion).FirstOrDefault();
             return View(modeloVista);
-
         }
 
         [HttpPost]
@@ -121,12 +125,13 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ".No se pudo eliminado ";
+                    resultado += "No se pudo eliminado ";
                 }
             }
 
-            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
-            return View(modeloVista);
+            TempData["Mensaje"] = resultado;
+            return RedirectToAction("AdiccionesLista", "Adicciones");
         }
+        #endregion
     }
 }

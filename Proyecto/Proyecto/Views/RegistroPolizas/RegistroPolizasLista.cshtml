@@ -1,10 +1,18 @@
 ﻿@model List<Proyecto.Models.sp_Retorna_Poliza_Cliente_Result>
+
 @{
     ViewBag.Title = "RegistroPolizas";
+    Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
 }
 
-<h2>Registros de pólizas</h2>
+@if (TempData["Mensaje"] != null)
+{
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
+}
 <br />
+<br />
+<h2 align="center">Registros de pólizas</h2>
+<a href="~/RegistroPolizas/RegistroPolizasInsertar">Nuevo registro póliza</a>
 <table class="table">
     <tr>
         <th>Id póliza</th>
@@ -28,17 +36,17 @@
                 <td>@posicionModelo.Cobertura</td>
                 <td>@posicionModelo.Nombre @posicionModelo.Primer_Apellido @posicionModelo.Segundo_Apellido</td>
                 <td>@posicionModelo.Fecha_Vencimiento.ToString("yyyy-MM-dd")</td>
-                <td>@posicionModelo.Monto_Asegurado</td>
+                <td>@posicionModelo.Monto_Asegurado.ToString().Split(',')[0]</td>
                 <td>@posicionModelo.Porcentaje_Cobertura</td>
                 <td>@posicionModelo.Numero_Adicciones</td>
-                <td>@posicionModelo.Monto_Adicciones</td>
-                <td>@posicionModelo.Prima_Antes_Impuestos</td>
-                <td>@posicionModelo.Impuestos</td>
-                <td>@posicionModelo.Prima_Final</td>
+                <td>@posicionModelo.Monto_Adicciones.ToString().Split(',')[0]</td>
+                <td>@posicionModelo.Prima_Antes_Impuestos.ToString().Split(',')[0]</td>
+                <td>@posicionModelo.Impuestos.ToString().Split(',')[0]</td>
+                <td>@posicionModelo.Prima_Final.ToString().Split(',')[0]</td>
                 <td>
                     <a href="~/RegistroPolizas/RegistroPolizasModificar?id_Poliza=@posicionModelo.Id_Poliza">Modificar</a>
-                        <br />
-                        <a href="~/RegistroPolizas/RegistroPolizasEliminar?id_Poliza=@posicionModelo.Id_Poliza">Eliminar</a>
+                    <br />
+                    <a href="~/RegistroPolizas/RegistroPolizasEliminar?id_Poliza=@posicionModelo.Id_Poliza">Eliminar</a>
                 </td>
             </tr>
         }

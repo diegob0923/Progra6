@@ -9,12 +9,9 @@ function creaValidaciones() {
         ///objeto que contiene "las condiciones" que el formulario
         ///debe cumplir para ser considerado válido
 
-
-
         rules: {
             Nombre: {
                 required: true
-
             },
             Descripcion: {
                 required: true,

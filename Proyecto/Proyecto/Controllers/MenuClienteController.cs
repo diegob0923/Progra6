@@ -8,10 +8,12 @@ namespace Proyecto.Controllers
 {
     public class MenuClienteController : Controller
     {
+        #region Menu de cliente
         // GET: MenuCliente
         public ActionResult MenuCliente()
         {
             return View();
         }
+        #endregion
     }
 }

@@ -4,38 +4,34 @@
     estableceEventoChangeParaCliente();
     estableceEventoChangeParaMontoAsegurado();
 });
-
 function estableceEventoChangeParaCobertura() {
     //evento change para el dropdownlist de coberturas
     $('#Id_Cobertura').change(function () {
         //obtener valores inputs
-        var cobertura = $('#Id_Cobertura').val()//obtiene el valor del parametro value de la etiqueta <select> de coberturas
-        
-        //llamar a la funcion que carga el porcentajeCobertura
+        var cobertura = $('#Id_Cobertura').val()//obtiene el valor del parámetro value de la etiqueta <select> de coberturas
+
+        //llamar a la función que carga el porcentajeCobertura
         asignarValorPorcentajeCobertura(cobertura);
-        
     });
-    
 }
 
 function estableceEventoChangeParaCliente() {
-  
+
     $('#Id_Cliente').change(function () {
         //obtener valores inputs
-
-        var cliente = $('#Id_Cliente').val()//obtiene el valor del parametro value de la etiqueta <select> de coberturas
-        //llamar a la funcion que carga el Cliente
+        var cliente = $('#Id_Cliente').val()//obtiene el valor del parámetro value de la etiqueta <select> de coberturas
+        //llamar a la función que carga el Cliente
         asignarValorNumeroAdicciones(cliente);
     });
 }
 
+
 function estableceEventoChangeParaMontoAsegurado() {
     //evento change para el dropdownlist de coberturas
     $('#Monto_Asegurado').change(function () {
-        //llamar a la funcion que realiza calculos
+        //llamar a la función que realiza cálculos
         RealizarCalculos();
     });
-
 }
 
 function asignarValorPorcentajeCobertura(idCobertura) {
@@ -43,7 +39,7 @@ function asignarValorPorcentajeCobertura(idCobertura) {
     var url = '/RegistroPolizas/RetornarCoberturaPorID';
     ///parámetros del método, es CASE-SENSITIVE
     var parametros = {
-        //estos son los parametros que recibe el action del controler
+        //estos son los parámetros que recibe el action del controler
         id_Cobertura: idCobertura
     };
     ///invocar el método
@@ -61,7 +57,6 @@ function asignarValorPorcentajeCobertura(idCobertura) {
             //asignar el valor al input
             inputPorcentajeCobertura.val(data.Porcentaje);
             RealizarCalculos();
-            
         },
         error: function (jQxhr, textStatus, errorThrown) {
             alert(errorThrown);
@@ -75,7 +70,7 @@ function asignarValorNumeroAdicciones(pIdCliente) {
     var url = '/RegistroPolizas/RetornarNumeroAdicciones';
     ///parámetros del método, es CASE-SENSITIVE
     var parametros = {
-        //estos son los parametros que recibe el action del controler
+        //estos son los parámetros que recibe el action del controler
         id_Cliente: pIdCliente
     };
     ///invocar el método
@@ -100,12 +95,13 @@ function asignarValorNumeroAdicciones(pIdCliente) {
     });
 }
 
+
 function RealizarCalculos() {
     var porcentajeCobertura = $('#Porcentaje_Cobertura').val();
     var numAdicciones = $('#Numero_Adicciones').val();
     var monto = Number($('#Monto_Asegurado').val().replace(/[,]+/g, "."));//el replace es por si se ingresa un numero con decimales, poner el decimal con , causa error por eso se trasforma a . 
    
-    //revisar si los campos de Porcentaje_Cobertura y Numero_Adicciones tienen valores para proceder con los calculos
+    //revisar si los campos de Porcentaje_Cobertura y Numero_Adicciones tienen valores para proceder con los cálculos
     if (porcentajeCobertura != "" && numAdicciones != "" && monto != "") {
       
         MontoAdicciones(numAdicciones, monto);
@@ -114,8 +110,7 @@ function RealizarCalculos() {
         PrimaFinal($('#Prima_Antes_Impuestos').val(), $('#Impuestos').val());
     } else {
         console.log('falta valor')
-    }
-    
+    }  
 }
 
 
@@ -132,22 +127,21 @@ function MontoAdicciones(cantidadAdicciones, montoAsegurado)
     else {// adicciones >3
         var montoAdicciones = montoAsegurado * 0.15;
     }
-
-    $('#Monto_Adicciones').val(montoAdicciones);
+    $('#Monto_Adicciones').val(Math.round(montoAdicciones));
 }
 
 function PrimaAntesImpuestos(porcentajeCobertura, montoAdicciones) {
     var primaAntesImpuestos = montoAdicciones * porcentajeCobertura;
-    $('#Prima_Antes_Impuestos').val(primaAntesImpuestos);
+    $('#Prima_Antes_Impuestos').val(Math.round(primaAntesImpuestos));
 }
 
 function Impuestos(primaAntesImpuestos) {
     var impuestos = primaAntesImpuestos * 0.13; //13% de impuestos
-    $('#Impuestos').val(impuestos);
+    $('#Impuestos').val(Math.round(impuestos));
 }
 
  function PrimaFinal(primaAntesImpuestos, impuestos)
  {
      var primarFinal = parseFloat(primaAntesImpuestos) + parseFloat(impuestos);
-     $('#Prima_Final').val(primarFinal);
+     $('#Prima_Final').val(Math.round(primarFinal));
 }

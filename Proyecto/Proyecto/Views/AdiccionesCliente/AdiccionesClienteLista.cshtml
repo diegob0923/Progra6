@@ -7,29 +7,28 @@
 
     {
         Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-
     }
     else
 
     {
         Layout = "~/Views/Shared/_LayoutCliente.cshtml";
     }
-
-
 }
 
-<h2>Lista de adicciones por cliente</h2>
+@if (TempData["Mensaje"] != null)
+{
+    <script language=javascript>alert('@TempData["Mensaje"]');</script>
+}
+<br />
+<br />
+<h2 align="center">Lista de adicciones por cliente</h2>
 @{
     if (Session["TipoUsuario"].ToString() == "Colaborador")
 
     {
-
-    <a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
-
+        <a href="~/AdiccionesCliente/AdiccionesClienteInsertar">Nueva adicción por cliente</a>
     }
-
 }
-
 <br />
 
 <table class="table">
@@ -40,16 +39,11 @@
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
-
                 <th> Acciones </th>
-
             }
-
         }
-
     </tr>
     @{
-
         if (Session["TipoUsuario"].ToString() == "Colaborador")
 
         {
@@ -66,38 +60,18 @@
                     </td>
                 </tr>
             }
-
         }
         else
-
         {
-
             foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
             {
                 <tr>
                     <td>@posicionModelo.Nombre </td> @*nombre de la adicción*@
                     <td>@posicionModelo.NombreCompleto</td>
                     @*nombre completo cliente*@
-
                 </tr>
             }
-        }
-
-
-
-        @*foreach (Proyecto.Models.sp_Retorna_Adiccion_Cliente_Result posicionModelo in Model)
-            {
-                <tr>
-                    <td>@posicionModelo.Nombre </td>
-                    <td>@posicionModelo.NombreCompleto</td>
-
-                    <td>
-                        <a href="~/AdiccionesCliente/AdiccionesClienteModificar?id=@posicionModelo.Id">Modificar</a>
-                        <br />
-                        <a href="~/AdiccionesCliente/AdiccionesClienteEliminar?id=@posicionModelo.Id">Eliminar</a>
-                    </td>
-                </tr>
-            }*@
+        }        
     }
 </table>
 

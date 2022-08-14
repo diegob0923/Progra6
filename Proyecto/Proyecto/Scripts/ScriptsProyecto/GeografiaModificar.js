@@ -2,12 +2,12 @@
     ///llamamos a la función que se encargará de crear los eventos
     ///que nos permitirán controlar cuando se haga una selección en las respectivas listas
     estableceEventosChange();
-    
+
 });
 
 ///función que registrará los eventos necesarios para "monitorear"
 ///cuando se ejecute el método change de las respectivas listas
-///Solo se utiliza el cantón y distritos que son producto de la seleccion de la provincia
+///Solo se utiliza el cantón y distritos que son producto de la selección de la provincia
 ///en los eventoschange
 
 function estableceEventosChange() {
@@ -23,11 +23,12 @@ function estableceEventosChange() {
     $("#Id_Canton").change(function () {
         ///Obtenemos el id de canton seleccionada con .val
         var canton = $("#Id_Canton").val();
-        ///Se llama a la funcion que carga los distrito asociados a la provincia
+        ///Se llama a la función que carga los distritos asociados a la provincia
         cargaDropdownListDistritos(canton);
     });
 
 }
+
 
 
 /*
@@ -55,10 +56,7 @@ function procesarResultadoProvincias(data) {
         ///y se concatena con nombre que es lo que se muestra visualmente
         nuevaOpcion = "<option value='" + provinciaActual.id_Provincia + "'>" + provinciaActual.nombre + "</option>";
         ddlProvincias.append(nuevaOpcion);
-
-
     });
-
 }
 
 ///carga los registros de los cantones
@@ -86,7 +84,7 @@ function cargaDropdownListCantones(pIdProvincia) {
     });
 }
 
-///data es lo que retorna el metodo de cargar cantones en el llamado
+///data es lo que retorna el método de cargar cantones en el llamado
 function procesarResultadoCantones(data) {
     ///Mediante el selector nos posicionamos en la lista de cantones
     var ddlCantones = $("#Id_Canton");
@@ -97,9 +95,7 @@ function procesarResultadoCantones(data) {
         var cantonActual = this;
         nuevaOpcion = "<option value='" + cantonActual.id_Canton + "'>" + cantonActual.nombre + "</option>";
         ddlCantones.append(nuevaOpcion);
-
     });
-
 }
 
 function cargaDropdownListDistritos(pIdCanton) {
@@ -127,7 +123,7 @@ function cargaDropdownListDistritos(pIdCanton) {
 }
 
 function procesarResultadoDistritos(data) {
-    ///Mendiante el selector nos posicionamos en la lista de distritos
+    ///Mediante el selector nos posicionamos en la lista de distritos
     var ddlDistritos = $("#Id_Distrito");
     ddlDistritos.empty();
     var nuevaOpcion = "<option value=''>SELECCIONE UN DISTRITO</option>";
@@ -136,7 +132,5 @@ function procesarResultadoDistritos(data) {
         var distritoActual = this;
         nuevaOpcion = "<option value='" + distritoActual.id_Distrito + "'>" + distritoActual.nombre + "</option>";
         ddlDistritos.append(nuevaOpcion);
-
     });
-
 }
