@@ -1,29 +1,25 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "InicioSesion";
     Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
-<h2>Iniciar sesión</h2>
+<h2 align="center">Iniciar sesión</h2>
 
-<form id="frmInicioSesion" method="post">
-
-    <div class="form-outline mb-4">
+<form align="center" id="frmInicioSesion" method="post">
+    <div align="center" class="form-outline mb-4">
         <label class="form-label">Usuario :</label>
         <input type="text" name="Usuario" id="Usuario" class="form-control" />
     </div>
-    <div class="form-outline mb-4">
+    <div align="center" class="form-outline mb-4">
         <label class="form-label">Contraseña :</label>
-        <input type="password" name="Contrasena" id="Contrasena" class="form-control" />
+        <input type="text" name="Contrasena" id="Contrasena" class="form-control" />
     </div>
-
     <br />
-    <div class="form-group">
+    <div align="center" class="form-group">
         <input class="btn btn-primary btn-block mb-4" type="submit" value="Ingresar" id="btnIngresar" />
     </div>
 </form>
 @section scripts{
 
     @Scripts.Render("~/Scripts/ScriptsProyecto/InicioSesion.js")
-
 }

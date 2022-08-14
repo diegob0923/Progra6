@@ -8,10 +8,12 @@ namespace Proyecto.Controllers
 {
     public class RegistroPolizasClienteReporteController : Controller
     {
+        #region Registro pólizas cliente Reporte
         // GET: RegistroPolizasClienteReporte
         public ActionResult RegistroPolizasClienteReporte()
         {
             return View();
         }
+        #endregion
     }
 }

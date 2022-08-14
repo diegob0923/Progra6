@@ -9,8 +9,6 @@ function creaValidaciones() {
         ///objeto que contiene "las condiciones" que el formulario
         ///debe cumplir para ser considerado válido
 
-
-
         rules: {
             Nombre: {
                 required: true
@@ -26,7 +24,6 @@ function creaValidaciones() {
                 min: 0.01,
                 max: 100
             },
-
         }
     });
 }

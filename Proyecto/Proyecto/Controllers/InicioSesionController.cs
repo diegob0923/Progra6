@@ -19,10 +19,8 @@ namespace Proyecto.Controllers
         {
             return View();
         }
-
-
-        
-        #region diferenciar usuarios 
+    
+        #region Inicio de sesión y diferenciar usuarios 
         [HttpPost]
         public ActionResult InicioSesion(int Usuario, string Contrasena)
         {
@@ -36,8 +34,7 @@ namespace Proyecto.Controllers
                     string tipoColaborador = "Colaborador";
 
                     var usuario = modeloBD.RetornarUsuarioContrasena(Usuario, Contrasena).FirstOrDefault();
-
-                    
+                   
                     if (usuario == null )
                     {
                         ViewBag.Error = "Usuario o contraseña incorrecta";
@@ -49,8 +46,7 @@ namespace Proyecto.Controllers
                         Session["TipoUsuario"] = tipoCliente;
                         Session["Usuario"] = usuario;
                         
-                        return RedirectToAction("MenuCliente", "MenuCliente");
-                        
+                        return RedirectToAction("MenuCliente", "MenuCliente");                        
                     }
                     
                     else if (usuario.TipoUsuario == tipoColaborador)
@@ -59,22 +55,17 @@ namespace Proyecto.Controllers
                         Session["TipoUsuario"] = tipoColaborador;
                         Session["Usuario"] = usuario;
                         
-                        return RedirectToAction("MenuColaborador", "MenuColaborador");
-                        
-                    }
-                    
+                        return RedirectToAction("MenuColaborador", "MenuColaborador");                       
+                    }                   
                 }
 
-
-                return RedirectToAction("","");
-                
+                return RedirectToAction("","");               
             }
             catch (Exception ex)
             {
                 ViewBag.error = ex.Message;
                 return View();
             }
-
         }
         #endregion
     }

@@ -4,11 +4,10 @@
     Layout = "~/Views/Shared/_LayoutSolo.cshtml";
 }
 
-<h2>Registrar nueva póliza</h2>
+<h2 align="center">Registrar nueva póliza</h2>
 
-<form id="frmRegistroPolizas" method="post">
-
-    <div class="form-group">
+<form align="center" id="frmRegistroPolizas" method="post">
+    <div align="center" class="form-group">
         <label>Cobertura</label>
         <select name="Id_Cobertura" id="Id_Cobertura" class="form-control">
             <option value="">Seleccione una cobertura</option>
@@ -16,13 +15,11 @@
                 foreach (Proyecto.Models.sp_Retorna_Cobertura_De_Poliza_Result cobertura in ViewBag.Cobertura)
                 {
                     <option value="@cobertura.Id_Cobertura">@cobertura.Nombre</option>
-
                 }
             }
         </select>
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Cliente</label>
         <select name="Id_Cliente" id="Id_Cliente" class="form-control">
             <option value="">Seleccione un cliente</option>
@@ -30,58 +27,48 @@
                 foreach (Proyecto.Models.sp_Retorna_Clientes_Result cliente in ViewBag.Clientes)
                 {
                     <option value="@cliente.Id_Cliente">@cliente.Nombre @cliente.Primer_Apellido @cliente.Segundo_Apellido</option>
-
                 }
             }
         </select>
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Fecha de vencimiento:</label>
         <input type="date" name="Fecha_Vencimiento" id="Fecha_Vencimiento" class="form-control" />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Monto asegurado</label>
         <input type="text" name="Monto_Asegurado" id="Monto_Asegurado" class="form-control" />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Porcentaje cobertura</label>
         <input type="text" name="Porcentaje_Cobertura" id="Porcentaje_Cobertura" class="form-control" readonly />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Numero adicciones </label>
         <input type="text" name="Numero_Adicciones" id="Numero_Adicciones" class="form-control" readonly />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Monto adicciones </label>
         <input type="text" name="Monto_Adicciones" id="Monto_Adicciones" class="form-control" readonly />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Prima antes impuestos</label>
         <input type="text" name="Prima_Antes_Impuestos" id="Prima_Antes_Impuestos" class="form-control" readonly />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Impuestos</label>
         <input type="text" name="Impuestos" id="Impuestos" class="form-control" readonly />
     </div>
-
-    <div class="form-group">
+    <div align="center" class="form-group">
         <label>Prima final</label>
         <input type="text" name="Prima_Final" id="Prima_Final" class="form-control" readonly />
     </div>
-
-    <div class="form-group">
-        <input type="submit" value="Registrar" id="btnRegistrar" />
+    <div align="center" class="form-group">
+        <input class="btn btn-primary btn-block mb-4" type="submit" value="Registrar" id="btnRegistrar" />
     </div>
     <a href="~/RegistroPolizas/RegistroPolizasLista">Regresar a la lista</a>
-
 </form>
+
 @section scripts{
     <script src="~/Scripts/ScriptsProyecto/RegistroPolizasValidaciones.js"></script>
     <script src="~/Scripts/ScriptsProyecto/RegistroPolizas.js"></script>

@@ -10,19 +10,24 @@ namespace Proyecto.Controllers
     public class RegistroPolizasController : Controller
     {
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
+
+        #region Registro pólizas lista
         public ActionResult RegistroPolizasLista()
         {
             List<sp_Retorna_Poliza_Cliente_Result> modeloVista = new List<sp_Retorna_Poliza_Cliente_Result>();
             modeloVista = modeloBD.sp_Retorna_Poliza_Cliente(null, null).ToList();
             return View(modeloVista);
         }
+        #endregion
 
+        #region Registro pólizas insertar
         public ActionResult RegistroPolizasInsertar()
         {
             AgregarCoberturaViewBag();
             AgregarClientesViewBag();
             return View();
         }
+
         [HttpPost]
         public ActionResult RegistroPolizasInsertar(Retorna_Registro_Polizas_Result modeloVista)
         {
@@ -64,16 +69,18 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ".No se pudo insertar ";
+                    resultado += "No se pudo insertar ";
                 }
             }
-
 
             AgregarCoberturaViewBag();
             AgregarClientesViewBag();
             TempData["Mensaje"] = resultado;
             return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
         }
+        #endregion
+
+        #region Registro pólizas modificar
         public ActionResult RegistroPolizasModificar(int id_Poliza)
         {
             sp_Retorna_Registro_PolizasID_Result modeloVista = modeloBD.sp_Retorna_Registro_PolizasID(id_Poliza).FirstOrDefault();
@@ -108,9 +115,8 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado = "No se puede eliminar una poliza con fecha menor a la actual";
+                    resultado = "No se puede eliminar una póliza con fecha menor a la actual";
                 }
-
             }
             catch (Exception error)
             {
@@ -124,7 +130,7 @@ namespace Proyecto.Controllers
                 }
                 else
                 {
-                    resultado += ".No se pudo modificar ";
+                    resultado += "No se pudo modificar ";
                 }
             }
 
@@ -133,7 +139,9 @@ namespace Proyecto.Controllers
             TempData["Mensaje"] = resultado;
             return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
         }
+        #endregion
 
+        #region Registro pólizas eliminar
         public ActionResult RegistroPolizasEliminar(int id_Poliza)
         {
             sp_Retorna_Registro_PolizasID_Result modeloVista = modeloBD.sp_Retorna_Registro_PolizasID(id_Poliza).FirstOrDefault();
@@ -158,7 +166,6 @@ namespace Proyecto.Controllers
                 {
                     resultado = "No se puede seleccionar una fecha menor a la actual, por favor intente de nuevo";
                 }
-
             }
             catch (Exception error)
             {
@@ -169,11 +176,10 @@ namespace Proyecto.Controllers
             {
 
                 resultado = "Registro eliminado";
-
             }
             else
             {
-                resultado += ".No se pudo eliminar ";
+                resultado += "No se pudo eliminar ";
             }
 
             AgregarCoberturaViewBag();
@@ -182,9 +188,7 @@ namespace Proyecto.Controllers
             TempData["Mensaje"] = resultado;
             return RedirectToAction("RegistroPolizasLista", "RegistroPolizas");
         }
-
-        #region Agregar datos al ViewBag
-
+        
         void AgregarCoberturaViewBag()
         {
             ViewBag.Cobertura = modeloBD.sp_Retorna_Cobertura_De_Poliza(null).ToList();
@@ -197,57 +201,49 @@ namespace Proyecto.Controllers
 
         #endregion
 
+        #region Retornar cobertura por ID
         public ActionResult RetornarCoberturaPorID(int id_Cobertura)
         {
             sp_Retorna_Cobertura_De_PolizaID_Result cobertura = modeloBD.sp_Retorna_Cobertura_De_PolizaID(id_Cobertura).FirstOrDefault();
             return Json(cobertura);
         }
+        #endregion
 
+        #region Retornar numero adicciones
         public ActionResult RetornarNumeroAdicciones(int id_Cliente)
         {
             int cantidadClientes = (int)modeloBD.Retornar_Cantidad_Adicciones_Por_Cliente(id_Cliente).FirstOrDefault();
             return Json(cantidadClientes);
         }
+        #endregion
 
-        #region retornar polizás para reporte
+        #region Retornar pólizas para reporte
         //Retornar la lista de polizás cliente para el reporte
         [HttpPost]
         public ActionResult RetornaPolizasClienteLista()
         {
-
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
-
                 List<sp_Retorna_Poliza_Cliente_Result> listaPolizasCliente =
-            this.modeloBD.sp_Retorna_Poliza_Cliente(null, null).ToList();
+                this.modeloBD.sp_Retorna_Poliza_Cliente(null, null).ToList();
 
                 return Json(new
                 {
                     resultado = listaPolizasCliente
                 });
-
             }
             else
-
             {
-
-
                 List<sp_Retorna_Poliza_Cliente_Result> listaPolizasCliente =
-            this.modeloBD.sp_Retorna_Poliza_Cliente(Convert.ToInt32(Session["Cedula"]), null).ToList();
+                this.modeloBD.sp_Retorna_Poliza_Cliente(Convert.ToInt32(Session["Cedula"]), null).ToList();
 
                 return Json(new
                 {
                     resultado = listaPolizasCliente
                 });
-
             }
-
-
-
         }
         #endregion
-
-
     }
 }

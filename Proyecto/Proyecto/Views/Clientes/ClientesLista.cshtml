@@ -6,46 +6,40 @@
 
     {
         Layout = "~/Views/Shared/_LayoutColaborador.cshtml";
-
     }
     else
 
     {
         Layout = "~/Views/Shared/_LayoutCliente.cshtml";
     }
-
 }
 
 @if (TempData["Mensaje"] != null)
 {
-
     <script language=javascript>alert('@TempData["Mensaje"]');</script>
 }
-<h2>Lista de clientes</h2>
+<br />
+<br />
+<h2 align="center">Lista de clientes</h2>
 
 <form id="frmClientes" method="post">
     @{
         if (Session["TipoUsuario"].ToString() == "Colaborador")
 
         {
-
             <a href="~/Clientes/ClientesInserta">Agregar nuevo cliente</a>
-
         }
-
     }
-
 </form>
 
 <table class="table">
     <tr>
-
         <th>Id Cliente </th>
-        <th>Cedula </th>
+        <th>Cédula </th>
         <th>Genero </th>
         <th>Fecha de nacimiento </th>
         <th>Nombre </th>
-        <th>Primer Apellido  </th>
+        <th>Primer Apellido </th>
         <th>Segundo Apellido </th>
         <th>Dirección Física </th>
         <th>Teléfono Principal </th>
@@ -58,29 +52,22 @@
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
-
                 <th>Acciones</th>
-
             }
-
         }
     <tr>
-
         @{
-
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
                 foreach (Proyecto.Models.sp_Retorna_Clientes_Result posicionModelo
                     in this.Model)
                 {
-
-
                 <tr>
                     <td>@posicionModelo.Id_Cliente</td>
                     <td>@posicionModelo.Cedula</td>
                     <td>@posicionModelo.Genero</td>
-                    <td>@posicionModelo.Fecha_Nacimiento</td>
+                    <td>@posicionModelo.Fecha_Nacimiento.ToString("yyyy-MM-dd")</td>
                     <td>@posicionModelo.Nombre</td>
                     <td>@posicionModelo.Primer_Apellido</td>
                     <td>@posicionModelo.Segundo_Apellido</td>
@@ -97,22 +84,18 @@
                         <a href="~/Clientes/ClientesElimina?Id_Cliente=@posicionModelo.Id_Cliente">Eliminar</a>
                     </td>
                 </tr>
-
             }
-
         }
         else
-
         {
             foreach (Proyecto.Models.sp_Retorna_Clientes_Result posicionModelo
                 in this.Model)
             {
-
                 <tr>
                     <td>@posicionModelo.Id_Cliente</td>
                     <td>@posicionModelo.Cedula</td>
                     <td>@posicionModelo.Genero</td>
-                    <td>@posicionModelo.Fecha_Nacimiento</td>
+                    <td>@posicionModelo.Fecha_Nacimiento.ToString("yyyy-MM-dd")</td>
                     <td>@posicionModelo.Nombre</td>
                     <td>@posicionModelo.Primer_Apellido</td>
                     <td>@posicionModelo.Segundo_Apellido</td>
@@ -123,16 +106,12 @@
                     <td>@posicionModelo.Provincia</td>
                     <td>@posicionModelo.Canton</td>
                     <td>@posicionModelo.Distrito</td>
-
                 </tr>
-
             }
         }
 
-
         }
-
-    </table>
+</table>
 
 
 

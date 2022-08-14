@@ -261,6 +261,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Carousel.css" />
+    <Content Include="Content\Centrar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -304,7 +305,6 @@
     <Content Include="Scripts\ScriptsProyecto\ClientesModifica.js" />
     <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaInserta.js" />
     <Content Include="Scripts\ScriptsProyecto\CoberturasPolizaModifica.js" />
-    <Content Include="Scripts\ScriptsProyecto\elementosJqueryUI.js" />
     <Content Include="Scripts\ScriptsProyecto\GeografiaModificar.js" />
     <Content Include="Scripts\ScriptsProyecto\Geografia.js" />
     <Content Include="Scripts\ScriptsProyecto\RegistroPolizas.js" />
@@ -361,7 +361,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Clases\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

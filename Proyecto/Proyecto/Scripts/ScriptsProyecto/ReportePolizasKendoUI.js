@@ -3,14 +3,16 @@
 });
 
 
-/// funcion que obtiene los registros
-// del metodo del controlador
+/// función que obtiene los registros
+// del método del controlador
 // RetornaAdiccionesClienteLista()
 function obtenerRegistrosPolizasCliente() {
     /////construir la dirección del método del servidor
     var urlMetodo = '/RegistroPolizas/RetornaPolizasClienteLista'
     var parametros = {};
     var funcion = creaGridKendo;
+
+    
     ///ejecuta la función $.ajax utilizando un método genérico
     //para no declarar toda la instrucción siempre
     ejecutaAjax(urlMetodo, parametros, funcion);
@@ -19,15 +21,17 @@ function obtenerRegistrosPolizasCliente() {
 //los datos obtenidos al llamar al método
 // RetornaAdiccionesClienteLista
 function creaGridKendo(data) {
-
+    
     $("#divKendoGrid").kendoGrid({
 
+        
         //Asignar la fuente de datos al objeto kendo grid
         dataSource: {
             data: data.resultado,
-            pageSize: 2
+            pageSize: 2,
+            
         },
-        //El pageable crea paginacion en el grid del reporte
+        //El pageable crea paginación en el grid del reporte
         pageable: true,
         //Es un array
         columns: [
@@ -35,6 +39,7 @@ function creaGridKendo(data) {
             {
                 //Propiedad de la fuente de datos a mostrar
                 field: 'Id_Poliza',
+                
                 //Texto del encabezado
                 title: 'Identificador'
             },
@@ -46,9 +51,9 @@ function creaGridKendo(data) {
             },
             {
                 //Propiedad de la fuente de datos a mostrar
-                field: 'Nombre',
+                field:'Nombre',
                 //Texto del encabezado
-                title: 'Nombre'
+                title: 'Nombre completo'
             },
             {
                 //Propiedad de la fuente de datos a mostrar
@@ -65,6 +70,7 @@ function creaGridKendo(data) {
             {
                 //Propiedad de la fuente de datos a mostrar
                 field: 'Fecha_Vencimiento',
+                type: "date", format: "{0:yyyy/MM/dd}",
                 //Texto del encabezado
                 title: 'Fecha Vencimiento'
             },
@@ -116,15 +122,13 @@ function creaGridKendo(data) {
         //toolbar para exportar
         toolbar: ["excel", "pdf"],
         excel: {
-            fileName: "Lista de polizás por cliente.xlsx"
+            fileName: "Lista de pólizas por cliente.xlsx"
         },
         pdf: {
-            fileName: "Lista de polizás por cliente.pdf",
+            fileName: "Lista de pólizas por cliente.pdf",
             author: "Seguros El Equipo del Siglo XXI.",
             creator: "Seguros El Equipo del Siglo XXI.",
             date: new Date(),
         }
     });
-
-
 }

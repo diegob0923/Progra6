@@ -9,21 +9,16 @@ function creaValidaciones() {
         ///objeto que contiene "las condiciones" que el formulario
         ///debe cumplir para ser considerado válido
 
-
-
         rules: {
             Usuario: {
                 required: true,
                 digits: true,
                 minlength: 9,
                 maxlength: 9
-
             },
             Contrasena: {
                 required: true
-
             }
-
         }
     });
 }

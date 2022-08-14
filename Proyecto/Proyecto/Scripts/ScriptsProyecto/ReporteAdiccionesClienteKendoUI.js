@@ -2,9 +2,8 @@
     obtenerRegistrosAdiccionesCliente();
 });
 
-
-/// funcion que obtiene los registros
-// del metodo del controlador
+/// función que obtiene los registros
+// del método del controlador
 // RetornaAdiccionesClienteLista()
 function obtenerRegistrosAdiccionesCliente() {
     /////construir la dirección del método del servidor
@@ -25,18 +24,18 @@ function creaGridKendo(data) {
         //Asignar la fuente de datos al objeto kendo grid
         dataSource: {
             data: data.resultado,
-            pageSize:2
+            pageSize: 2
         },
-        //El pageable crea paginacion en el grid del reporte
+        //El pageable crea paginación en el grid del reporte
         pageable: true,
         //Es un array
         columns: [
-        //Cada columna se agrega por llaves
+            //Cada columna se agrega por llaves
             {
                 //Propiedad de la fuente de datos a mostrar
                 field: 'Id',
                 //Texto del encabezado
-                title:'Identificador'
+                title: 'Identificador'
             },
             {
                 //Propiedad de la fuente de datos a mostrar
@@ -56,15 +55,13 @@ function creaGridKendo(data) {
         //toolbar para exportar
         toolbar: ["excel", "pdf"],
         excel: {
-            fileName:"Lista de adicciones por cliente.xlsx"
+            fileName: "Lista de adicciones por cliente.xlsx"
         },
         pdf: {
             fileName: "Lista de adicciones por cliente.pdf",
             author: "Seguros El Equipo del Siglo XXI.",
-            creator:"Seguros El Equipo del Siglo XXI.",
+            creator: "Seguros El Equipo del Siglo XXI.",
             date: new Date(),
         }
     });
-
-
 }

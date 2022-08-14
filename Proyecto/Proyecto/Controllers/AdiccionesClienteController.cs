@@ -10,43 +10,26 @@ namespace Proyecto.Controllers
     public class AdiccionesClienteController : Controller
     {
         ProyectoSegurosEntities modeloBD = new ProyectoSegurosEntities();
+
+        #region Adicciones cliente Lista
         public ActionResult AdiccionesClienteLista()
-        {
-
-            if (Session["TipoUsuario"] != null)
-            {
-
-             
+        {            
                 if (Session["TipoUsuario"].ToString() == "Colaborador")
-
                 {
-
                     List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
                     modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(null).ToList();
                     return View(modeloVista);
-
                 }
                 else
-
                 {
-
                     List<sp_Retorna_Adiccion_Cliente_Result> modeloVista = new List<sp_Retorna_Adiccion_Cliente_Result>();
                     modeloVista = modeloBD.sp_Retorna_Adiccion_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
                     return View(modeloVista);
-
-                }
-
-
-            }
-            else
-            {
-                return View();
-            }
-
-            
-
+                }           
         }
+        #endregion
 
+        #region Adicciones cliente insertar
         public ActionResult AdiccionesClienteInsertar()
         {
             AgregarAdiccionesViewBag();
@@ -61,7 +44,7 @@ namespace Proyecto.Controllers
             string resultado = "";
             try
             {
-                cantRegistrosAfectados = modeloBD.sp_Insertar_Adicciones_Clientes(modeloVista.Id_Adiccion,modeloVista.Id_Cliente);
+                cantRegistrosAfectados = modeloBD.sp_Insertar_Adicciones_Clientes(modeloVista.Id_Adiccion, modeloVista.Id_Cliente);
             }
             catch (Exception error)
             {
@@ -78,7 +61,7 @@ namespace Proyecto.Controllers
                     resultado += "No se pudo insertar";
                 }
             }
-            
+
             AgregarAdiccionesViewBag();
             AgregarClientesViewBag();
             TempData["Mensaje"] = resultado;
@@ -87,13 +70,15 @@ namespace Proyecto.Controllers
 
         void AgregarAdiccionesViewBag()
         {
-            ViewBag.Adicciones = modeloBD.sp_Retorna_Adicciones(null,null).ToList();
+            ViewBag.Adicciones = modeloBD.sp_Retorna_Adicciones(null, null).ToList();
         }
         void AgregarClientesViewBag()
         {
-            ViewBag.Clientes = modeloBD.sp_Retorna_Clientes(null,null,null,null).ToList(); ;
+            ViewBag.Clientes = modeloBD.sp_Retorna_Clientes(null, null, null, null).ToList(); ;
         }
+        #endregion
 
+        #region Adicciones cliente modificar
         public ActionResult AdiccionesClienteModificar(int id)
         {
             sp_Retorna_Adiccion_ClienteID_Result modeloVista = new sp_Retorna_Adiccion_ClienteID_Result();
@@ -129,12 +114,14 @@ namespace Proyecto.Controllers
                 }
             }
 
-            
             AgregarAdiccionesViewBag();
             AgregarClientesViewBag();
             TempData["Mensaje"] = resultado;
             return RedirectToAction("AdiccionesClienteLista", "AdiccionesCliente");
         }
+        #endregion
+
+        #region Adicciones cliente eliminar
         public ActionResult AdiccionesClienteEliminar(int id)
         {
             sp_Retorna_Adiccion_ClienteID_Result modeloVista = new sp_Retorna_Adiccion_ClienteID_Result();
@@ -170,22 +157,22 @@ namespace Proyecto.Controllers
                 }
             }
 
-            
             AgregarAdiccionesViewBag();
             AgregarClientesViewBag();
             TempData["Mensaje"] = resultado;
             return RedirectToAction("AdiccionesClienteLista", "AdiccionesCliente");
         }
+        #endregion
 
+        #region Retorna adicciones cliente lista para reporte
         //Retornar la lista de adicciones cliente para el reporte
         [HttpPost]
         public ActionResult RetornaAdiccionesClienteLista()
         {
-            
+
             if (Session["TipoUsuario"].ToString() == "Colaborador")
 
             {
-
                 List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
             this.modeloBD.sp_Retorna_Adiccion_Cliente(null).ToList();
 
@@ -193,13 +180,10 @@ namespace Proyecto.Controllers
                 {
                     resultado = listaAdiccionesCliente
                 });
-
             }
             else
 
             {
-
-
                 List<sp_Retorna_Adiccion_Cliente_Result> listaAdiccionesCliente =
             this.modeloBD.sp_Retorna_Adiccion_Cliente(Convert.ToInt32(Session["Cedula"])).ToList();
 
@@ -207,11 +191,8 @@ namespace Proyecto.Controllers
                 {
                     resultado = listaAdiccionesCliente
                 });
-
             }
-
-
-
         }
+        #endregion
     }
 }
